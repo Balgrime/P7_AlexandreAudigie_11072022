@@ -1,3 +1,3 @@
 @mixin box-shadow {
-    box-shadow: 4px 4px 15px grayscale($color: #b9b9b9);
+    box-shadow: 4px 3px 10px grayscale($color: $secondary);
 }

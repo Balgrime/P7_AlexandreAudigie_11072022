@@ -15,7 +15,7 @@ function Home() {
         <Navbar />
       </header>
 
-      <main>
+      <main className='main'>
         <SectionBienvenue />
         <Routes>
           <Route path="/pages/Forum" element={<Forum />} />

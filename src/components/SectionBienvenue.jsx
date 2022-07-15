@@ -5,17 +5,19 @@ import { Link } from "react-router-dom";
 
 
 function SectionBienvenue(){
-    return <section>
-        <h1>Bienvenue</h1>
-        <ul>
-            <li>
-                <Link className="SectionBienvenue__Button" to="../pages/Connexion">Connexion</Link>
-            </li>
-            <li>
-                <Link className="SectionBienvenue__Button" to="../pages/Inscription">Inscription</Link>
-            </li>
-        </ul>
-    </section>
+    return (
+        <section className="sectionBienvenue">
+            <h1>Bienvenue</h1>
+            <div>
+                <div>
+                    <Link className="SectionBienvenue__Button" to="../pages/Connexion">Connexion</Link>
+                </div>
+                <div>
+                    <Link className="SectionBienvenue__Button" to="../pages/Inscription">Inscription</Link>
+                </div>
+            </div>
+        </section>
+    )
 };
 
 export default SectionBienvenue;

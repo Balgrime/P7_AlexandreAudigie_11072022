@@ -6,10 +6,13 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    & ul li{
-        float:left;
-        list-style:none;
-    }
+    & ul{
+        display: flex;
+        flex-flow: row nowrap;
+        & li{
+            list-style: none;
+        }
+    } 
     &__Text{   
         color: white;
         }
@@ -17,4 +20,41 @@
 
 .active{
     position: fixed;
+}
+
+
+
+
+
+.sectionBienvenue{
+    background-color: $primary;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    @include box-shadow;
+    & h1{
+        font-weight: 900;
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+    }
+    & div{
+        display: flex;
+        flex-flow: row nowrap;
+        border: solid transparent 3px;
+        & :hover{
+            border: solid green 3px;
+            cursor: pointer;
+        }
+        & div{
+            background-color: white;
+            border-radius: 20px;
+            padding: 0.1rem 0.4rem 0.2rem 0.4rem;
+            margin-right: 2rem;
+            margin-left: 2rem;
+            margin-bottom: 1.6rem;
+            & :hover{
+                border: none;
+            }
+        }
+    }
 }
