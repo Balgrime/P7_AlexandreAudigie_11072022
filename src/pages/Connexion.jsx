@@ -1,7 +1,9 @@
+import SectionConnexion from "../components/SectionConnexion";
+
 function Connexion() {
     return (
         <div>
-            <h1>Bienvenue</h1>
+            <SectionConnexion />
         </div>
     )
 };

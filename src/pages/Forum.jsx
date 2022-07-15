@@ -1,7 +1,7 @@
 function Forum() {
     return (
         <div>
-            <h1>Bienvenue</h1>
+            <h2>super espace de discussion</h2>
         </div>
     )
 };

@@ -10,11 +10,10 @@
         float:left;
         list-style:none;
     }
+    &__Text{   
+        color: white;
+        }
 }
-
-.navbarText{   
-    color: white;
-    }
 
 .active{
     position: fixed;

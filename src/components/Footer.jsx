@@ -1,7 +1,7 @@
 import logoNoir from "../images/logoNoir.png";
 import { Link } from "react-router-dom";
 
-function footerBar() {
+function FooterBar() {
     return <footer className="footer">
         <img className="logoNoir" src={logoNoir} alt="Le logo de Groupomania" />
         <Link to="#">Contact</Link>
@@ -9,4 +9,4 @@ function footerBar() {
     </footer>
 };
 
-export default footerBar;
+export default FooterBar;

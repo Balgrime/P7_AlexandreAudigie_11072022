@@ -2,21 +2,31 @@ import Navbar from '../components/Navbar';
 import Forum from './Forum';
 import { Route, Routes } from "react-router-dom";
 import Footer from '../components/Footer';
-import SectionConnexion from '../components/SectionConnexion';
+import Inscription from './Inscription';
+import Connexion from './Connexion';
+import SectionBienvenue from '../components/SectionBienvenue';
+import Profil from './Profil';
 
 
 function Home() {
   return (
-    <header>
-      <Navbar />
-      <Routes>
-        <Route path="/pages/Home" element={<Home />} />
-        <Route path="/pages/Forum" element={<Forum />} />
-      </Routes>
-      <SectionConnexion />
-      <Footer />
-    </header>
+    <div>
+      <header>
+        <Navbar />
+      </header>
 
+      <main>
+        <SectionBienvenue />
+        <Routes>
+          <Route path="/pages/Forum" element={<Forum />} />
+          <Route path="/pages/Inscription" element={<Inscription />} />
+          <Route path="/pages/Profil" element={<Profil />} />
+          <Route path="/pages/Connexion" element={<Connexion />} />
+        </Routes>
+      </main>
+      
+      <Footer />
+    </div>
   )
 }
 export default Home;

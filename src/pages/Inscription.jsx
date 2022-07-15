@@ -1,8 +1,8 @@
+import SectionInscription from "../components/SectionInscription";
+
 function Inscription() {
     return (
-        <div>
-            <h1>Bienvenue</h1>
-        </div>
+        <SectionInscription />
     )
 };
 
