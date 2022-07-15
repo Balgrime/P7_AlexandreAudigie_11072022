@@ -1,4 +1,4 @@
-function Forum() {
+function Profil() {
     return (
         <div>
             <h1>Profil</h1>
@@ -6,4 +6,4 @@ function Forum() {
     )
 };
 
-export default Forum;
+export default Profil;

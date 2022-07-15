@@ -1,0 +1,21 @@
+.navbar{
+    padding: 0.3rem 2rem 0.3rem 2rem;
+    background-color: $secondary;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    & ul li{
+        float:left;
+        list-style:none;
+    }
+}
+
+.navbarText{   
+    color: white;
+    }
+
+.active{
+    position: fixed;
+}
