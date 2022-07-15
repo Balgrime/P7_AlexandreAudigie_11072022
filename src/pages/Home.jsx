@@ -18,6 +18,7 @@ function Home() {
       <main className='main'>
         <SectionBienvenue />
         <Routes>
+          <Route path="/" element={<Connexion />} />
           <Route path="/pages/Forum" element={<Forum />} />
           <Route path="/pages/Inscription" element={<Inscription />} />
           <Route path="/pages/Profil" element={<Profil />} />

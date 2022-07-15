@@ -10,10 +10,10 @@ function SectionBienvenue(){
             <h1>Bienvenue</h1>
             <div>
                 <div>
-                    <Link className="SectionBienvenue__Button" to="../pages/Connexion">Connexion</Link>
+                    <Link className="SectionBienvenue__Button" to="../pages/Inscription">Inscription</Link>
                 </div>
                 <div>
-                    <Link className="SectionBienvenue__Button" to="../pages/Inscription">Inscription</Link>
+                    <Link className="SectionBienvenue__Button" to="../pages/Connexion">Connexion</Link>
                 </div>
             </div>
         </section>

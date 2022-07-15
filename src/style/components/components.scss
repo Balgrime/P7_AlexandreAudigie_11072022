@@ -11,6 +11,7 @@
         flex-flow: row nowrap;
         & li{
             list-style: none;
+            margin-right: 1rem;
         }
     } 
     &__Text{   
@@ -52,6 +53,7 @@
             margin-right: 2rem;
             margin-left: 2rem;
             margin-bottom: 1.6rem;
+            font-weight: 600;
             & :hover{
                 border: none;
             }
