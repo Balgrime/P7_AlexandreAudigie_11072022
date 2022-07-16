@@ -9,10 +9,20 @@ import Profil from './Profil';
 
 
 function Home() {
+
+
+const isConnected = false;
+
+
+
+
+
+
+
   return (
     <div>
       <header>
-        <Navbar />
+        <Navbar connexion={isConnected} />
       </header>
 
       <main className='main'>

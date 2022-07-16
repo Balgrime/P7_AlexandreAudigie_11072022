@@ -16,7 +16,7 @@
             list-style: none;
             margin-right: 1.5rem;
             & :hover{
-                background-color: $primary;
+                background-color: darken($color: $primary, $amount: 15%) ;
             }
         }
     } 
@@ -52,25 +52,16 @@
         font-size: 3.5rem;
         margin-bottom: 1rem;
     }
-    & div{
+    &>div{
         display: flex;
         flex-flow: row nowrap;
-        border: solid transparent 3px;
-        & :hover{
-            border: solid green 3px;
-            cursor: pointer;
-        }
-        & div{
-            background-color: white;
-            border-radius: 20px;
-            padding: 0.1rem 0.4rem 0.2rem 0.4rem;
-            margin-right: 2rem;
-            margin-left: 2rem;
-            margin-bottom: 1.6rem;
-            font-weight: 600;
-            & :hover{
-                border: none;
-            }
-        }
+        margin-bottom: 2rem;
+    }
+    &__Button{
+        background-color: white;
+        border-radius: 20px;
+        padding: 0.1rem 0.4rem 0.2rem 0.4rem;
+        margin: 0rem 2rem 2rem 1.5rem;
+        font-weight: 600;
     }
 }

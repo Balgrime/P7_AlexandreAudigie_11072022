@@ -1,12 +1,12 @@
 
 
 function SectionConnexion() {
-    return <main>
+    return (
         <section className="sectionConnexion">
             <h2>super formulaire de connexion</h2>
 
         </section>
-    </main>
+    )
 }
 
 export default SectionConnexion;

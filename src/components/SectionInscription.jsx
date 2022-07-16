@@ -1,10 +1,10 @@
 function SectionInscription() {
-    return <main>
+    return (
         <section className="sectionInscription">
-            <h2>super formulaire d'inscription</h2><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br><br></br>
+            <h2>super formulaire d'inscription</h2>
 
         </section>
-    </main>
+    )
 }
 
 export default SectionInscription;
