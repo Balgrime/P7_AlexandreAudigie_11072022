@@ -4,8 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket, faUserFriends, faUserTie, faClipboardUser } from "@fortawesome/free-solid-svg-icons";
 
 
-function Navbar(props) {
-
+function Navbar(props, {modeSectionBienvenue, changeMode}) {
     return (
         <nav className='navbar'>
             <Link to="#">
@@ -29,16 +28,16 @@ function Navbar(props) {
                     </Link>
                 </li>
                 <li>
-                    <Link className="navbar__Lien" to="../pages/Connexion">
+                    <Link onClick={() => props.changeMode("Connexion")} className="navbar__Lien" to="../pages/Connexion">
                         <div>
-                            <FontAwesomeIcon className="navbarIcon" icon={ faRightFromBracket }></FontAwesomeIcon>
+                            <FontAwesomeIcon label="Quitter" className="navbarIcon" icon={ faRightFromBracket }></FontAwesomeIcon>
                         </div>
                         <p className="navbar__Lien__Text" >Quitter</p>
                     </Link>
                 </li>
             </ul> : <ul>
                 <li>
-                    <Link className="navbar__Lien" to="../pages/Connexion">
+                    <Link onClick={() => props.changeMode("Connexion")} className="navbar__Lien" to="../pages/Connexion">
                         <div>
                             <FontAwesomeIcon className="navbarIcon" icon={ faUserTie }></FontAwesomeIcon>
                         </div>
@@ -46,7 +45,7 @@ function Navbar(props) {
                     </Link>
                 </li>
                 <li>
-                    <Link className="navbar__Lien" to="../pages/Inscription">
+                    <Link onClick={() => props.changeMode("Inscription")} className="navbar__Lien" to="../pages/Inscription">
                         <div>
                             <FontAwesomeIcon className="navbarIcon" icon={ faClipboardUser }></FontAwesomeIcon>
                         </div>

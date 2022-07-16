@@ -6,10 +6,10 @@ import Inscription from './Inscription';
 import Connexion from './Connexion';
 import SectionBienvenue from '../components/SectionBienvenue';
 import Profil from './Profil';
-
+import { useState } from 'react';
 
 function Home() {
-
+const [modeSectionBienvenue, changeMode] = useState( "Connexion" );
 
 const isConnected = false;
 
@@ -22,11 +22,11 @@ const isConnected = false;
   return (
     <div>
       <header>
-        <Navbar connexion={isConnected} />
+        <Navbar connexion={isConnected} modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />
       </header>
 
       <main className='main'>
-        <SectionBienvenue />
+        <SectionBienvenue modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />
         <Routes>
           <Route path="/" element={<Connexion />} />
           <Route path="/pages/Forum" element={<Forum />} />
