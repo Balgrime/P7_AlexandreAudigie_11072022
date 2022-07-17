@@ -46,11 +46,16 @@ h1, h2, h3, p, a{
     margin-top: 0.7rem;
     margin-bottom: 1.7rem;
     padding: 0.3rem 0rem 0.3rem 0rem;
+    display: flex;
+    justify-content: center;
     &>span{
         padding: 0.2rem 1.5rem 0.2rem 1.5rem;
     }
     &:hover{
         cursor: pointer;
         animation: rebondi forwards ease-out 160ms;
+    }
+    &--red{
+        background: linear-gradient(175deg, #e97979, #7c0b0b);
     }
 }

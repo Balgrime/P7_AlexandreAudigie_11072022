@@ -38,7 +38,7 @@
 
 
 
-.sectionBienvenue{
+.section1{
     position: relative;
     z-index: 1;
     background-color: $primary;
@@ -84,7 +84,7 @@
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
-    padding-bottom: 2rem;
+    padding-bottom: 5rem;
     &>p{
         font-size: 0.87rem;
     }

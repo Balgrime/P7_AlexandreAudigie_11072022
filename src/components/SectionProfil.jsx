@@ -7,15 +7,9 @@ function SectionProfil() {
     return (
         <section className="sectionConnexion">
             <div>
-                <FontAwesomeIcon className="navbarIcon" icon={ faCircleUser }></FontAwesomeIcon>
+                <FontAwesomeIcon className="profilIcon" icon={ faCircleUser }></FontAwesomeIcon>
             </div>
-            <div>
-                <h2>John Doe</h2>
-                <p>JohnDoe@hotmail.fr</p>
-            </div>
-            <div>
-                <h2>Historique des messages</h2>
-            </div>
+            <p>John Doe</p>
             <HistoriqueMessages />
         </section>
     )

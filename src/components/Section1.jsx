@@ -4,49 +4,49 @@ import { faUserTie, faClipboardUser, faUserFriends, faCaretDown, faUserGear } fr
 
 
 
-function SectionBienvenue(props){
+function Section1(props){
 
-    if(props.modeSectionBienvenue === "Connexion"){
+    if(props.modeSection1 === "Connexion"){
     return ( 
-        <section className="sectionBienvenue">
+        <section className="section1">
             <h1>Bienvenue</h1>
             <div>
                 <div>
-                    <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faUserTie }></FontAwesomeIcon>
+                    <FontAwesomeIcon className="section1__Icon" icon={ faUserTie }></FontAwesomeIcon>
                 </div>
                 <h2>Se connecter</h2>
                 <div>
-                    <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faCaretDown }></FontAwesomeIcon>
+                    <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
                 </div>
             </div>
         </section>
         )
     }
-    if(props.modeSectionBienvenue === "Inscription"){
+    if(props.modeSection1 === "Inscription"){
     return ( 
-        <section className="sectionBienvenue">
+        <section className="section1">
             <h1>Bienvenue</h1>
             <div>
                 <div>
-                    <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faClipboardUser }></FontAwesomeIcon>
+                    <FontAwesomeIcon className="section1__Icon" icon={ faClipboardUser }></FontAwesomeIcon>
                 </div>
                 <h2>S'inscrire</h2>
                 <div>
-                    <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faCaretDown }></FontAwesomeIcon>
+                    <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
                 </div>
             </div>
         </section>
         )
     }
-    if(props.modeSectionBienvenue === "Forum"){
+    if(props.modeSection1 === "Forum"){
     return ( 
-        <section className="sectionBienvenue">
+        <section className="section1">
             <h1>Forum de discussion</h1>
             <div>
                 <div>
-                    <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faUserFriends }></FontAwesomeIcon>
+                    <FontAwesomeIcon className="section1__Icon" icon={ faUserFriends }></FontAwesomeIcon>
                 </div>
-                <div className="sectionBienvenue__bas">
+                <div className="section1__bas">
                     <div className="greenButton">
                     <span>Publier un nouveau post</span>
                     </div>
@@ -55,13 +55,13 @@ function SectionBienvenue(props){
         </section>
         )
     }
-    if(props.modeSectionBienvenue === "Profil"){
+    if(props.modeSection1 === "Profil"){
     return ( 
-        <section className="sectionBienvenue">
+        <section className="section1">
             <h1>Profil</h1>
             <div>
                 <div>
-                    <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faUserTie }></FontAwesomeIcon>
+                    <FontAwesomeIcon className="section1__Icon" icon={ faUserTie }></FontAwesomeIcon>
                 </div>
                 <div className="greenButton" onClick={() => props.changeMode("ModifierProfil")}>
                     <span>Modifier mon profil</span>
@@ -70,19 +70,19 @@ function SectionBienvenue(props){
         </section>
         )
     }
-    if(props.modeSectionBienvenue === "ModifierProfil"){
+    if(props.modeSection1 === "ModifierProfil"){
         return ( 
-            <section className="sectionBienvenue">
+            <section className="section1">
                 <h1>Modifier votre profil</h1>
                 <div>
                     <div>
-                        <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faUserGear }></FontAwesomeIcon>
+                        <FontAwesomeIcon className="section1__Icon" icon={ faUserGear }></FontAwesomeIcon>
                     </div>
-                    <div>
+                    <div className="section1__buttons">
                         <div className="greenButton">
                             <span>Enregistrer mes modifications</span>
                         </div>
-                        <div className="greenButton red">
+                        <div className="greenButton greenButton--red">
                             <span>Supprimer mon profil</span>
                         </div>
                     </div>
@@ -92,4 +92,4 @@ function SectionBienvenue(props){
         }
 };
 
-export default SectionBienvenue;
+export default Section1;

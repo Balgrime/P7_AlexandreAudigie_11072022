@@ -4,18 +4,19 @@ import { Route, Routes } from "react-router-dom";
 import Footer from '../components/Footer';
 import Inscription from './Inscription';
 import Connexion from './Connexion';
-import SectionBienvenue from '../components/SectionBienvenue';
+import Section1 from '../components/Section1';
 import Profil from './Profil';
 import { useState } from 'react';
 
 function Home() {
-const [modeSectionBienvenue, changeMode] = useState( "Connexion" );
+const [modeSection1, changeMode] = useState( "Connexion" );
 
 
-//à changer
+//Origine à changer
 const isConnected = true;
 
-
+//Origine à changer
+const isPrivate = true;
 
 
 
@@ -24,17 +25,17 @@ const isConnected = true;
   return (
     <div>
       <header>
-        <Navbar connexion={isConnected} modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />
+        <Navbar connexion={isConnected} modeSection1={modeSection1} changeMode={changeMode} />
       </header>
 
       <main className='main'>
-        <SectionBienvenue modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />
+        <Section1 isPrivate={isPrivate} modeSection1={modeSection1} changeMode={changeMode} />
         <Routes>
-          <Route path="/" element={<Connexion modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />} />
+          <Route path="/" element={<Connexion modeSection1={modeSection1} changeMode={changeMode} />} />
           <Route path="/pages/Forum" element={<Forum />} />
-          <Route path="/pages/Inscription" element={<Inscription modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />} />
+          <Route path="/pages/Inscription" element={<Inscription modeSection1={modeSection1} changeMode={changeMode} />} />
           <Route path="/pages/Profil" element={<Profil />} />
-          <Route path="/pages/Connexion" element={<Connexion modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />} />
+          <Route path="/pages/Connexion" element={<Connexion modeSection1={modeSection1} changeMode={changeMode} />} />
         </Routes>
       </main>
       
