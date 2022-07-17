@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket, faUserFriends, faUserTie, faClipboardUser } from "@fortawesome/free-solid-svg-icons";
 
 
-function Navbar(props, {modeSectionBienvenue, changeMode}) {
+function Navbar(props) {
     return (
         <nav className='navbar'>
             <Link to="#">

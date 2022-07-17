@@ -4,7 +4,7 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 
 
 
-function SectionConnexion(props, {modeSectionBienvenue, changeMode}) {
+function SectionConnexion(props) {
     return (
         <section className="sectionConnexion">
             <div>

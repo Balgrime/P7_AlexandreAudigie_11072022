@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserTie, faClipboardUser, faUserFriends, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faUserTie, faClipboardUser, faUserFriends, faCaretDown, faUserGear } from "@fortawesome/free-solid-svg-icons";
 
 
 
 
-function SectionBienvenue( {modeSectionBienvenue, changeMode}){
+function SectionBienvenue(props){
 
-    if(modeSectionBienvenue === "Connexion"){
+    if(props.modeSectionBienvenue === "Connexion"){
     return ( 
         <section className="sectionBienvenue">
             <h1>Bienvenue</h1>
@@ -22,7 +22,7 @@ function SectionBienvenue( {modeSectionBienvenue, changeMode}){
         </section>
         )
     }
-    if(modeSectionBienvenue === "Inscription"){
+    if(props.modeSectionBienvenue === "Inscription"){
     return ( 
         <section className="sectionBienvenue">
             <h1>Bienvenue</h1>
@@ -38,27 +38,24 @@ function SectionBienvenue( {modeSectionBienvenue, changeMode}){
         </section>
         )
     }
-    if(modeSectionBienvenue === "Forum"){
+    if(props.modeSectionBienvenue === "Forum"){
     return ( 
         <section className="sectionBienvenue">
-            <h1>Forum</h1>
+            <h1>Forum de discussion</h1>
             <div>
                 <div>
                     <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faUserFriends }></FontAwesomeIcon>
                 </div>
                 <div className="sectionBienvenue__bas">
                     <div className="greenButton">
-                    <span>Poster un nouveau message</span>
+                    <span>Publier un nouveau post</span>
                     </div>
-                    <p>
-                        Rechercher
-                    </p>
                 </div>
             </div>
         </section>
         )
     }
-    if(modeSectionBienvenue === "Profil"){
+    if(props.modeSectionBienvenue === "Profil"){
     return ( 
         <section className="sectionBienvenue">
             <h1>Profil</h1>
@@ -66,13 +63,33 @@ function SectionBienvenue( {modeSectionBienvenue, changeMode}){
                 <div>
                     <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faUserTie }></FontAwesomeIcon>
                 </div>
-                <div className="greenButton">
+                <div className="greenButton" onClick={() => props.changeMode("ModifierProfil")}>
                     <span>Modifier mon profil</span>
                 </div>
             </div>
         </section>
         )
     }
+    if(props.modeSectionBienvenue === "ModifierProfil"){
+        return ( 
+            <section className="sectionBienvenue">
+                <h1>Modifier votre profil</h1>
+                <div>
+                    <div>
+                        <FontAwesomeIcon className="sectionBienvenue__Icon" icon={ faUserGear }></FontAwesomeIcon>
+                    </div>
+                    <div>
+                        <div className="greenButton">
+                            <span>Enregistrer mes modifications</span>
+                        </div>
+                        <div className="greenButton red">
+                            <span>Supprimer mon profil</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            )
+        }
 };
 
 export default SectionBienvenue;
