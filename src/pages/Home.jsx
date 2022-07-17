@@ -11,7 +11,9 @@ import { useState } from 'react';
 function Home() {
 const [modeSectionBienvenue, changeMode] = useState( "Connexion" );
 
-const isConnected = false;
+
+//à changer
+const isConnected = true;
 
 
 
@@ -28,11 +30,11 @@ const isConnected = false;
       <main className='main'>
         <SectionBienvenue modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />
         <Routes>
-          <Route path="/" element={<Connexion />} />
+          <Route path="/" element={<Connexion modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />} />
           <Route path="/pages/Forum" element={<Forum />} />
-          <Route path="/pages/Inscription" element={<Inscription />} />
+          <Route path="/pages/Inscription" element={<Inscription modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />} />
           <Route path="/pages/Profil" element={<Profil />} />
-          <Route path="/pages/Connexion" element={<Connexion />} />
+          <Route path="/pages/Connexion" element={<Connexion modeSectionBienvenue={modeSectionBienvenue} changeMode={changeMode} />} />
         </Routes>
       </main>
       

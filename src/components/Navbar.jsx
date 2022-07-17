@@ -12,7 +12,7 @@ function Navbar(props, {modeSectionBienvenue, changeMode}) {
             </Link>
             {props.connexion ? <ul>
                 <li>
-                    <Link className="navbar__Lien" to="../pages/Forum">
+                    <Link onClick={() => props.changeMode("Forum")} className="navbar__Lien" to="../pages/Forum">
                         <div>
                             <FontAwesomeIcon className="navbarIcon" icon={ faUserFriends }></FontAwesomeIcon>
                         </div>
@@ -20,7 +20,7 @@ function Navbar(props, {modeSectionBienvenue, changeMode}) {
                     </Link>
                 </li>
                 <li>
-                    <Link className="navbar__Lien" to="../pages/Profil">
+                    <Link onClick={() => props.changeMode("Profil")} className="navbar__Lien" to="../pages/Profil">
                         <div>
                             <FontAwesomeIcon className="navbarIcon" icon={ faUserTie }></FontAwesomeIcon>
                         </div>

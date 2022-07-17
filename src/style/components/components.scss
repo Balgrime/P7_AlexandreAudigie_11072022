@@ -52,6 +52,7 @@
     & h2{
         margin-top: 0.3rem;
         margin-bottom: 2rem;
+        opacity: 0.8;
     }
     &>div{
         display: flex;
@@ -61,5 +62,17 @@
     &__Icon{
         font-size: 2.2rem;
         color: $secondary;
+    }
+}
+
+
+
+.sectionConnexion{
+    &>p{
+        font-size: 0.87rem;
+    }
+    &__Lien{
+        color: blue;
+        border-bottom: solid blue 1.5px;
     }
 }

@@ -1,10 +1,9 @@
 import SectionConnexion from "../components/SectionConnexion";
 
-function Connexion() {
+
+function Connexion(props, {modeSectionBienvenue, changeMode}) {
     return (
-        <div>
-            <SectionConnexion />
-        </div>
+        <SectionConnexion modeSectionBienvenue={props.modeSectionBienvenue} changeMode={props.changeMode} />
     )
 };
 
