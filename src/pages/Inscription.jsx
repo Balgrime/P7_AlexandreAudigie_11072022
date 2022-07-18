@@ -1,8 +1,8 @@
 import SectionInscription from "../components/SectionInscription";
 
-function Inscription(props) {
+function Inscription() {
     return (
-        <SectionInscription modeSection1={props.modeSection1} changeMode={props.changeMode} />
+        <SectionInscription />
     )
 };
 

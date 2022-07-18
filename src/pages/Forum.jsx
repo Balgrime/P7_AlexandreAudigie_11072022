@@ -1,4 +1,4 @@
-import Posts from "../components/Posts";
+import Posts from "../components/SectionForum";
 
 function Forum() {
     return (

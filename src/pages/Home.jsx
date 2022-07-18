@@ -4,12 +4,10 @@ import { Route, Routes } from "react-router-dom";
 import Footer from '../components/Footer';
 import Inscription from './Inscription';
 import Connexion from './Connexion';
-import Section1 from '../components/Section1';
 import Profil from './Profil';
 import { useState } from 'react';
 
 function Home() {
-const [modeSection1, changeMode] = useState( "Connexion" );
 
 
 
@@ -27,17 +25,16 @@ const [isPrivate, changePrivacy] = useState(true);
   return (
     <div>
       <header>
-        <Navbar connexion={isConnected} modeSection1={modeSection1} changeMode={changeMode} />
+        <Navbar connexion={isConnected} />
       </header>
 
       <main className='main'>
-        <Section1 modeSection1={modeSection1} changeMode={changeMode} />
         <Routes>
-          <Route path="/" element={<Connexion modeSection1={modeSection1} changeMode={changeMode} />} />
+          <Route path="/" element={<Connexion />} />
           <Route path="/pages/Forum" element={<Forum />} />
-          <Route path="/pages/Inscription" element={<Inscription modeSection1={modeSection1} changeMode={changeMode} />} />
+          <Route path="/pages/Inscription" element={<Inscription />} />
           <Route path="/pages/Profil" element={<Profil isPrivate={isPrivate} changePrivacy={changePrivacy} />} />
-          <Route path="/pages/Connexion" element={<Connexion modeSection1={modeSection1} changeMode={changeMode} />} />
+          <Route path="/pages/Connexion" element={<Connexion />} />
         </Routes>
       </main>
       

@@ -12,7 +12,7 @@ function Navbar(props) {
             </Link>
             {props.connexion ? <ul>
                 <li>
-                    <Link onClick={() => props.changeMode("Forum")} className="navbar__Lien" to="../pages/Forum">
+                    <Link className="navbar__Lien" to="../pages/Forum">
                         <div>
                             <FontAwesomeIcon className="navbarIcon" icon={ faUserFriends }></FontAwesomeIcon>
                         </div>
@@ -20,7 +20,7 @@ function Navbar(props) {
                     </Link>
                 </li>
                 <li>
-                    <Link onClick={() => props.changeMode("Profil")} className="navbar__Lien" to="../pages/Profil">
+                    <Link className="navbar__Lien" to="../pages/Profil">
                         <div>
                             <FontAwesomeIcon className="navbarIcon" icon={ faUserTie }></FontAwesomeIcon>
                         </div>
@@ -28,7 +28,7 @@ function Navbar(props) {
                     </Link>
                 </li>
                 <li>
-                    <Link onClick={() => props.changeMode("Connexion")} className="navbar__Lien" to="../pages/Connexion">
+                    <Link className="navbar__Lien" to="../pages/Connexion">
                         <div>
                             <FontAwesomeIcon label="Quitter" className="navbarIcon" icon={ faRightFromBracket }></FontAwesomeIcon>
                         </div>
@@ -37,7 +37,7 @@ function Navbar(props) {
                 </li>
             </ul> : <ul>
                 <li>
-                    <Link onClick={() => props.changeMode("Connexion")} className="navbar__Lien" to="../pages/Connexion">
+                    <Link className="navbar__Lien" to="../pages/Connexion">
                         <div>
                             <FontAwesomeIcon className="navbarIcon" icon={ faUserTie }></FontAwesomeIcon>
                         </div>
@@ -45,7 +45,7 @@ function Navbar(props) {
                     </Link>
                 </li>
                 <li>
-                    <Link onClick={() => props.changeMode("Inscription")} className="navbar__Lien" to="../pages/Inscription">
+                    <Link className="navbar__Lien" to="../pages/Inscription">
                         <div>
                             <FontAwesomeIcon className="navbarIcon" icon={ faClipboardUser }></FontAwesomeIcon>
                         </div>
