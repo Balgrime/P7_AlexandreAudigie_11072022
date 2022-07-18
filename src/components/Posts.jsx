@@ -12,12 +12,14 @@ function Posts(props) {
     }
     format();
 
-    useEffect(()=>{
-        fetch('http://localhost:3004/Post')
-        .then(response => response.json())
-        .then(json => changePublication(json))
-        }, []
-    )
+    const getdata = () =>{fetch('http://localhost:3004/Post')
+    .then(response => response.json())
+    .then(json => changePublication(json))
+    }
+    
+    useEffect(getdata, []);
+
+    
 
     return (<div className="sectionConnexion">
         {publications.map( post =>{
