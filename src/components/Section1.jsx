@@ -5,6 +5,7 @@ import { faUserTie, faClipboardUser, faUserFriends, faCaretDown, faUserGear } fr
 
 
 function Section1(props){
+    console.log(props.modeSection1)
 
     if(props.modeSection1 === "Connexion"){
     return ( 

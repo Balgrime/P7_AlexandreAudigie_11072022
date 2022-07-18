@@ -1,7 +1,9 @@
+import Posts from "../components/Posts";
+
 function Forum() {
     return (
         <div>
-            <h2>super espace de discussion</h2>
+            <Posts />
         </div>
     )
 };

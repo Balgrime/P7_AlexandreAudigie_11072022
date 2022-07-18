@@ -4,7 +4,6 @@ import HistoriqueMessages from "./HistoriqueMessages";
 
 
 function SectionProfil(props) {
-    console.log(props.isPrivate)
     return (
         <section className="sectionConnexion">
             <div>
