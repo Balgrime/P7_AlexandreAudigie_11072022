@@ -1,16 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser} from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser, faUserSecret } from "@fortawesome/free-solid-svg-icons";
 import HistoriqueMessages from "./HistoriqueMessages";
 
 
-function SectionProfil() {
+function SectionProfil(props) {
+    console.log(props.isPrivate)
     return (
         <section className="sectionConnexion">
             <div>
                 <FontAwesomeIcon className="profilIcon" icon={ faCircleUser }></FontAwesomeIcon>
             </div>
-            <p>John Doe</p>
-            <HistoriqueMessages />
+            <p>John Doe</p> {props.isPrivate ? <div>
+                <FontAwesomeIcon className="profilIcon" icon={ faUserSecret }></FontAwesomeIcon>
+                <p>Ce profil est en mode privé.</p></div> : <HistoriqueMessages />
+            }
         </section>
     )
 }

@@ -1,8 +1,9 @@
 import SectionProfil from "../components/SectionProfil";
 
-function Profil() {
+function Profil(props) {
+    console.log(props)
     return (
-        <SectionProfil />
+        <SectionProfil isPrivate={props.isPrivate} changePrivacy={props.changePrivacy} />
     )
 };
 

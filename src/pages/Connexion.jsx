@@ -3,7 +3,7 @@ import SectionConnexion from "../components/SectionConnexion";
 
 function Connexion(props) {
     return (
-        <SectionConnexion modeSectionBienvenue={props.modeSectionBienvenue} changeMode={props.changeMode} />
+        <SectionConnexion modeSection1={props.modeSection1} changeMode={props.changeMode} />
     )
 };
 

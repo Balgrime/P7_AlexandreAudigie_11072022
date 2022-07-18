@@ -102,9 +102,8 @@
             padding: 0.2rem 1.5rem 0.2rem 1.5rem;
         }
     }
-}
-
-.emailErr{
-    color: red;
-    font-weight: 500;
+    &>div{
+        display: flex;
+        flex-flow: column nowrap;
+    }
 }

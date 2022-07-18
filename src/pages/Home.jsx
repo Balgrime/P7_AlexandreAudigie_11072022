@@ -16,7 +16,7 @@ const [modeSection1, changeMode] = useState( "Connexion" );
 const isConnected = true;
 
 //Origine à changer
-const isPrivate = true;
+const [isPrivate, changePrivacy] = useState(true);
 
 
 
@@ -29,12 +29,12 @@ const isPrivate = true;
       </header>
 
       <main className='main'>
-        <Section1 isPrivate={isPrivate} modeSection1={modeSection1} changeMode={changeMode} />
+        <Section1 modeSection1={modeSection1} changeMode={changeMode} />
         <Routes>
           <Route path="/" element={<Connexion modeSection1={modeSection1} changeMode={changeMode} />} />
           <Route path="/pages/Forum" element={<Forum />} />
           <Route path="/pages/Inscription" element={<Inscription modeSection1={modeSection1} changeMode={changeMode} />} />
-          <Route path="/pages/Profil" element={<Profil />} />
+          <Route path="/pages/Profil" element={<Profil isPrivate={isPrivate} changePrivacy={changePrivacy} />} />
           <Route path="/pages/Connexion" element={<Connexion modeSection1={modeSection1} changeMode={changeMode} />} />
         </Routes>
       </main>
