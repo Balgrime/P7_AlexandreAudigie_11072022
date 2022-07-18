@@ -1,20 +1,30 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
-function Posts() {
+function Posts(props) {
 
+    const [publications, changePublication] = useState([]);
+
+    
+    let d = "";
+    function format(){
+        var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
+        d = new Date().toLocaleDateString([], options);
+    }
+    format();
 
     useEffect(()=>{
-        fetch('https://jsonplaceholder.typicode.com/todos/1')
+        fetch('http://localhost:3004/Post')
         .then(response => response.json())
-        .then(json => console.log(json))
+        .then(json => changePublication(json))
         }, []
     )
 
-
-
-    return (
-        
-        <div></div>
+    return (<div className="sectionConnexion">
+        {publications.map( post =>{
+           return <div>{post.text + d}</div>
+            }
+        )}
+        </div>
     )
 };
 
