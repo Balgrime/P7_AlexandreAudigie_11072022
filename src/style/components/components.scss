@@ -107,3 +107,24 @@
         flex-flow: column nowrap;
     }
 }
+
+
+.article{
+    background-color: $primary;
+    border-radius: 25px;
+    margin-top: 1rem;
+    @include box-shadow;
+    &__corps{
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+    }
+}
+
+.imagePost{
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    object-fit: cover;
+    min-width: 90%;
+    max-height: 13rem;
+    @include box-shadow;
+}

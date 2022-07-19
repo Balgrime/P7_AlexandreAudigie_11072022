@@ -20,10 +20,6 @@ const getData = ()=>{
     useEffect(getData, [url]);
 
 
-
-
-
-
     return { data, loading, error};
 };
 

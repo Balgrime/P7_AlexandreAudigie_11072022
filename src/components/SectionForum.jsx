@@ -3,6 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../Hooks/useFetch";
 
+
+
 function Posts() {
 
     const [publications, changePublication] = useState([]);
@@ -16,21 +18,8 @@ function Posts() {
     format();
 
     const { data, loading, error } = useFetch("http://localhost:3004/Post");
-
-
-    //if (loading) return <p>loading</p>;
-
     if (error) console.log(error);
 
-    /*const getdata = () =>{fetch('http://localhost:3004/Post')
-    .then(response => response.json())
-    .then(json => changePublication(json))
-    }
-
-    
-    useEffect(getdata, []);*/
-    console.log(data);
-    
 
     return (
         <div>
@@ -42,22 +31,28 @@ function Posts() {
                     </div>
                     <div className="section1__bas">
                         <div className="greenButton">
-                        <span>Publier un nouveau post</span>
+                            <span>Publier un nouveau post</span>
                         </div>
                     </div>
                 </div>
             </section>
             <div className="sectionConnexion">
-                {/*publications.map( post =>{
-                return <div>{post.text + d}</div>
-                    }
-                )*/
+                {
                 data?.map( post =>{
-                    return <div>{post.text + d}</div>
+                    return <article className="article">
+                                <div>
+                                    <p>{post.firstName + post.name}</p>
+                                    <p>{post.date}</p>
+                                </div>
+                                <div className="article__corps">
+                                    <div>
+                                        <img className="imagePost" src={post.postImageUrl} alt="publication du post" />
+                                    </div>
+                                    <p>{post.text}</p>
+                                </div>                     
+                            </article>
                         }
                     )
-                
-                
                 }
             </div>
         </div>
