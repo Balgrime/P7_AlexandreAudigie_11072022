@@ -52,7 +52,9 @@ function SectionProfil(props) {
                                 <div>
                                     <FontAwesomeIcon className="section1__Icon" icon={ faUserGear }></FontAwesomeIcon>
                                 </div>
-                                <h2>Mon profil</h2>
+                                <div className="greenButton" onClick={() => switchToBase()}>
+                                    <span>Revenir au profil</span>
+                                </div>
                                 <div>
                                     <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
                                 </div>
