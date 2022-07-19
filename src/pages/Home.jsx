@@ -16,7 +16,7 @@ function Home() {
 const isConnected = true;
 
 //Origine à changer
-const [isPrivate, changePrivacy] = useState(true);
+const [isPrivate, changePrivacy] = useState(false);
 
 
 
