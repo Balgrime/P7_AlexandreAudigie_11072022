@@ -50,7 +50,7 @@
              "text": "Ce superbe troisième post fonctionne", "likes": 2, "usersLiked": ["1,2,3,4,5"]
         },
         {
-            "postId":"4", "userId": "1", "postFollowedId": "", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
+            "postId":"4", "userId": "1", "postFollowedId": "", "comments": 1, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
              "postImageUrl": "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg",
              "text": "Ce superbe premier post fonctionne", "likes": 2, "usersLiked": ["1,2,3,4,5"]
         },
@@ -60,7 +60,7 @@
              "text": "Ce superbe premier post fonctionne", "likes": 2, "usersLiked": ["1,2,3,4,5"]
         },
         {
-            "postId":"6", "userId": "1", "postFollowedId": "", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
+            "postId":"6", "userId": "1", "postFollowedId": "4", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
              "postImageUrl": "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg",
              "text": "Ce superbe premier post fonctionne", "likes": 2, "usersLiked": ["1,2,3,4,5"]
         },
