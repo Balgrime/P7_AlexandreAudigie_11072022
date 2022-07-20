@@ -13,6 +13,11 @@
         column-gap: 3rem;
         margin-top: 2rem;
         margin-bottom: 1rem;
+        &>form{
+            display: flex;
+            flex-flow: column nowrap;
+            row-gap: 0.1rem;
+        }
     }
     &__milieu{
         display: flex;
