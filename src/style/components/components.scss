@@ -113,6 +113,7 @@
     background-color: $primary;
     border-radius: 25px;
     margin-top: 1rem;
+    min-width: 70%;
     @include box-shadow;
     &__corps{
         display: grid;
@@ -124,7 +125,6 @@
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
     object-fit: cover;
-    min-width: 90%;
-    max-height: 13rem;
-    @include box-shadow;
+    min-width: 100%;
+    max-height: 18rem;
 }

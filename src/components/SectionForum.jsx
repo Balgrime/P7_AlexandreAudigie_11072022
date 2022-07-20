@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserFriends } from "@fortawesome/free-solid-svg-icons";
+import { faUserFriends, faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../Hooks/useFetch";
 
 
 
 function Posts() {
-
-    const [publications, changePublication] = useState([]);
-
     
     let d = "";
     function format(){
@@ -40,14 +37,23 @@ function Posts() {
                 {
                 data?.map( post =>{
                     return <article className="article">
-                                <div>
-                                    <p>{post.firstName + post.name}</p>
-                                    <p>{post.date}</p>
+                                <div className="infoUser">
+                                    {post.profilImageUrl ? 
+                                        <div>
+                                            <img className="imageProfil" src={post.profilImageUrl} alt="profil" />
+                                        </div> : <div>
+                                                    <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
+                                                </div>}
+                                    <div>
+                                        <p className="infoUser__user">{post.firstName + " " + post.name}</p>
+                                        <p className="infoUser__date">{post.date}</p>
+                                    </div>
                                 </div>
                                 <div className="article__corps">
+                                    {post.postImageUrl ? 
                                     <div>
                                         <img className="imagePost" src={post.postImageUrl} alt="publication du post" />
-                                    </div>
+                                    </div> : ''}
                                     <p>{post.text}</p>
                                 </div>                     
                             </article>

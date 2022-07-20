@@ -8,7 +8,7 @@ function ListUsers() {
     
     return <div className="listUser">
                 <div>
-                    <h2>Liste collègues</h2>
+                    <h2>Liste d'utilisateurs</h2>
                 </div>
         {data?.map( user => {
             return <p>{user.firstName + user.name}</p>
