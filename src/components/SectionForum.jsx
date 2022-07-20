@@ -22,8 +22,6 @@ function Posts() {
 
 
     function showComment(data){
-        editVisibility(
-            chercheLesCommentaires(data))
     }
 
 
@@ -45,38 +43,10 @@ function Posts() {
     if (error) console.log(error);
 
     
-
-
-    function chercheLesCommentaires(data){
-        console.log(data);
-        for(let post of data){ if(post.postFollowedId){
-            console.log(post);
-             return <article id={post.postId} className="article">
-            <div className="infoUser">
-                {post.profilImageUrl ? 
-                    <div>
-                        <img className="imageProfil" src={post.profilImageUrl} alt="profil" />
-                    </div> : <div>
-                                <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
-                            </div>}
-                    <div>
-                        <p className="infoUser__user">{post.firstName + " " + post.name}</p>
-                        <p className="infoUser__date">{post.date}</p>
-                    </div>
-                    </div>
-                    <div className="article__corps">
-                        <p>{post.text}</p>
-                    </div>
-            </article>
-        }
-            
-        }
-    }
     
     
-    
-    
-    /*<article id={post.postId} className="article">
+    /*
+    <article id={post.postId} className="article">
         <div className="infoUser">
             {post.profilImageUrl ? 
                 <div>
@@ -140,7 +110,27 @@ function Posts() {
                                 </div> : ''}
                                 <p>{post.text}</p>
                                 {post.comments? <p onClick={() => showComment(data)}>Afficher les {post.comments} commentaires</p> : <p>0 commentaire</p>}
-                                {isCommentVisible}
+                                {data?.map( comment=>{ if(comment.postFollowedId ===post.postId){
+                                    return (<article className="article">
+                                    <div className="infoUser">
+                                        {comment.profilImageUrl ? 
+                                            <div>
+                                                <img className="imageProfil" src={comment.profilImageUrl} alt="profil" />
+                                            </div> : <div>
+                                                        <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
+                                                    </div>}
+                                            <div>
+                                                <p className="infoUser__user">{comment.firstName + " " + comment.name}</p>
+                                                <p className="infoUser__date">{comment.date}</p>
+                                            </div>
+                                            </div>
+                                            <div className="article__corps">
+                                                <p>{comment.text}</p>
+                                            </div>
+                                    </article>)
+                                }
+                                }
+                                )}
                             </div>
                     </article>
                     }
