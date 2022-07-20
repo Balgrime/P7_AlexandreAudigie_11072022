@@ -107,20 +107,3 @@
         flex-flow: column nowrap;
     }
 }
-
-
-.article{
-    background-color: $primary;
-    border-radius: 25px;
-    margin-top: 1rem;
-    min-width: 70%;
-    @include box-shadow;
-}
-
-.imagePost{
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
-    object-fit: cover;
-    min-width: 100%;
-    max-height: 16rem;
-}

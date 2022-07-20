@@ -7,7 +7,7 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 
 function Comment(props) {
-    return (<article className="article">
+    return (<article className="article article--comment">
     <div className="infoUser">
         {props.comment.profilImageUrl ? 
             <div>

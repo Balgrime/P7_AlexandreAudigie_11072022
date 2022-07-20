@@ -1,5 +1,5 @@
 import useFetch from "../Hooks/useFetch";
-
+import { Link } from "react-router-dom";
 
 function ListUsers() {
 
@@ -11,7 +11,7 @@ function ListUsers() {
                     <h2>Liste d'utilisateurs</h2>
                 </div>
         {data?.map( user => {
-            return <p key={user.userId} >{user.firstName + user.name}</p>
+            return <Link className="navbar__Lien" to="../pages/Profil" key={user.userId} >{user.firstName + user.name}</Link>
             }
         )}
     </div>

@@ -9,44 +9,8 @@ import Post from "./Post";
 function Posts() {
 
 
-
-
-    
-
-
-
-
-
     const { data, loading, error } = useFetch("http://localhost:3004/Post");
     if (error) console.log(error);
-
-
-    /*
-    <article id={post.postId} className="article">
-        <div className="infoUser">
-            {post.profilImageUrl ? 
-                <div>
-                    <img className="imageProfil" src={post.profilImageUrl} alt="profil" />
-                </div> : <div>
-                            <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
-                        </div>}
-                <div>
-                    <p className="infoUser__user">{post.firstName + " " + post.name}</p>
-                    <p className="infoUser__date">{post.date}</p>
-                </div>
-                </div>
-                <div className="article__corps">
-                    <p>{post.text}</p>
-                </div>
-        </article>*/
-
-
-    /*function testons(post){
-        document.getElementById(post.postId).innerText = "testest "
-    };
-*/
-    function testons(){}
-
 
 
     return (
@@ -68,8 +32,7 @@ function Posts() {
                 {
                 data?.map( post =>{ if(!post.postFollowedId){
                     return <Post post={post} data={data} />
-                    }
-                   
+                            }
                         }
                     )
                 }
