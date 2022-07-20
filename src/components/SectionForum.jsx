@@ -6,6 +6,27 @@ import useFetch from "../Hooks/useFetch";
 
 
 function Posts() {
+
+
+
+
+    const [isCommentVisible, editVisibility] = useState("");
+
+
+    
+        
+
+
+
+
+
+
+    function showComment(data){
+        editVisibility(
+            chercheLesCommentaires(data))
+    }
+
+
     
     let d = "";
     function format(){
@@ -14,8 +35,71 @@ function Posts() {
     }
     format();
 
+
+
+
+
+
+
     const { data, loading, error } = useFetch("http://localhost:3004/Post");
     if (error) console.log(error);
+
+    
+
+
+    function chercheLesCommentaires(data){
+        console.log(data);
+        for(let post of data){ if(post.postFollowedId){
+            console.log(post);
+             return <article id={post.postId} className="article">
+            <div className="infoUser">
+                {post.profilImageUrl ? 
+                    <div>
+                        <img className="imageProfil" src={post.profilImageUrl} alt="profil" />
+                    </div> : <div>
+                                <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
+                            </div>}
+                    <div>
+                        <p className="infoUser__user">{post.firstName + " " + post.name}</p>
+                        <p className="infoUser__date">{post.date}</p>
+                    </div>
+                    </div>
+                    <div className="article__corps">
+                        <p>{post.text}</p>
+                    </div>
+            </article>
+        }
+            
+        }
+    }
+    
+    
+    
+    
+    /*<article id={post.postId} className="article">
+        <div className="infoUser">
+            {post.profilImageUrl ? 
+                <div>
+                    <img className="imageProfil" src={post.profilImageUrl} alt="profil" />
+                </div> : <div>
+                            <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
+                        </div>}
+                <div>
+                    <p className="infoUser__user">{post.firstName + " " + post.name}</p>
+                    <p className="infoUser__date">{post.date}</p>
+                </div>
+                </div>
+                <div className="article__corps">
+                    <p>{post.text}</p>
+                </div>
+        </article>*/
+        
+
+
+
+
+
+
 
 
     return (
@@ -35,28 +119,32 @@ function Posts() {
             </section>
             <div className="sectionConnexion">
                 {
-                data?.map( post =>{
-                    return <article className="article">
-                                <div className="infoUser">
-                                    {post.profilImageUrl ? 
-                                        <div>
-                                            <img className="imageProfil" src={post.profilImageUrl} alt="profil" />
-                                        </div> : <div>
-                                                    <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
-                                                </div>}
-                                    <div>
-                                        <p className="infoUser__user">{post.firstName + " " + post.name}</p>
-                                        <p className="infoUser__date">{post.date}</p>
-                                    </div>
-                                </div>
-                                <div className="article__corps">
-                                    {post.postImageUrl ? 
-                                    <div>
-                                        <img className="imagePost" src={post.postImageUrl} alt="publication du post" />
-                                    </div> : ''}
-                                    <p>{post.text}</p>
-                                </div>                     
-                            </article>
+                data?.map( post =>{ if(!post.postFollowedId){
+                    return <article id={post.postId} className="article">
+                    <div className="infoUser">
+                        {post.profilImageUrl ? 
+                            <div>
+                                <img className="imageProfil" src={post.profilImageUrl} alt="profil" />
+                            </div> : <div>
+                                        <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
+                                    </div>}
+                            <div>
+                                <p className="infoUser__user">{post.firstName + " " + post.name}</p>
+                                <p className="infoUser__date">{post.date}</p>
+                            </div>
+                            </div>
+                            <div className="article__corps">
+                                {post.postImageUrl ? 
+                                <div>
+                                    <img className="imagePost" src={post.postImageUrl} alt="publication du post" />
+                                </div> : ''}
+                                <p>{post.text}</p>
+                                {post.comments? <p onClick={() => showComment(data)}>Afficher les {post.comments} commentaires</p> : <p>0 commentaire</p>}
+                                {isCommentVisible}
+                            </div>
+                    </article>
+                    }
+                   
                         }
                     )
                 }
