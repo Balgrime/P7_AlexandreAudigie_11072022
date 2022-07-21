@@ -31,13 +31,13 @@ h1, h2, h3, p, a{
 
 
 .navbarIcon{
-    color: white;
+    color: $clearest;
     font-size: 1.4rem;
 }
 
 
 .greenButton{
-    color: white;
+    color: $clearest;
     font-weight: 500;
     background: linear-gradient(175deg, #73ce87, #0b531b);
     border: none;

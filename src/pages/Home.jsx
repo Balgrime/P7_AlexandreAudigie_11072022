@@ -7,10 +7,8 @@ import Connexion from './Connexion';
 import Profil from './Profil';
 import { useState } from 'react';
 
+
 function Home() {
-
-
-
 
 //Origine à changer
 const isConnected = true;
@@ -34,6 +32,7 @@ const [isPrivate, changePrivacy] = useState(false);
           <Route path="/pages/Forum" element={<Forum />} />
           <Route path="/pages/Inscription" element={<Inscription />} />
           <Route path="/pages/Profil" element={<Profil isPrivate={isPrivate} changePrivacy={changePrivacy} />} />
+          <Route path="/pages/Profil/:id" element={<Profil />} />
           <Route path="/pages/Connexion" element={<Connexion />} />
         </Routes>
       </main>

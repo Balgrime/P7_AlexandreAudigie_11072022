@@ -2,10 +2,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faUserSecret, faUserTie, faUserGear, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import HistoriqueMessages from "./HistoriqueMessages";
 import { useState } from 'react';
+import { useParams } from "react-router-dom";
 
 
 function SectionProfil(props) {
     
+    const { id } = useParams();
+    console.log(id);
+
+
+
+
+
+
+
+
 
     function switchToEdit(){
         changeButtons(buttonsAdded);
