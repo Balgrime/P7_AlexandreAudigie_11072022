@@ -21,11 +21,11 @@ function SectionProfil(props) {
 
 
     const buttonsAdded = <div className="sectionProfil__milieu">
-                            <button className="greenButton greenButton" onClick={() => switchToBase()}>
+                            <button className="greenButton greenButton" type="button" onClick={() => switchToBase()}>
                                 <span>Enregistrer mes modifications</span>
                             </button>
                         
-                            <button className="greenButton greenButton--red" onClick={() => warnUser()}>
+                            <button className="greenButton greenButton--red" type="button" onClick={() => warnUser()}>
                                 <span>Supprimer mon profil</span>
                             </button>
                         </div>
@@ -42,7 +42,7 @@ function SectionProfil(props) {
                                 <div>
                                     <FontAwesomeIcon className="section1__Icon" icon={ faUserTie }></FontAwesomeIcon>
                                 </div>
-                                <button className="greenButton" onClick={() => switchToEdit()}>
+                                <button className="greenButton" type="button" onClick={() => switchToEdit()}>
                                     <span>Modifier mon profil</span>
                                 </button>
                             </div>
@@ -54,7 +54,7 @@ function SectionProfil(props) {
                                 <div>
                                     <FontAwesomeIcon className="section1__Icon" icon={ faUserGear }></FontAwesomeIcon>
                                 </div>
-                                <button className="greenButton" onClick={() => switchToBase()}>
+                                <button className="greenButton" type="button" onClick={() => switchToBase()}>
                                     <span>Revenir au profil</span>
                                 </button>
                                 <div className="iconAnim">

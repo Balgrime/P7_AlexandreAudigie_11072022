@@ -33,10 +33,10 @@
     ],
     "Post": [
         {
-            "postId":"1", "userId": "1", "postFollowedId": "", "comments": 2, "firstName": "John", "name": "Doe",
+            "postId":"1", "userId": "1", "postFollowedId": "", "comments": 3, "firstName": "John", "name": "Doe",
             "profilImageUrl": "https://risibank.fr/cache/medias/0/25/2503/250332/full.png", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
              "postImageUrl": "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg",
-             "text": "Ce superbe premier post fonctionne", "likes": 2, "usersLiked": ["1,2,3,4,5"]
+             "text": "Ce superbe premier post fonctionne", "likes": 100, "usersLiked": ["1,2,3,4,5"]
         },
         {
             "postId":"2", "userId": "1", "postFollowedId": "", "comments": 0, "firstName": "John", "name": "Doe",
@@ -47,17 +47,17 @@
         {
             "postId":"3", "userId": "1", "postFollowedId": "", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
              "postImageUrl": "",
-             "text": "Ce superbe troisième post fonctionne", "likes": 2, "usersLiked": ["1,2,3,4,5"]
+             "text": "Ce superbe troisième post fonctionne", "likes": 3, "usersLiked": ["1,2,3,4,5"]
         },
         {
             "postId":"4", "userId": "1", "postFollowedId": "", "comments": 1, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
              "postImageUrl": "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg",
-             "text": "Ce superbe premier post fonctionne", "likes": 2, "usersLiked": ["1,2,3,4,5"]
+             "text": "c", "likes": 2, "usersLiked": ["1,2,3,4,5"]
         },
         {
             "postId":"5", "userId": "1", "postFollowedId": "", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
              "postImageUrl": "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg",
-             "text": "Ce superbe premier post fonctionne", "likes": 2, "usersLiked": ["1,2,3,4,5"]
+             "text": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.", "likes": 2, "usersLiked": ["1,2,3,4,5"]
         },
         {
             "postId":"6", "userId": "1", "postFollowedId": "4", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
@@ -86,6 +86,11 @@
         },
         {
             "postId":"11", "userId": "1", "postFollowedId": "1", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
+             "postImageUrl": "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg",
+             "text": "Ceci est un commentaire", "likes": 2, "usersLiked": ["1,2,3,4,5"]
+        },
+        {
+            "postId":"12", "userId": "1", "postFollowedId": "1", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
              "postImageUrl": "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg",
              "text": "Ceci est un commentaire", "likes": 2, "usersLiked": ["1,2,3,4,5"]
         }

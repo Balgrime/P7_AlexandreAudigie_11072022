@@ -22,7 +22,7 @@ function Posts() {
                         <FontAwesomeIcon className="section1__Icon" icon={ faUserFriends }></FontAwesomeIcon>
                     </div>
                     <div className="section1__bas">
-                        <button className="greenButton">
+                        <button className="greenButton" type="button">
                             <span>Publier un nouveau post</span>
                         </button>
                     </div>

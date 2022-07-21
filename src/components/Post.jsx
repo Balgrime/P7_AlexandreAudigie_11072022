@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import Comment from './Comment';
-
+import Like from './Like';
 
 function Post(props) {
 
@@ -36,7 +36,13 @@ function Post(props) {
             <div className="article__corps__texte">
                 <p>{props.post.text}</p>
             </div>
-            {props.post.comments? <div className="msgCacher" ><p onClick={()=>{editVisibility(visible)}}>Afficher les {props.post.comments} commentaires</p><p onClick={()=>{editVisibility("")}}>Cacher les commentaires</p></div> : <p>0 commentaire</p>}
+            <div className='likeContainer'>
+                <Like likes={props.post.likes} />
+                <button className='greenButton' type='button'>
+                    <span>Répondre</span>
+                </button>
+            </div>
+            {props.post.comments? <div className="msgCacher" ><p onClick={()=>{editVisibility(visible)}}>Afficher: {props.post.comments} commentaires</p><p onClick={()=>{editVisibility("")}}>Cacher les commentaires</p></div> : <p>0 commentaire</p>}
             <div className="containerComments">
                 {isVisible}
             </div>
