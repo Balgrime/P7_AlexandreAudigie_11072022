@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 function ListUsers() {
 
-    const { data } = useFetch("http://localhost:3004/User");
+    const { data } = useFetch("/User");
 
     
     return <div className="listUser">

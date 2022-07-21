@@ -6,10 +6,11 @@ function useFetch(url) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
+    const addressApi = "http://localhost:3004";
 
 const getData = ()=>{
     setLoading(true);
-        fetch(url).then(res => res.json()).then((json)=>{setData(json);
+        fetch(addressApi+url).then(res => res.json()).then((json)=>{setData(json);
         }).catch((err)=>{
             setError(err);
         }).finally(()=>{

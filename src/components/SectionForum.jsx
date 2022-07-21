@@ -9,7 +9,7 @@ import Post from "./Post";
 function Posts() {
 
 
-    const { data, loading, error } = useFetch("http://localhost:3004/Post");
+    const { data, loading, error } = useFetch("/Post");
     if (error) console.log(error);
 
 

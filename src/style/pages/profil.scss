@@ -30,3 +30,11 @@
         align-items: center;
     }
 }
+
+.check{
+    margin-top: 1rem;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+    column-gap: 0.4rem;
+}

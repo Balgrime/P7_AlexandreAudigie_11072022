@@ -6,6 +6,7 @@
     border-radius: 25px;
     margin-top: 1rem;
     width: 70%;
+    max-width: 40rem;
     @include box-shadow;
     &--comment{
         background-color: $tertiary;

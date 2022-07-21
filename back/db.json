@@ -1,12 +1,12 @@
 {
     "User": [
         {
-            "userId": "1", "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "isPrivate": true,
+            "userId": "1", "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "isPrivate": true, "id": "1",
              "profilImageUrl": "https://risibank.fr/media/250332-risitas-elton-john-lunettes-bleues-golem-shills-rire-tison-cheveux-issou-2022-selection-naturelle-ahi",
              "email": "superemail@hotmail.fr", "password": "hdhufjkfjdjYUTBbhfjf1234"
         },
         {
-            "userId": "2", "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "isPrivate": false,
+            "userId": "2", "firstName": "harry", "name": "Potter", "date": "19 Juillet 2022 à 04:09", "isPrivate": false, "id": "2",
              "profilImageUrl": "https://risibank.fr/media/250332-risitas-elton-john-lunettes-bleues-golem-shills-rire-tison-cheveux-issou-2022-selection-naturelle-ahi",
              "email": "superemail@hotmail.fr", "password": "hdhufjkfjdjYUTBbhfjf1234"
         },
@@ -39,10 +39,10 @@
              "text": "Ce superbe premier post fonctionne", "likes": 100, "usersLiked": ["1,2,3,4,5"]
         },
         {
-            "postId":"2", "userId": "1", "postFollowedId": "", "comments": 0, "firstName": "John", "name": "Doe",
+            "postId":"2", "userId": "2", "postFollowedId": "", "comments": 0, "firstName": "Harry", "name": "Potter",
             "profilImageUrl": "https://risibank.fr/cache/medias/0/25/2503/250332/full.png", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",
              "postImageUrl": "https://img-19.commentcamarche.net/WNCe54PoGxObY8PCXUxMGQ0Gwss=/480x270/smart/d8c10e7fd21a485c909a5b4c5d99e611/ccmcms-commentcamarche/20456790.jpg",
-             "text": "Ce superbe second post fonctionne", "likes": 2, "usersLiked": ["1,2,3,4,5"]
+             "text": "a l'école des sorciers", "likes": 2, "usersLiked": ["1,2,3,4,5"]
         },
         {
             "postId":"3", "userId": "1", "postFollowedId": "", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "modifDate": "19 Juillet 2022 à 05:09",

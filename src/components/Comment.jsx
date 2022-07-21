@@ -1,6 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { Link } from 'react-router-dom';
 
 
 
@@ -15,10 +16,10 @@ function Comment(props) {
             </div> : <div>
                         <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
                     </div>}
-            <div>
+            <Link to={`/pages/Profil/${props.comment.userId}`}>
                 <p className="infoUser__user">{props.comment.firstName + " " + props.comment.name}</p>
                 <p className="infoUser__date">{props.comment.date}</p>
-            </div>
+            </Link>
             </div>
             <div className="article__corps--comment">
                 <p>{props.comment.text}</p>
