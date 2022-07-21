@@ -42,7 +42,7 @@ function Post(props) {
                     <span>Répondre</span>
                 </button>
             </div>
-            {props.post.comments? <div className="msgCacher" ><p onClick={()=>{editVisibility(visible)}}>Afficher: {props.post.comments} commentaires</p><p onClick={()=>{editVisibility("")}}>Cacher les commentaires</p></div> : <p>0 commentaire</p>}
+            {props.post.comments? <div className="msgCacher" ><p onClick={()=>{editVisibility(visible)}}>Afficher: {props.post.comments} commentaire(s)</p><p onClick={()=>{editVisibility("")}}>Cacher les commentaires</p></div> : <p className='centertxt'>0 commentaire</p>}
             <div className="containerComments">
                 {isVisible}
             </div>
