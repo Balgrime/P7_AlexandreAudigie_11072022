@@ -28,7 +28,7 @@ function Posts() {
                     </div>
                 </div>
             </section>
-            <div className="sectionConnexion">
+            <div className="section2">
                 {
                 data?.map( post =>{ if(!post.postFollowedId){
                     return <Post post={post} data={data} />

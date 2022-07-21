@@ -21,7 +21,7 @@ function SectionInscription() {
                     </div>
                 </div>
             </section>
-            <section className="sectionConnexion">
+            <section className="section2">
                 <div>
                     <Formik
                     initialValues={{ name: '', firstname: '', email: '', password: '', repassword: '' }}
@@ -44,7 +44,7 @@ function SectionInscription() {
                     }}
                     >
                     {({ isSubmitting }) => (
-                        <Form className="sectionConnexion__formulaire">
+                        <Form className="section2__formulaire">
                             <label>Adresse email :</label>
                             <Field id="email" type="email" name="email" placeholder="exemple@hotmail.fr" />
                             <ErrorMessage className="emailErr" name="email" component="div" />
@@ -59,7 +59,7 @@ function SectionInscription() {
                     </Formik>
                 </div>
 
-                <p>Vous êtes déjà inscrit ? Rendez-vous sur la <Link  className="sectionConnexion__Lien" to="../pages/Connexion">page de connexion</Link></p>
+                <p>Vous êtes déjà inscrit ? Rendez-vous sur la <Link  className="section2__Lien" to="../pages/Connexion">page de connexion</Link></p>
             </section>
         </div>
     )
