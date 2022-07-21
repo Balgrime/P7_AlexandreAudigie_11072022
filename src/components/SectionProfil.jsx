@@ -21,13 +21,13 @@ function SectionProfil(props) {
 
 
     const buttonsAdded = <div className="sectionProfil__milieu">
-                            <div className="greenButton greenButton" onClick={() => switchToBase()}>
+                            <button className="greenButton greenButton" onClick={() => switchToBase()}>
                                 <span>Enregistrer mes modifications</span>
-                            </div>
+                            </button>
                         
-                            <div className="greenButton greenButton--red" onClick={() => warnUser()}>
+                            <button className="greenButton greenButton--red" onClick={() => warnUser()}>
                                 <span>Supprimer mon profil</span>
-                            </div>
+                            </button>
                         </div>
 
     
@@ -42,9 +42,9 @@ function SectionProfil(props) {
                                 <div>
                                     <FontAwesomeIcon className="section1__Icon" icon={ faUserTie }></FontAwesomeIcon>
                                 </div>
-                                <div className="greenButton" onClick={() => switchToEdit()}>
+                                <button className="greenButton" onClick={() => switchToEdit()}>
                                     <span>Modifier mon profil</span>
-                                </div>
+                                </button>
                             </div>
                         </section>;
 
@@ -54,10 +54,10 @@ function SectionProfil(props) {
                                 <div>
                                     <FontAwesomeIcon className="section1__Icon" icon={ faUserGear }></FontAwesomeIcon>
                                 </div>
-                                <div className="greenButton" onClick={() => switchToBase()}>
+                                <button className="greenButton" onClick={() => switchToBase()}>
                                     <span>Revenir au profil</span>
-                                </div>
-                                <div>
+                                </button>
+                                <div className="iconAnim">
                                     <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
                                 </div>
                             </div>

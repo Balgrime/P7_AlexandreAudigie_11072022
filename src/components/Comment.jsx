@@ -20,7 +20,7 @@ function Comment(props) {
                 <p className="infoUser__date">{props.comment.date}</p>
             </div>
             </div>
-            <div className="article__corps">
+            <div className="article__corps--comment">
                 <p>{props.comment.text}</p>
             </div>
     </article>)

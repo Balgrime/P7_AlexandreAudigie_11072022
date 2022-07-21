@@ -81,11 +81,7 @@ h1, h2, h3, p, a{
     }
 }
 
-.infoUser{
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: flex-start;
-    &__user{
-        font-weight: 700;
-    }
+
+.iconAnim{
+    animation: goingDown 430ms ease both alternate-reverse infinite;;
 }

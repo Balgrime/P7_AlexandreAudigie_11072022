@@ -16,7 +16,7 @@ function SectionInscription() {
                         <FontAwesomeIcon className="section1__Icon" icon={ faClipboardUser }></FontAwesomeIcon>
                     </div>
                     <h2>S'inscrire</h2>
-                    <div>
+                    <div className="iconAnim">
                         <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
                     </div>
                 </div>

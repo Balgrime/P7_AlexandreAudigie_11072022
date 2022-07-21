@@ -16,7 +16,7 @@ function SectionConnexion() {
                         <FontAwesomeIcon className="section1__Icon" icon={ faUserTie }></FontAwesomeIcon>
                     </div>
                     <h2>Se connecter</h2>
-                    <div>
+                    <div className="iconAnim">
                         <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
                     </div>
                 </div>
