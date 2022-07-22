@@ -9,7 +9,7 @@ function HistoriqueMessages(props) {
     return (
         <>
             <h2>Historique des posts</h2>
-            {data?.filter( post => post.userId === props.data?.userId).map( post => <Post post={post} data={data} />)}
+            {data?.filter(post => post.userId === props.data?.userId).map(post => <Post key={post.postId} post={post} data={data} />)}
         </>
     )
 };

@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faUserSecret, faUserTie, faUserGear, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser, faUserGear, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import VerifyProfil from "./Verify/VerifyProfil";
 import { useState } from 'react';
 import SectionProfil from "./SectionProfil";
@@ -35,11 +35,13 @@ function ModifyProfil(props) {
 
     let form = <form>
                     <label htmlFor="name">Prénom :</label>
-                    <input type="text" placeholder={props.data.firstName} id="firstName" minLength="1"></input>
+                    <input type="text" placeholder={props.data.firstName} id="firstName" minLength="1" maxLength="30"></input>
+
                     <label htmlFor="firstName">Nom :</label>
-                    <input type="text" placeholder={props.data.name} id="name" minLength="1"></input>
+                    <input type="text" placeholder={props.data.name} id="name" minLength="1" maxLength="30"></input>
+                    
                     <label htmlFor="email">Modifier le mot de passe :</label>
-                    <input type="text" id="password" minLength="1"></input>
+                    <input type="text" id="password" minLength="1" maxLength="30"></input>
                     <div className="check">
                         <label htmlFor="isPrivate">Rendre le profil privé : </label>
                         <input type="checkbox" id="isPrivate"></input>

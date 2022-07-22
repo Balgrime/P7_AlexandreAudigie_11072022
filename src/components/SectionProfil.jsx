@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faUserSecret, faUserTie, faUserGear, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser, faUserSecret, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import HistoriqueMessages from "./HistoriqueMessages";
 import { useState } from 'react';
 import { useParams } from "react-router-dom";
@@ -14,7 +14,6 @@ function SectionProfil() {
     const [editClic, switchToEdit] = useState(false);
     
     const { id } = useParams();
-    console.log(id);
 
     const { data } = useFetch(`/User/${id}`);
 
@@ -25,9 +24,6 @@ function SectionProfil() {
         </div> : <div>
                     <FontAwesomeIcon className="profilIcon" icon={ faCircleUser }></FontAwesomeIcon>
                 </div>
-
-
-
 
 
 

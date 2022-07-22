@@ -12,7 +12,7 @@ function Posts() {
     const [clicPost, editClicPost] = useState("");
     
 
-    const { data, loading, error } = useFetch("/Post");
+    const { data, error } = useFetch("/Post");
     if (error) console.log(error);
 
 
@@ -25,7 +25,7 @@ function Posts() {
                         <FontAwesomeIcon className="section1__Icon" icon={ faUserFriends }></FontAwesomeIcon>
                     </div>
                     <div className="section1__bas">
-                        <button className="greenButton" type="button" onClick={() => editClicPost(<CreatePost editClicPost={editClicPost} />)}>
+                        <button className="greenButton" type="button" onClick={()=> editClicPost(<CreatePost editClicPost={editClicPost} />)}>
                             <span>Publier un nouveau post</span>
                         </button>
                     </div>
@@ -33,7 +33,7 @@ function Posts() {
             </section>
             <div className="section2">
                 {clicPost}
-                {data?.filter( post =>!post.postFollowedId).map( post => <Post post={post} data={data} />)}
+                {data?.filter(post =>!post.postFollowedId).map(post => <Post key={post.postId} post={post} data={data} />)}
             </div>
         </div>
     )

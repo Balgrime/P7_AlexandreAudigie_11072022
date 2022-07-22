@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import React from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboardUser, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -23,40 +22,20 @@ function SectionInscription() {
             </section>
             <section className="section2">
                 <div>
-                    <Formik
-                    initialValues={{ name: '', firstname: '', email: '', password: '', repassword: '' }}
-                    validate={values => {
-                        const errors = {};
-                        if (!values.email) {
-                        errors.email = 'Requis!';
-                        } else if (
-                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-                        ) {
-                        errors.email = 'Adresse email non valide';
-                        }
-                        return errors;
-                    }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        setTimeout(() => {
-                        alert(JSON.stringify(values, null, 2));
-                        setSubmitting(false);
-                        }, 400);
-                    }}
-                    >
-                    {({ isSubmitting }) => (
-                        <Form className="section2__formulaire">
-                            <label>Adresse email :</label>
-                            <Field id="email" type="email" name="email" placeholder="exemple@hotmail.fr" />
-                            <ErrorMessage className="emailErr" name="email" component="div" />
-                            <label>Mot de passe :</label>
-                            <Field id="password" type="password" name="password" />
-                            <ErrorMessage name="password" component="div" />
-                            <button className="greenButton" type="submit" disabled={isSubmitting}>
-                                Inscription
-                            </button>
-                        </Form>
-                    )}
-                    </Formik>
+                    <form>
+                        <label htmlFor="firstName">Prénom :</label>
+                        <input type="text" id="firstName" minLength="1" maxLength="30"></input>
+
+                        <label htmlFor="firstName">Nom :</label>
+                        <input type="text" id="name" minLength="1" maxLength="30"></input>
+
+                        <label htmlFor="email">Modifier le mot de passe :</label>
+                        <input type="text" id="password" minLength="1" maxLength="30"></input>
+                        <div className="check">
+                            <label htmlFor="isPrivate">Rendre le profil privé : </label>
+                            <input type="checkbox" id="isPrivate"></input>
+                        </div>
+                    </form>
                 </div>
 
                 <p>Vous êtes déjà inscrit ? Rendez-vous sur la <Link  className="section2__Lien" to="../pages/Connexion">page de connexion</Link></p>

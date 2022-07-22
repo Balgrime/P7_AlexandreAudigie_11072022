@@ -12,14 +12,11 @@ function Post(props) {
 
 
 
+    let post= props.post;
+
+    let visible = props.data?.filter(comment => comment.postFollowedId === post.postId).map(comment => <Comment key={comment.postId} comment={comment} data={props.data} />)
+
     
-
-    let visible = props.data?.map( comment=>{ if(comment.postFollowedId === props.post.postId){
-        return <Comment comment={comment} data={props.data} />
-     }})
-
-     let post= props.post;
-
     return (<article className="article">
                 <PostHeader post={post} />
                 <div className="article__corps">
@@ -37,7 +34,7 @@ function Post(props) {
                         </button>
                     </div>
                     <div className='containerClicPost'>{clicPost}</div>
-                    {post.comments? <div className="msgCacher" ><p onClick={()=>{editVisibility(visible)}}>Afficher: {post.comments} commentaire(s)</p><p onClick={()=>{editVisibility("")}}>Cacher les commentaires</p></div> : <p className='centertxt'>0 commentaire</p>}
+                        {post.comments? <div className="msgCacher" ><p onClick={()=>{editVisibility(visible)}}>Afficher: {post.comments} commentaire(s)</p><p onClick={()=>{editVisibility("")}}>Cacher les commentaires</p></div> : <p className='centertxt'>0 commentaire</p>}
                     <div className="containerComments">
                         {isVisible}
                     </div>
