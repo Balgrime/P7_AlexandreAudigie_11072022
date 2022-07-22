@@ -3,11 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../Hooks/useFetch";
 import Post from "./Post";
+import CreatePost from "./CreatePost";
 
 
 
 function Posts() {
 
+    const [clicPost, editClicPost] = useState("");
+    
 
     const { data, loading, error } = useFetch("/Post");
     if (error) console.log(error);
@@ -22,13 +25,14 @@ function Posts() {
                         <FontAwesomeIcon className="section1__Icon" icon={ faUserFriends }></FontAwesomeIcon>
                     </div>
                     <div className="section1__bas">
-                        <button className="greenButton" type="button">
+                        <button className="greenButton" type="button" onClick={() => editClicPost(<CreatePost editClicPost={editClicPost} />)}>
                             <span>Publier un nouveau post</span>
                         </button>
                     </div>
                 </div>
             </section>
             <div className="section2">
+                {clicPost}
                 {
                 data?.map( post =>{ if(!post.postFollowedId){
                     return <Post post={post} data={data} />

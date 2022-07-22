@@ -13,9 +13,6 @@ function Home() {
 //Origine à changer
 const isConnected = true;
 
-//Origine à changer
-const [isPrivate, changePrivacy] = useState(false);
-
 
 
 
@@ -31,7 +28,7 @@ const [isPrivate, changePrivacy] = useState(false);
           <Route path="/" element={<Connexion />} />
           <Route path="/pages/Forum" element={<Forum />} />
           <Route path="/pages/Inscription" element={<Inscription />} />
-          <Route path="/pages/Profil" element={<Profil isPrivate={isPrivate} changePrivacy={changePrivacy} />} />
+          <Route path="/pages/Profil" element={<Profil />} />
           <Route path="/pages/Profil/:id" element={<Profil />} />
           <Route path="/pages/Connexion" element={<Connexion />} />
         </Routes>

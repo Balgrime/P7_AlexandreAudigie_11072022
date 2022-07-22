@@ -8,6 +8,11 @@ import { Link } from 'react-router-dom';
 
 
 function Comment(props) {
+
+
+
+
+
     return (<article className="article article--comment">
     <div className="infoUser">
         {props.comment.profilImageUrl ? 

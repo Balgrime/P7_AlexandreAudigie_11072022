@@ -11,7 +11,7 @@
              "email": "superemail@hotmail.fr", "password": "hdhufjkfjdjYUTBbhfjf1234"
         },
         {
-            "userId": "3", "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "isPrivate": true,
+            "userId": "3", "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "isPrivate": true,  "id": "3",
              "profilImageUrl": "",
              "email": "superemail@hotmail.fr", "password": "hdhufjkfjdjYUTBbhfjf1234"
         },
@@ -45,7 +45,7 @@
              "text": "a l'école des sorciers", "likes": 2, "usersLiked": ["1,2,3,4,5"]
         },
         {
-            "postId":"3", "userId": "1", "postFollowedId": "", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "profilImageUrl": "https://risibank.fr/media/250332-risitas-elton-john-lunettes-bleues-golem-shills-rire-tison-cheveux-issou-2022-selection-naturelle-ahi", "modifDate": "19 Juillet 2022 à 05:09",
+            "postId":"3", "userId": "3", "postFollowedId": "", "comments": 0, "firstName": "John", "name": "Doe", "date": "19 Juillet 2022 à 04:09", "profilImageUrl": "https://risibank.fr/media/250332-risitas-elton-john-lunettes-bleues-golem-shills-rire-tison-cheveux-issou-2022-selection-naturelle-ahi", "modifDate": "19 Juillet 2022 à 05:09",
              "postImageUrl": "",
              "text": "Ce superbe troisième post fonctionne", "likes": 3, "usersLiked": ["1,2,3,4,5"]
         },

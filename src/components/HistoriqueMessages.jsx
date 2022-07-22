@@ -15,7 +15,7 @@ function HistoriqueMessages(props) {
 
 
     return (
-        <div>
+        <>
             <h2>historique des messages</h2>
 
             <div className="section2">
@@ -27,7 +27,7 @@ function HistoriqueMessages(props) {
                     )
                     }
             </div>
-        </div>
+        </>
     )
 };
 

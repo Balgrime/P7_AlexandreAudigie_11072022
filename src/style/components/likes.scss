@@ -28,6 +28,10 @@
     justify-items: center;
     align-items: flex-start;
     height: 2.5rem;
+    &>button{
+        width: 70%;
+        max-width: 9rem;
+    }
 }
 
 
