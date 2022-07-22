@@ -1,4 +1,6 @@
 .createPost{
+    animation: postAppearing 430ms ease-out;
+    position: relative;
     &>label{
         text-align: center;
         margin-bottom: 0.4rem;
@@ -18,10 +20,36 @@
             justify-self: center;
         }
     }
-    animation: postAppearing 430ms ease-out;
 }
 
 .containerClicPost{
     display: flex;
     justify-content: center;
+}
+
+
+.image__display{
+    background-color: $clearest;
+    height: 130px;
+    margin: 0.4rem 0.4rem 0.4rem 0.4rem;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+input[type="file"]{
+    transform: translateY(-160px);
+    width: 100%;
+    opacity: 0;
+    height: 90px;
+    border: solid 2px green;
+    position: absolute;
+    justify-self: baseline;
+    z-index: 4;
+    cursor: pointer;
+}
+
+.iconFile{
+    font-size: 5rem;
 }
