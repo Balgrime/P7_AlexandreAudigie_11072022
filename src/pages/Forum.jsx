@@ -1,4 +1,4 @@
-import ListUsers from "../components/listUsers";
+import ListUsers from "../components/listUsers/listUsers";
 import Posts from "../components/SectionForum";
 
 function Forum() {

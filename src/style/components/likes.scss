@@ -11,6 +11,8 @@
     height: 2rem;
     margin-top: 0.8rem;
     padding: 0 0.5rem 0 0.5rem;
+    width: 20%;
+    min-width: 4.4rem;
     &:hover{
         cursor: pointer;
         animation: rebondi forwards ease-out 140ms;
@@ -33,7 +35,6 @@
         max-width: 9rem;
     }
 }
-
 
 
 .bordergrey{

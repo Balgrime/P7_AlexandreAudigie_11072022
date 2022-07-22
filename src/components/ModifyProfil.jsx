@@ -29,11 +29,15 @@ function ModifyProfil(props) {
                         </section>
 
 
+
+
+
+
     let form = <form>
                     <label htmlFor="name">Prénom :</label>
-                    <input placeholder={props.data.firstName} type="text" id="firstName" minLength="1"></input>
+                    <input type="text" placeholder={props.data.firstName} id="firstName" minLength="1"></input>
                     <label htmlFor="firstName">Nom :</label>
-                    <input placeholder={props.data.name} type="text" id="name" minLength="1"></input>
+                    <input type="text" placeholder={props.data.name} id="name" minLength="1"></input>
                     <label htmlFor="email">Modifier le mot de passe :</label>
                     <input type="text" id="password" minLength="1"></input>
                     <div className="check">
@@ -71,8 +75,6 @@ function ModifyProfil(props) {
                         <VerifyProfil />
                     </section>
                 </div>
-
-
 
     return (change())
 };

@@ -18,26 +18,26 @@ function Post(props) {
         return <Comment comment={comment} data={props.data} />
      }})
 
-
+     let post= props.post;
 
     return (<article className="article">
-                <PostHeader props={props} />
+                <PostHeader post={post} />
                 <div className="article__corps">
-                    {props.post.postImageUrl ? 
+                    {post.postImageUrl ? 
                     <div className='article__corps__image'>
-                        <img className="imagePost" src={props.post.postImageUrl} alt="publication du post" />
+                        <img className="imagePost" src={post.postImageUrl} alt="publication du post" />
                     </div> : ''}
                     <div className="article__corps__texte">
-                        <p>{props.post.text}</p>
+                        <p>{post.text}</p>
                     </div>
                     <div className='likeContainer'>
-                        <Like likes={props.post.likes} />
+                        <Like likes={post.likes} />
                         <button className='greenButton' type='button' onClick={() => editClicPost(<CreatePost editClicPost={editClicPost} />)}>
                             <span>Répondre</span>
                         </button>
                     </div>
                     <div className='containerClicPost'>{clicPost}</div>
-                    {props.post.comments? <div className="msgCacher" ><p onClick={()=>{editVisibility(visible)}}>Afficher: {props.post.comments} commentaire(s)</p><p onClick={()=>{editVisibility("")}}>Cacher les commentaires</p></div> : <p className='centertxt'>0 commentaire</p>}
+                    {post.comments? <div className="msgCacher" ><p onClick={()=>{editVisibility(visible)}}>Afficher: {post.comments} commentaire(s)</p><p onClick={()=>{editVisibility("")}}>Cacher les commentaires</p></div> : <p className='centertxt'>0 commentaire</p>}
                     <div className="containerComments">
                         {isVisible}
                     </div>
