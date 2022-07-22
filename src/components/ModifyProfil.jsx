@@ -41,7 +41,7 @@ function ModifyProfil(props) {
                     <input type="text" id="name" minLength="1" maxLength="50"></input>
 
                     <label htmlFor="password">Mot de passe :</label>
-                    <input type="text" id="password" minLength="1" maxLength="50"></input>
+                    <input type="password" id="password" minLength="1" maxLength="50"></input>
                     <div className="check">
                         <label htmlFor="isPrivate">Rendre le profil privé : </label>
                         <input type="checkbox" id="isPrivate"></input>

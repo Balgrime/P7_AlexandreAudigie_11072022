@@ -30,10 +30,10 @@ function SectionInscription() {
                     <input type="text" id="name" minLength="1" maxLength="50"></input>
 
                     <label htmlFor="email">Adresse email :</label>
-                    <input type="text" placeholder="exemple@hotmail.fr" id="email" minLength="1" maxLength="50"></input>
+                    <input type="email" placeholder="exemple@hotmail.fr" id="email" minLength="1" maxLength="50"></input>
 
                     <label htmlFor="password">Mot de passe :</label>
-                    <input type="text" id="password" minLength="1" maxLength="50"></input>
+                    <input type="password" id="password" minLength="1" maxLength="50"></input>
 
                     <button className="greenButton" type="submit">
                         Inscription

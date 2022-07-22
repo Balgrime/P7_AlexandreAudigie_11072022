@@ -5,30 +5,37 @@ import Footer from '../components/Footer';
 import Inscription from './Inscription';
 import Connexion from './Connexion';
 import Profil from './Profil';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
+import Auth from './Auth';
 
 function Home() {
 
-//Origine à changer
-const isConnected = true;
+  const [user, setUser] = useState(null);
 
+  useEffect(()=>{
+    const u = localStorage.getItem("userId");
+    u && JSON.parse(u) ? setUser(true) : setUser(false);
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("userId", user);
+  }, [user]);
 
 
   return (
     <div>
       <header>
-        <Navbar connexion={isConnected} />
+        <Navbar />
       </header>
 
       <main className='main'>
         <Routes>
-          <Route path="/" element={<Connexion />} />
-          <Route path="/pages/Forum" element={<Forum />} />
-          <Route path="/pages/Inscription" element={<Inscription />} />
-          <Route path="/pages/Profil" element={<Profil />} />
-          <Route path="/pages/Profil/:id" element={<Profil />} />
-          <Route path="/pages/Connexion" element={<Connexion />} />
+          <Route path="/" element={<Auth authenticate={()=> setUser(true)} />} />
+          <Route path="/pages/Connexion" element={<Connexion authenticate={()=> setUser(true)}/>} />
+          <Route path="/pages/Inscription" element={<Inscription authenticate={()=> setUser(true)}/>} />
+          <Route path="/pages/Forum" element={<Forum authenticate={()=> setUser(true)}/>} />
+          <Route path="/pages/Profil" element={<Profil logout={()=> setUser(false)}/>} />
+          <Route path="/pages/Profil/:id" element={<Profil authenticate={()=> setUser(true)}/>} />
         </Routes>
       </main>
       
