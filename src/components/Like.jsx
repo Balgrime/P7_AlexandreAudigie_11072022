@@ -14,7 +14,6 @@ function Like(props) {
         */
     }
 
-
     return (
         <div className={`like border${clic}`}>
             <p className={clic}>{props.likes}</p>

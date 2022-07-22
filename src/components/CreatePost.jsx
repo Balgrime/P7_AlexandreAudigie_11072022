@@ -1,7 +1,4 @@
-import { useState } from "react";
 import AddImageToPost from "./AddImageToPost";
-
-
 
 
 
@@ -16,7 +13,7 @@ function CreatePost(props) {
             {addImg}
             <label htmlFor="Post">Ecrivez votre texte: </label>
 
-            <textarea className="article__corps__texte" id="Post" name="Post" rows="5" cols="33">
+            <textarea className="article__corps__texte" id="Post" name="Post" rows="5" cols="33" minLength="1">
             </textarea>
             <div className="createPost__btn">
                 <button className="greenButton createPost__btn__btn" type="button" onClick={()=>props.editClicPost("")}>retour</button>

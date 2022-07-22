@@ -15,8 +15,6 @@ const isConnected = true;
 
 
 
-
-
   return (
     <div>
       <header>

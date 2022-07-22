@@ -19,9 +19,7 @@ function SectionProfil() {
     const { data } = useFetch(`/User/${id}`);
 
     
-
-
-    const img = data?.profilImageUrl ? 
+    let img = data?.profilImageUrl ? 
         <div>
             <img className="imageProfil" src={data.profilImageUrl} alt="profil" />
         </div> : <div>
