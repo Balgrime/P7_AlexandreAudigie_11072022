@@ -33,13 +33,7 @@ function Posts() {
             </section>
             <div className="section2">
                 {clicPost}
-                {
-                data?.map( post =>{ if(!post.postFollowedId){
-                    return <Post post={post} data={data} />
-                            }
-                        }
-                    )
-                }
+                {data?.filter( post =>!post.postFollowedId).map( post => <Post post={post} data={data} />)}
             </div>
         </div>
     )
