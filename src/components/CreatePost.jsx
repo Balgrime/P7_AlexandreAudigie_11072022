@@ -1,14 +1,19 @@
+import { useState } from "react";
 import AddImageToPost from "./AddImageToPost";
 
 
 
 
 
-
 function CreatePost(props) {
+
+    let addImg ="";
+
+    if(!props.post) addImg =(<AddImageToPost />);
+
     return (
         <article className="article createPost">
-            <AddImageToPost />
+            {addImg}
             <label htmlFor="Post">Ecrivez votre texte: </label>
 
             <textarea className="article__corps__texte" id="Post" name="Post" rows="5" cols="33">

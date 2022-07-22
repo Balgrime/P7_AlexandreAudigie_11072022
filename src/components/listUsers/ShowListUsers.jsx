@@ -1,17 +1,19 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import useFetch from "../../Hooks/useFetch";
+import ListUsers from "./listUsers";
 
 function ShowListUsers() {
 
 
-    const [show, editShow] = useState();
+    const [show, editShow] = useState("");
 
-    const { data } = useFetch("/User");
 
     
     return (
-        <div></div>
+        <div className="listUser">
+            <button type="button" onClick={()=>{editShow(<ListUsers />)}}>
+                Liste d'utilisateurs
+            </button>
+        </div>
     )
 };
 

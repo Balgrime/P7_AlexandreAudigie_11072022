@@ -32,7 +32,7 @@ function Post(props) {
                     </div>
                     <div className='likeContainer'>
                         <Like likes={post.likes} />
-                        <button className='greenButton' type='button' onClick={() => editClicPost(<CreatePost editClicPost={editClicPost} />)}>
+                        <button className='greenButton' type='button' onClick={() => editClicPost(<CreatePost post={post} editClicPost={editClicPost} />)}>
                             <span>Répondre</span>
                         </button>
                     </div>
