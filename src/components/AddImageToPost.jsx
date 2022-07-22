@@ -2,8 +2,6 @@ import { useState } from "react";
 
 
 
-
-
 function AddImageToPost() {
 
     const [image, changeImage] = useState("");
