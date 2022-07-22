@@ -55,7 +55,7 @@ function SectionProfil() {
          </div>
          {data?.isPrivate ? <div className="sectionProfil__bas">
              <FontAwesomeIcon className="profilIcon" icon={ faUserSecret }></FontAwesomeIcon>
-             <p>Ce profil est en mode privé.</p></div> : <HistoriqueMessages />
+             <p>Ce profil est en mode privé.</p></div> : <HistoriqueMessages data={data} />
          }
      </section>
          </div>
