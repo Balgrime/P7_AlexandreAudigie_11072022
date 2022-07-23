@@ -1,11 +1,16 @@
 import { Link } from "react-router-dom";
-import React from 'react';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboardUser, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 
 
 function SectionInscription() {
+
+    const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
+    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
+
+
     return (
         <div>
             <section className="section1">

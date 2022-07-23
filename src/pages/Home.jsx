@@ -10,7 +10,6 @@ import Layout from '../components/Layout';
 
 function Home() {
 
-  
   return (
     <Routes>
           <Route path="/" element={<Connexion />} />
