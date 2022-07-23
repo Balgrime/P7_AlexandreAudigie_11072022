@@ -8,10 +8,6 @@ import useAuth from "../Hooks/useAuth";
 
 function SectionConnexion() {
 
-
-    
-
-
     return (
         <div>
             <section className="section1">
@@ -26,6 +22,8 @@ function SectionConnexion() {
                     </div>
                 </div>
             </section>
+
+
             <section className="section2">
                 
                 <form className="section2__formulaire">
@@ -34,7 +32,6 @@ function SectionConnexion() {
 
                     <label htmlFor="password">Mot de passe :</label>
                     <input type="password" id="password" minLength="1" maxLength="50"></input>
-
 
                 </form>
 

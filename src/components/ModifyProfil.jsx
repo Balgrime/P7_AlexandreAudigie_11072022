@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faUserGear, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import VerifyProfil from "./Verify/VerifyProfil";
 import { useState } from 'react';
 import SectionProfil from "./SectionProfil";
 
@@ -57,8 +56,6 @@ function ModifyProfil(props) {
 
 
 
-
-
     function change(){
         if(editClic=== false){
             return base
@@ -74,7 +71,6 @@ function ModifyProfil(props) {
                             {img}
                             {form}
                         </div>
-                        <VerifyProfil />
                     </section>
                 </div>
 
