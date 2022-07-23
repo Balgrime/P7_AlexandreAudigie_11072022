@@ -10,9 +10,9 @@ import Layout from '../components/Layout';
 
 function Home() {
 
+  
   return (
     <Routes>
-        <Route path="/" element={<Layout />} />
           <Route path="/" element={<Connexion />} />
 
           {/* public routes */}
@@ -20,11 +20,11 @@ function Home() {
           <Route path="/pages/Inscription" element={<Inscription />} />
 
           {/*protected routes*/}
-          <Route element={<RequireAuth />}>
+          {/*<Route element={<RequireAuth />}>*/}
             <Route path="/pages/Forum" element={<Forum />} />
             <Route path="/pages/Profil" element={<Profil />} />
             <Route path="/pages/Profil/:id" element={<Profil />} />
-          </Route>
+          {/*</Route>*/}
           {/*redirecting route*/}
           <Route path="*" element={ <Connexion />} />
     </Routes>

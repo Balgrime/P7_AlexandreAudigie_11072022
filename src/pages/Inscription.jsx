@@ -3,12 +3,13 @@ import Navbar from "../components/Navbar";
 import SectionInscription from "../components/SectionInscription";
 
 function Inscription() {
+
     return (
         <>
             <header>
                 <Navbar />
             </header>
-                <SectionInscription />
+            <SectionInscription />
             <footer>
                 <FooterBar />
             </footer>

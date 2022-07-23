@@ -1,36 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faUserGear, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { useState } from 'react';
-import SectionProfil from "./SectionProfil";
-
-
-
 
 
 function ModifyProfil(props) {
-
-    const [editClic, switchToBase] = useState(false);
-
-
-    let section1Edit = <section className="section1">
-                            <h1>Modifier mon profil</h1>
-                            <div>
-                                <div>
-                                    <FontAwesomeIcon className="section1__Icon" icon={ faUserGear }></FontAwesomeIcon>
-                                </div>
-                                <button className="greenButton" type="button" onClick={() => switchToBase(true)}>
-                                    <span>Revenir au profil</span>
-                                </button>
-                                <div className="iconAnim">
-                                    <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
-                                </div>
-                            </div>
-                        </section>
-
-
-
-
-
 
     let form = <form>
                     <label htmlFor="firstName">Prénom :</label>
@@ -38,6 +10,9 @@ function ModifyProfil(props) {
 
                     <label htmlFor="firstName">Nom :</label>
                     <input type="text" id="name" minLength="1" maxLength="50"></input>
+
+                    <label htmlFor="email">Adresse email :</label>
+                    <input type="email" placeholder="exemple@hotmail.fr" id="email" minLength="1" maxLength="50"></input>
 
                     <label htmlFor="password">Mot de passe :</label>
                     <input type="password" id="password" minLength="1" maxLength="50"></input>
@@ -54,27 +29,30 @@ function ModifyProfil(props) {
                 <FontAwesomeIcon className="profilIcon" icon={ faCircleUser }></FontAwesomeIcon>
             </div>
 
-
-
-    function change(){
-        if(editClic=== false){
-            return base
-        } else if(editClic){
-            return <SectionProfil />
-        }
-    }
-
-    const base = <div>
-                    {section1Edit}
-                    <section className="sectionProfil">
+    return (
+        <>
+        <section className="section1">
+                            <h1>Modifier mon profil</h1>
+                            <div>
+                                <div>
+                                    <FontAwesomeIcon className="section1__Icon" icon={ faUserGear }></FontAwesomeIcon>
+                                </div>
+                                <button className="greenButton" type="button" onClick={() => props.switchToEdit(false)}>
+                                    <span>Revenir au profil</span>
+                                </button>
+                                <div className="iconAnim">
+                                    <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
+                                </div>
+                            </div>
+                        </section>
+                        <section className="sectionProfil">
                         <div className="sectionProfil__haut">
                             {img}
                             {form}
                         </div>
                     </section>
-                </div>
-
-    return (change())
+                    </>
+    )
 };
 
 export default ModifyProfil;
