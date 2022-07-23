@@ -1,11 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import React from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserTie, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import useAuth from "../Hooks/useAuth";
 
 
 
 function SectionConnexion() {
+
+
+    
+
+
     return (
         <div>
             <section className="section1">
@@ -29,9 +35,7 @@ function SectionConnexion() {
                     <label htmlFor="password">Mot de passe :</label>
                     <input type="password" id="password" minLength="1" maxLength="50"></input>
 
-                    <button className="greenButton" type="submit">
-                        Inscription
-                    </button>
+
                 </form>
 
                 <p>Vous n'êtes pas encore inscrit ? Rendez-vous sur la <Link  className="section2__Lien" to="../pages/Inscription">page d'inscription</Link></p>

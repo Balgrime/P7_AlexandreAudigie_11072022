@@ -1,9 +1,19 @@
+import FooterBar from "../components/FooterBar";
+import Navbar from "../components/Navbar";
 import SectionConnexion from "../components/SectionConnexion";
 
 
 function Connexion() {
     return (
-        <SectionConnexion />
+        <>
+            <header>
+                <Navbar />
+            </header>
+                <SectionConnexion />
+            <footer>
+                <FooterBar />
+            </footer>
+        </>
     )
 };
 

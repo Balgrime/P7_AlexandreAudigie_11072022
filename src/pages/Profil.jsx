@@ -1,8 +1,18 @@
+import FooterBar from "../components/FooterBar";
+import Navbar from "../components/Navbar";
 import SectionProfil from "../components/SectionProfil";
 
 function Profil(props) {
     return (
-        <SectionProfil isPrivate={props.isPrivate} changePrivacy={props.changePrivacy} />
+        <>
+            <header>
+                <Navbar />
+            </header>
+                <SectionProfil />
+            <footer>
+                <FooterBar />
+            </footer>
+        </>
     )
 };
 

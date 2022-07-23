@@ -1,8 +1,18 @@
+import FooterBar from "../components/FooterBar";
+import Navbar from "../components/Navbar";
 import SectionInscription from "../components/SectionInscription";
 
 function Inscription() {
     return (
-        <SectionInscription />
+        <>
+            <header>
+                <Navbar />
+            </header>
+                <SectionInscription />
+            <footer>
+                <FooterBar />
+            </footer>
+        </>
     )
 };
 
