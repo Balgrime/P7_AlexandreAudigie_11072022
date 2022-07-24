@@ -1,34 +1,89 @@
 import { Link } from "react-router-dom";
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboardUser, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import apiRequest from "./apiRequest";
+
+
 
 
 
 function SectionInscription() {
-
-    const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-    const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-
-
-
-
-
-
-    const [firstName, editFirstName] = useState("");
-    const [name, editName] = useState("");
-    const [email, editEmail] = useState("");
-    const [password, editPassword] = useState("");
-
+/*
     const requestOptions = {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName: firstName,
+        body: JSON.stringify({ formValues })
+    };
+
+
+    const finalForm = async () =>{
+        formValues = {
+            firstName: firstName,
                                 name: name,
                                 email: email,
                                 password: password 
-        })
+        }
+        const result = await apiRequest("http://localhost:3004/User", requestOptions);
+    }*/
+
+    const initialValues = { firstName: "", name: "", email: "", password: "" };
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
     };
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormErrors(validate(formValues));
+        setIsSubmit(true);
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+  useEffect(() => {
+    console.log(formErrors);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      console.log(formValues);
+    }
+  }, [formErrors]);
+  const validate = (values) => {
+    const errors = {};
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
+    if (!values.name) {
+      errors.name = "Veuillez renseigner votre nom";
+    }
+    if (!values.firstName) {
+        errors.firstName = "Veuillez renseigner votre prénom";
+      }
+    if (!values.email) {
+      errors.email = "veuillez renseigner votre adresse email";
+    } else if (!regex.test(values.email)) {
+      errors.email = "Il ne s'agit pas d'une adresse email valide";
+    }
+    if (!values.password) {
+      errors.password = "Un mot de passe est requis";
+    } else if (values.password.length < 4) {
+      errors.password = "Le mot de passe doit faire plus que 4 caractères";
+    }
+    return errors;
+  };
+
 
 
     return (
@@ -45,26 +100,34 @@ function SectionInscription() {
                     </div>
                 </div>
             </section>
+
+
+
             <section className="section2">
 
-                <form className="section2__formulaire">
-                    <label htmlFor="firstName">Prénom :</label>
-                    <input type="text" id="firstName" minLength="1" maxLength="50" onChange={editFirstName(this?.value)}></input>
+                <form className="section2__formulaire" onSubmit={handleSubmit}>
+                    
+                    <label>Prénom :</label>
+                    <input type="text" name="firstName" value={formValues.firstName} onChange={handleChange} />
+                
+                    <p>{formErrors.firstName}</p>
 
-                    <label htmlFor="firstName">Nom :</label>
-                    <input type="text" id="name" minLength="1" maxLength="50" onChange={editName(this?.value)}></input>
-
-                    <label htmlFor="email">Adresse email :</label>
-                    <input type="email" placeholder="exemple@hotmail.fr" id="email" minLength="1" maxLength="50" onChange={editEmail(this?.value)}></input>
-
-                    <label htmlFor="password">Mot de passe :</label>
-                    <input type="password" id="password" minLength="1" maxLength="50" onChange={editPassword(this?.value)}></input>
-
-                    <button className="greenButton" type="submit" onClick={fetch('/User', requestOptions)
-                                                                            .then(response => response.json(console.log(response)))
-                                                                            }>
-                        Inscription
-                    </button>
+                    <label>Nom :</label>
+                    <input type="text" name="name" value={formValues.name} onChange={handleChange} />
+                
+                    <p>{formErrors.name}</p>
+                
+                    <label>Email :</label>
+                    <input type="text" name="email" placeholder="exemple@hotmail.fr" value={formValues.email} onChange={handleChange} />
+                
+                    <p>{formErrors.email}</p>
+                
+                    <label>Mot de passe :</label>
+                    <input type="password" name="password" value={formValues.password} onChange={handleChange} />
+            
+                    <p>{formErrors.password}</p>
+                    <button className="greenButton">Inscription</button>
+                
                 </form>
 
                 <p>Vous êtes déjà inscrit ? Rendez-vous sur la <Link className="section2__Lien" to="../pages/Connexion">page de connexion</Link></p>
