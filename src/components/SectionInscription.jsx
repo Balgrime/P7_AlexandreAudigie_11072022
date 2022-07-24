@@ -38,21 +38,28 @@ function SectionInscription() {
     };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setFormErrors(validate(formValues));
         setIsSubmit(true);
+
+
+
+
+
+
+
+
+
+        
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ formValues })
+        }
+        await apiRequest("http://localhost:3004/User", requestOptions);
     };
-
-
-
-
-
-
-
-
-
-
 
 
 
