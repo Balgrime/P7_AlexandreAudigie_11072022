@@ -1,5 +1,7 @@
 const express = require('express');
-const mongoose = require('mongoose');
+
+const mysql = require("mysql");
+
 const app = express();
 const path = require('path');
 
@@ -8,17 +10,33 @@ require('dotenv').config();
 const userRoutes = require('./routes/user');
 const sauceRoutes = require('./routes/sauce');
 
-const dataBaseKey = process.env.mongoDbKey;
-const frontLink = process.env.linkFront;
 
+const frontLink = process.env.linkFront;
+const dbName = process.env.dbName;
 
 app.use(express.json());
 
-mongoose.connect(dataBaseKey,
-  { useNewUrlParser: true,
-    useUnifiedTopology: true })
-  .then(() => console.log('Connexion à MongoDB réussie !'))
-  .catch(() => console.log('Connexion à MongoDB échouée !'));
+
+
+const mysqlconnection = mysql.createConnection({
+  host: "localhost",
+  port: "3307",
+  user:'root',
+  database: dbName
+})
+
+console.log(mysqlconnection);
+
+mysqlconnection.connect((err)=>{
+  if(err){
+    console.log(`error connecting:${err.stack}`)
+  } else {
+    console.log("connecté à la bonne base de donnée!")
+    console.log(`connected as id ${mysqlconnection.threadId}`)
+  }
+})
+
+
 
 
 app.use((req, res, next) => {
