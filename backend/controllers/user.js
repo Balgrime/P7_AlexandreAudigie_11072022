@@ -1,11 +1,28 @@
 const bcrypt = require('bcrypt');
 const jwt = require ('jsonwebtoken');
-
 const User = require('../models/User');
+const mysql = require("mysql");
+
+
+
+
 
 exports.signup = (req, res, next) => {
     bcrypt.hash(req.body.password, 10)
-        .then(hash => {
+    .then(hash => {
+        console.log(hash);
+        console.log(req);
+        })
+    };
+
+
+
+
+
+
+    /*
+    bcrypt.hash(req.body.password, 10)
+    .then(hash => {
             const user = new User({
                 email: req.body.email,
                 password: hash
@@ -16,7 +33,12 @@ exports.signup = (req, res, next) => {
         })
         .catch(error => res.status(500).json({ error }));
 };
+*/
 
+
+
+
+/*
 
 exports.login = (req, res, next) => {
     User.findOne({ email: req.body.email })
@@ -43,4 +65,4 @@ exports.login = (req, res, next) => {
                 }
         })
         .catch(error => res.status(500).json({ error }));
-};
+};*/
