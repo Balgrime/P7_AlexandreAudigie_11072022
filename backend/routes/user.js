@@ -10,7 +10,8 @@ const password = require("../middleware/password");
 const emailValidation = require("../middleware/emailValidation");
 
 
-router.post('/', password, emailValidation, userCtrl.signup);
+router.post('/',/* password, emailValidation,*/ userCtrl.signup);
 //router.post('/pages/Connexion', emailValidation, userCtrl.login);
 
 module.exports = router;
+

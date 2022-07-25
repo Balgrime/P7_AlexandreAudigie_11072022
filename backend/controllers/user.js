@@ -3,21 +3,55 @@ const jwt = require ('jsonwebtoken');
 const User = require('../models/User');
 const mysql = require("mysql");
 
+const dbName = process.env.dbName;
+
+
+const mysqlconnection = mysql.createConnection({
+    host: "localhost",
+    port: "3307",
+    user:'root',
+    database: dbName
+  })
+
+
+
+
+
+
 
 
 
 
 exports.signup = (req, res, next) => {
-    bcrypt.hash(req.body.password, 10)
+    console.log(req.body.formValues.password);
+    let form = req.body.formValues;
+
+    bcrypt.hash(form.password, 10)
     .then(hash => {
-        console.log(hash);
-        console.log(req);
-        })
-    };
+            const user ={
+                firstName: form.firstName,
+                name: form.name,
+                email: form.email,
+                password: hash
+            };
+        console.log(user);
+            //la requête SQL
+            mysqlconnection.query(
+                'INSERT INTO user SET ?', user, (error, results, fields)=>{
+                    if (error){
+                        console.log(error);
+                        res.json({error});
+                    } else {
+                        console.log("--> results");
+                        console.log(results);
+                        res.json({message:"utilisateur enregistré"});
+                    }
+                }
+            )
+    });
 
 
-
-
+}
 
 
     /*
