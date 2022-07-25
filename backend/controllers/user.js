@@ -17,20 +17,24 @@ const mysqlconnection = mysql.createConnection({
 
 
 
-
-
-
-
-
 exports.signup = (req, res, next) => {
     console.log(req.body.formValues.password);
     let form = req.body.formValues;
 
+    var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
+    let date = new Date().toLocaleDateString([], options);
+
+    
+    let userId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""))
+    console.log(userId);
+
     bcrypt.hash(form.password, 10)
     .then(hash => {
-            const user ={
+            const user = {
+                userId: userId,
                 firstName: form.firstName,
                 name: form.name,
+                date: date,
                 email: form.email,
                 password: hash
             };
@@ -49,8 +53,6 @@ exports.signup = (req, res, next) => {
                 }
             )
     });
-
-
 }
 
 

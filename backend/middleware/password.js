@@ -16,10 +16,10 @@ passwordSchema
 
 
 module.exports = (req, res, next) => {
-    if(passwordSchema.validate(req.body.password)){
+    if(passwordSchema.validate(req.body.formValues.password)){
         next();
     } else {
-        let test = passwordSchema.validate(req.body.password, { list: true });
+        let test = passwordSchema.validate(req.body.formValues.password, { list: true });
         let errorMessage = [];
         if (test.includes("min"))
             errorMessage.push(["Le mot de passe doit contenir au moins 8 caractères."]);
