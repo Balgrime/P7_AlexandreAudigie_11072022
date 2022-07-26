@@ -19,16 +19,6 @@ const mysqlconnection = mysql.createConnection({
 
 
 
-
-
-
-
-
-
-
-
-
-
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
   
