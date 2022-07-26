@@ -13,7 +13,7 @@ router.post('/signup',/* password, emailValidation, */userCtrl.signup);
 router.post('/login', /*emailValidation,*/ userCtrl.login);
 //ajouter controles sur routes ci dessous
 router.get('/', verifyJWT, userCtrl.getAllUsers);
-router.get('/:id', verifyJWT, userCtrl.getOneUser);
+router.get('/:id', auth, userCtrl.getOneUser);
 
 
 module.exports = router;

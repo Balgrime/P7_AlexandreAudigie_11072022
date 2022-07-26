@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { options } from "../modules/FetchHeaders";
 
 function useFetch(url) {
 
@@ -7,10 +8,10 @@ function useFetch(url) {
     const [error, setError] = useState(null);
 
     const addressApi = "http://localhost:3002/api";
-
+    console.log(options);
 const getData = ()=>{
     setLoading(true);
-        fetch(addressApi+url).then(res => res.json()).then((json)=>{setData(json);
+        fetch(addressApi+url, options).then(res => res.json()).then((json)=>{setData(json);
         }).catch((err)=>{
             setError(err);
         }).finally(()=>{
