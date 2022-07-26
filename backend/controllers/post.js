@@ -1,8 +1,32 @@
 const Sauce = require('../models/Sauce');
-
 const sanitize = require("validator");
-
 const fs = require('fs');
+
+
+
+const mysql = require("mysql");
+const dbName = process.env.dbName;
+
+const mysqlconnection = mysql.createConnection({
+    host: "localhost",
+    port: "3307",
+    user:'root',
+    database: dbName
+  })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 exports.createSauce = (req, res, next) => {
@@ -117,19 +141,20 @@ exports.getOneSauce = (req, res, next) => {
 
 
 
-exports.getAllSauces = (req, res, next) => {
-  Sauce.find().then(
-    (sauces) => {
-      res.status(200).json(sauces);
-    }
-  ).catch(
-    (error) => {
-      res.status(400).json({
-        error: error
-      });
-    }
-  );
-};
+exports.getAllPosts = (req, res, next) => {
+//la requête SQL
+mysqlconnection.query(
+    'SELECT * FROM post',  (error, results, fields)=>{
+        if (error){
+            console.log(error);
+            res.json({error});
+        } else {
+            console.log("--> results");
+            console.log(results);
+            res.json(results);
+        }
+    })
+}
 
 
 

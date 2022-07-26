@@ -1,10 +1,11 @@
 const bcrypt = require('bcrypt');
 const jwt = require ('jsonwebtoken');
 const User = require('../models/User');
+
+
+
 const mysql = require("mysql");
-
 const dbName = process.env.dbName;
-
 
 const mysqlconnection = mysql.createConnection({
     host: "localhost",
@@ -60,20 +61,19 @@ exports.signup = (req, res, next) => {
 
 
 exports.getAllUsers = (req, res, next) => {
-
-    //la requête SQL
-    mysqlconnection.query(
-        'SELECT * FROM user',  (error, results, fields)=>{
-            if (error){
-                console.log(error);
-                res.json({error});
-            } else {
-                console.log("--> results");
-                console.log(results);
-                res.json(results);
-            }
-        })
-    }
+//la requête SQL
+mysqlconnection.query(
+    'SELECT * FROM user',  (error, results, fields)=>{
+        if (error){
+            console.log(error);
+            res.json({error});
+        } else {
+            console.log("--> results");
+            console.log(results);
+            res.json(results);
+        }
+    })
+}
 
 
 
