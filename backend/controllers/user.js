@@ -61,10 +61,85 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     
+    let { email, password} = req.body.formValues;
+    mysqlconnection.query('SELECT * FROM user', (error, result)=>{
+        let userArray = result.filter(user => user.email === email)
+        let user = userArray[0];
+
+        if (!user) {
+            return res.status(401).json({ message: 'Le mot de passe ou l\'email est incorrect !' })
+        } else {
+            bcrypt.compare(password, user.password).then(valid =>{
+                    if (!valid){
+                        console.log(valid);
+                        return res.status(401).json({ message: 'Le mot de passe ou l\'identifiant est incorrect !' })
+                    } else {
+                        const role = user.role;
+                        console.log("c'est"+role);
+                        // create JWTs token d'accès
+                        const accessToken = jwt.sign(
+                            {
+                                "UserInfo": {
+                                    "userId": user.userId,
+                                    "role": role
+                                }
+                            },
+                            process.env.ACCESS_TOKEN_SECRET,
+                            { expiresIn: '20s' }
+                        );
+                        const refreshToken = jwt.sign(
+                            { "userId": user.userId },
+                            process.env.REFRESH_TOKEN_SECRET,
+                            { expiresIn: '1d' }
+                        );
+                        // Saving refreshToken with current user
+                        user.refreshToken = refreshToken;
+                            console.log(user);
+                            console.log(user.userId);
+                            //la requête SQL
+                            mysqlconnection.query(
+                                `INSERT INTO user SET refreshToken = ${refreshToken} WHERE userId = ${user.userId}`, (error, user, fields)  => {
+                                    if (error){
+                                        console.log(error);
+                                        res.json({error});
+                                    } else {
+                                        console.log("--> results");
+                                        console.log(user);
+                                        res.json({message:"login effectué"});
+                                    }
+                                })
+                                
+                        // Creates Secure Cookie with refresh token
+                        res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+
+                        // Send authorization roles and access token to user
+                        res.json({ role, accessToken });
+                    }
+                }).catch(error => res.status(500).json({ error }));
+            }
+
+
+
+
+
+
+
+
+
+
+    });
+
+};
+
+
+/*
+
     //la requête SQL
     mysqlconnection.query(
-        `SELECT * FROM user WHERE email = ${req.body.formValues.email}`, (error, user, fields)  => {
-            if (!user) {
+        'SELECT * FROM user WHERE ?', email, (error, user, fields) => {
+            console.log(user)
+            console.log(error)
+            if (user === []) {
                 return res.status(401).json({ message: 'Le mot de passe ou l\'email est incorrect !' })
             } else {
                 bcrypt.compare(req.body.formValues.password, user.password)
@@ -112,12 +187,10 @@ exports.login = (req, res, next) => {
                             res.json({ role, accessToken });
                         }
                     })
-                    .catch(error => res.status(500).json({ error }));
                 }
         })
-        .catch(error => res.status(500).json({ error }));
 };
-
+*/
 
 
 
