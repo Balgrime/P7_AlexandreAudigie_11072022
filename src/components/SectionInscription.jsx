@@ -7,25 +7,8 @@ import apiRequest from "./apiRequest";
 
 
 
-
 function SectionInscription() {
-/*
-    const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ formValues })
-    };
 
-
-    const finalForm = async () =>{
-        formValues = {
-            firstName: firstName,
-                                name: name,
-                                email: email,
-                                password: password 
-        }
-        const result = await apiRequest("http://localhost:3004/User", requestOptions);
-    }*/
 
     const initialValues = { firstName: "", name: "", email: "", password: "" };
     const [formValues, setFormValues] = useState(initialValues);
@@ -42,14 +25,6 @@ function SectionInscription() {
         e.preventDefault();
         setFormErrors(validate(formValues));
         setIsSubmit(true);
-
-
-
-
-
-
-
-
 
         
 

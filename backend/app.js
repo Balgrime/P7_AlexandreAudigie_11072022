@@ -1,27 +1,31 @@
+require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
 const mysql = require("mysql");
 const cors = require('cors');
+const cookieParser = require('cookie-parser');
+const credentials = require('./middleware/credentials')
 const app = express();
 const path = require('path');
+const allowedOrigins = require('./config/allowedOrigins');
 
-require('dotenv').config();
 
 const userRoutes = require('./routes/user');
-const sauceRoutes = require('./routes/sauce');
+const postRoutes = require('./routes/post');
 
 const frontLink = process.env.linkFront;
 const dbName = process.env.dbName;
 
-app.use(express.json());
 
+
+
+//Pour se connecter à la base de données mysql
 const mysqlconnection = mysql.createConnection({
   host: "localhost",
   port: "3307",
   user:'root',
   database: dbName
 })
-
 
 mysqlconnection.connect((err)=>{
   if(err){
@@ -34,21 +38,36 @@ mysqlconnection.connect((err)=>{
 
 
 
+// Handle options credentials check - before CORS!
+// and fetch cookies credentials requirement
+app.use(credentials);
+
 
 //cross origin ressource sharing
-const whitelist = ['http://localhost:3000']
-app.use(cors());
+//remove !origin after developpement phase
+const corsOptions = {
+  origin: (origin, callback) => {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  },
+  optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
 
 
-const rateLimit = require('express-rate-limit');
+//built-in middle to handle urlencoded data
+app.use(express.urlencoded({ extended: true }));
 
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10000, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
-  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
-  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-});
 
+// built-in middleware for json
+app.use(express.json());
+
+
+//middleware for cookies
+app.use(cookieParser());
 
 
 
@@ -72,9 +91,16 @@ app.use((req, res, next) => {
 });
 
 
-app.use(express.urlencoded({ extended: true }));
 
 
+//limite le nombre de requêtes en un temps donné
+const rateLimit = require('express-rate-limit');
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 10000, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
 app.use(limiter);
 
 
@@ -83,7 +109,7 @@ app.use(limiter);
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 app.use('/api/User', userRoutes);
-//app.use('/api/sauces', sauceRoutes);
+app.use('/api/Post', postRoutes);
 
 
 module.exports = app;

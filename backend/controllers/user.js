@@ -24,7 +24,6 @@ exports.signup = (req, res, next) => {
     var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
     let date = new Date().toLocaleDateString([], options);
 
-    
     let userId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""))
     console.log(userId);
 
