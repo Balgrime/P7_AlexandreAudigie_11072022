@@ -55,21 +55,25 @@ exports.signup = (req, res, next) => {
 }
 
 
-    /*
-    bcrypt.hash(req.body.password, 10)
-    .then(hash => {
-            const user = new User({
-                email: req.body.email,
-                password: hash
-            });
-            user.save()
-                .then(() => res.status(201).json({ message: 'Utilisateur créé !'}))
-                .catch(() =>  res.status(401).json({ message: "L'utilisateur existe déjà !"}));
-        })
-        .catch(error => res.status(500).json({ error }));
-};
-*/
 
+
+
+
+exports.getAllUsers = (req, res, next) => {
+
+    //la requête SQL
+    mysqlconnection.query(
+        'SELECT * FROM user',  (error, results, fields)=>{
+            if (error){
+                console.log(error);
+                res.json({error});
+            } else {
+                console.log("--> results");
+                console.log(results);
+                res.json(results);
+            }
+        })
+    }
 
 
 

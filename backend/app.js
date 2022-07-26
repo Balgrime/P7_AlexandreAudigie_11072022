@@ -10,31 +10,11 @@ const path = require('path');
 const allowedOrigins = require('./config/allowedOrigins');
 
 
-const userRoutes = require('./routes/user');
-const postRoutes = require('./routes/post');
 
 const frontLink = process.env.linkFront;
 const dbName = process.env.dbName;
 
 
-
-
-//Pour se connecter à la base de données mysql
-const mysqlconnection = mysql.createConnection({
-  host: "localhost",
-  port: "3307",
-  user:'root',
-  database: dbName
-})
-
-mysqlconnection.connect((err)=>{
-  if(err){
-    console.log(`error connecting:${err.stack}`)
-  } else {
-    console.log("connecté à la bonne base de donnée!")
-    console.log(`connected as id ${mysqlconnection.threadId}`)
-  }
-})
 
 
 
@@ -105,11 +85,46 @@ app.use(limiter);
 
 
 
-
+//Pour le dossier images
 app.use('/images', express.static(path.join(__dirname, 'images')));
+
+
+
+
+
+
+const userRoutes = require('./routes/user');
+const postRoutes = require('./routes/post');
 
 app.use('/api/User', userRoutes);
 app.use('/api/Post', postRoutes);
+
+
+
+app.all('*', (req, res) => {
+  res.status(404);
+  res.type('txt').send("404 Not Found");
+});
+
+
+
+//Pour se connecter à la base de données mysql
+const mysqlconnection = mysql.createConnection({
+  host: "localhost",
+  port: "3307",
+  user:'root',
+  database: dbName
+})
+
+mysqlconnection.connect((err)=>{
+  if(err){
+    console.log(`error connecting:${err.stack}`)
+  } else {
+    console.log("connecté à la bonne base de donnée!")
+    console.log(`connected as id ${mysqlconnection.threadId}`)
+  }
+})
+
 
 
 module.exports = app;

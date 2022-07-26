@@ -33,7 +33,7 @@ function SectionInscription() {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ formValues })
         }
-        await apiRequest("http://localhost:3002/api/User", requestOptions);
+        await apiRequest("http://localhost:3002/api/User/signup", requestOptions);
     };
 
 
