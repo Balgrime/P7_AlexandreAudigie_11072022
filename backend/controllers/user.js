@@ -85,7 +85,7 @@ exports.login = (req, res, next) => {
                             }
                         },
                         process.env.ACCESS_TOKEN_SECRET,
-                        { expiresIn: '20s' }
+                        { expiresIn: '1d' }
                     );
                     const refreshToken = jwt.sign(
                         { "userId": user.userId },
@@ -226,8 +226,6 @@ exports.getAllUsers = (req, res, next) => {
                 console.log(error);
                 res.json({error});
             } else {
-                console.log("--> results");
-                console.log(results);
                 res.json(results);
             }
         })

@@ -9,8 +9,6 @@ import apiRequest from "./apiRequest";
 
 function SectionConnexion() {
 
-
-
     
     const initialValues = { email: "", password: "" };
     const [formValues, setFormValues] = useState(initialValues);
@@ -23,20 +21,50 @@ function SectionConnexion() {
     };
 
 
-    const handleSubmit = async (e) => {
+    /*const handleSubmit = async (e) => {
         e.preventDefault();
         setFormErrors(validate(formValues));
         setIsSubmit(true);
-
-        
 
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ formValues })
         }
-        await apiRequest("http://localhost:3002/api/User/login", requestOptions);
-    };
+        await apiRequest("http://localhost:3002/api/User/login", requestOptions)
+    };*/
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormErrors(validate(formValues));
+        setIsSubmit(true);
+
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ formValues })
+        }
+    
+        fetch("http://localhost:3002/api/User/login", requestOptions)
+            .then( res => res.json() )
+            .then( res => {
+                console.log(res);
+                localStorage.setItem('accessToken', JSON.stringify(res));
+               /* let inMemoryToken = res.token;
+                console.log( inMemoryToken );
+                // { Authorization: `Bearer  ${ inMemoryToken }`; }
+                return inMemoryToken;*/
+            });
+    }
+
+   
+
+
+
+
+
+
+
 
 
 
