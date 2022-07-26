@@ -97,8 +97,8 @@ exports.login = (req, res, next) => {
                             console.log(user);
                             console.log(user.userId);
                             //la requête SQL
-                            mysqlconnection.query(
-                                `INSERT INTO user SET refreshToken = ${refreshToken} WHERE userId = ${user.userId}`, (error, user, fields)  => {
+                            /*mysqlconnection.query(
+                                `UPDATE `, refreshToken, (error, user, fields)  => {
                                     if (error){
                                         console.log(error);
                                         res.json({error});
@@ -107,7 +107,7 @@ exports.login = (req, res, next) => {
                                         console.log(user);
                                         res.json({message:"login effectué"});
                                     }
-                                })
+                                })*/
                                 
                         // Creates Secure Cookie with refresh token
                         res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
@@ -248,3 +248,22 @@ exports.getAllUsers = (req, res, next) => {
             }
         })
     }
+
+
+
+    exports.getOneUser = (req, res, next) => {
+        //la requête SQL
+        console.log(req.params.id);
+        let currentId = req.params.id;
+        mysqlconnection.query(
+            `SELECT * FROM user WHERE userId = '${currentId}'`,  (error, results, fields)=>{
+                if (error){
+                    console.log(error);
+                    res.json({error});
+                } else {
+                    console.log("--> results");
+                    console.log(results[0]);
+                    res.json(results[0]);
+                }
+            })
+        }

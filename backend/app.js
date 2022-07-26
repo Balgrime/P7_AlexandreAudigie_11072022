@@ -52,6 +52,7 @@ app.use(cookieParser());
 
 
 app.use(helmet());
+/*
 // Configuration des headers :
 app.use((req, res, next) => {
   // res.setHeader('Access-Control-Request-Headers', '*');
@@ -68,7 +69,7 @@ app.use((req, res, next) => {
   // );
   res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
   next();
-});
+});*/
 
 
 
@@ -77,11 +78,12 @@ app.use((req, res, next) => {
 const rateLimit = require('express-rate-limit');
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10000, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  max: 100000, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
 });
 app.use(limiter);
+
 
 
 
