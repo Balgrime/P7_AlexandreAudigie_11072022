@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboardUser, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import apiRequest from "./apiRequest";
-
 
 
 
@@ -21,21 +19,21 @@ function SectionInscription() {
     };
 
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        setFormErrors(validate(formValues));
-        setIsSubmit(true);
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      setFormErrors(validate(formValues));
+      setIsSubmit(true);
 
-        
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ formValues })
-        }
-        await apiRequest("http://localhost:3002/api/User/signup", requestOptions);
-    };
-
+      const requestOptions = {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ formValues })
+      }
+      fetch("http://localhost:3002/api/User/signup", requestOptions)
+      .then(res => res.json())
+      .then(res =>console.log(res))
+  }
 
 
   useEffect(() => {

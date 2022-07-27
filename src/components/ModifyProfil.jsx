@@ -31,27 +31,27 @@ function ModifyProfil(props) {
 
     return (
         <>
-        <section className="section1">
-                            <h1>Modifier mon profil</h1>
-                            <div>
-                                <div>
-                                    <FontAwesomeIcon className="section1__Icon" icon={ faUserGear }></FontAwesomeIcon>
-                                </div>
-                                <button className="greenButton" type="button" onClick={() => props.switchToEdit(false)}>
-                                    <span>Revenir au profil</span>
-                                </button>
-                                <div className="iconAnim">
-                                    <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
-                                </div>
-                            </div>
-                        </section>
-                        <section className="sectionProfil">
-                        <div className="sectionProfil__haut">
-                            {img}
-                            {form}
-                        </div>
-                    </section>
-                    </>
+            <section className="section1">
+                <h1>Modifier mon profil</h1>
+                <div>
+                    <div>
+                        <FontAwesomeIcon className="section1__Icon" icon={ faUserGear }></FontAwesomeIcon>
+                    </div>
+                    <button className="greenButton" type="button" onClick={() => props.switchToEdit(false)}>
+                        <span>Revenir au profil</span>
+                    </button>
+                    <div className="iconAnim">
+                        <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
+                    </div>
+                </div>
+            </section>
+            <section className="sectionProfil">
+                <div className="sectionProfil__haut">
+                    {img}
+                    {form}
+                </div>
+            </section>
+        </>
     )
 };
 

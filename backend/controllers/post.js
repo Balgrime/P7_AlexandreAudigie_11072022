@@ -8,13 +8,11 @@ const mysql = require("mysql");
 const dbName = process.env.dbName;
 
 const mysqlconnection = mysql.createConnection({
-    host: "localhost",
-    port: "3307",
-    user:'root',
-    database: dbName
-  })
-
-
+  host: "localhost",
+  port: "3307",
+  user:'root',
+  database: dbName
+});
 
 
 

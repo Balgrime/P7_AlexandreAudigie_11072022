@@ -11,12 +11,10 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 function Post(props) {
 
     const [isVisible, editVisibility] = useState("");
-
     const [clicPost, editClicPost] = useState("");
 
 
     let post= props.post;
-
     let visible = props.data?.filter(comment => comment.postFollowedId === post.postId).map(comment => <Comment key={comment.postId} comment={comment} data={props.data} />)
 
     
@@ -48,4 +46,5 @@ function Post(props) {
             </article>
         )
     }
+
 export default Post;

@@ -15,7 +15,6 @@ const mysqlconnection = mysql.createConnection({
 
 
 
-
 exports.signup = (req, res, next) => {
     console.log(req.body.formValues.password);
     let form = req.body.formValues;
@@ -38,19 +37,18 @@ exports.signup = (req, res, next) => {
                 role: 2834
             };
         console.log(user);
-            //la requête SQL
-            mysqlconnection.query(
-                'INSERT INTO user SET ?', user, (error, results, fields)=>{
-                    if (error){
-                        console.log(error);
-                        res.json({error});
-                    } else {
-                        console.log("--> results");
-                        console.log(results);
-                        res.json({message:"utilisateur enregistré"});
-                    }
+        //la requête SQL
+        mysqlconnection.query(
+            'INSERT INTO user SET ?', user, (error, results, fields)=>{
+                if (error){
+                    console.log(error);
+                    res.json({error});
+                } else {
+                    console.log("--> results");
+                    console.log(results);
+                    res.json({message:"utilisateur enregistré"});
                 }
-            )
+            })
     });
 }
 
@@ -118,71 +116,6 @@ exports.login = (req, res, next) => {
 };
 
 
-/*
-
-    //la requête SQL
-    mysqlconnection.query(
-        'SELECT * FROM user WHERE ?', email, (error, user, fields) => {
-            console.log(user)
-            console.log(error)
-            if (user === []) {
-                return res.status(401).json({ message: 'Le mot de passe ou l\'email est incorrect !' })
-            } else {
-                bcrypt.compare(req.body.formValues.password, user.password)
-                    .then(valid =>{
-                        if (!valid){
-                            return res.status(401).json({ message: 'Le mot de passe ou l\'identifiant est incorrect !' })
-                        } else {
-                            const role = user.role;
-                            // create JWTs token d'accès
-                            const accessToken = jwt.sign(
-                                {
-                                    "UserInfo": {
-                                        "userId": user.userId,
-                                        "role": role
-                                    }
-                                },
-                                process.env.ACCESS_TOKEN_SECRET,
-                                { expiresIn: '20s' }
-                            );
-                            const refreshToken = jwt.sign(
-                                { "userId": user.userId },
-                                process.env.REFRESH_TOKEN_SECRET,
-                                { expiresIn: '1d' }
-                            );
-                            // Saving refreshToken with current user
-                            user.refreshToken = refreshToken;
-
-                                //la requête SQL
-                                mysqlconnection.query(
-                                    `UPDATE user SET refreshToken = ${refreshToken} WHERE userId = ${user.userId}`, (error, user, fields)  => {
-                                        if (error){
-                                            console.log(error);
-                                            res.json({error});
-                                        } else {
-                                            console.log("--> results");
-                                            console.log(user);
-                                            res.json({message:"login effectué"});
-                                        }
-                                    })
-                                    
-                            // Creates Secure Cookie with refresh token
-                            res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
-
-                            // Send authorization roles and access token to user
-                            res.json({ role, accessToken });
-                        }
-                    })
-                }
-        })
-};
-*/
-
-
-
-
-
-
 
 
 
@@ -214,38 +147,32 @@ exports.logout = async (req, res) => {
 
 
 
-
-
-
-
-
-
 exports.getAllUsers = (req, res, next) => {
-    //la requête SQL
-    mysqlconnection.query(
-        'SELECT * FROM user',  (error, results, fields)=>{
-            if (error){
-                console.log(error);
-                res.json({error});
-            } else {
-                res.json(results);
-            }
-        })
-    }
-
-
-
-    exports.getOneUser = (req, res, next) => {
-        let currentId = req.params.id;
-        mysqlconnection.query(
-            `SELECT * FROM user WHERE userId = '${currentId}'`,  (error, results, fields)=>{
-                if (error){
-                    console.log(error);
-                    res.json({error});
-                } else {
-                    console.log("--> results");
-                    console.log(results[0]);
-                    res.json(results[0]);
-                }
-            })
+//la requête SQL
+mysqlconnection.query(
+    'SELECT * FROM user', (error, results, fields)=>{
+        if (error){
+            console.log(error);
+            res.json({error});
+        } else {
+            res.json(results);
         }
+    })
+}
+
+
+
+exports.getOneUser = (req, res, next) => {
+let currentId = req.params.id;
+mysqlconnection.query(
+    `SELECT * FROM user WHERE userId = '${currentId}'`,  (error, results, fields)=>{
+        if (error){
+            console.log(error);
+            res.json({error});
+        } else {
+            console.log("--> results");
+            console.log(results[0]);
+            res.json(results[0]);
+        }
+    })
+}

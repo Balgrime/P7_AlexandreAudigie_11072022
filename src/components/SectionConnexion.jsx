@@ -2,8 +2,6 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserTie, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import useAuth from "../Hooks/useAuth";
-import apiRequest from "./apiRequest";
 import { AuthContext } from "../context/AuthContext";
 
 
@@ -23,19 +21,6 @@ function SectionConnexion() {
         setFormValues({ ...formValues, [name]: value });
     };
 
-
-    /*const handleSubmit = async (e) => {
-        e.preventDefault();
-        setFormErrors(validate(formValues));
-        setIsSubmit(true);
-
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ formValues })
-        }
-        await apiRequest("http://localhost:3002/api/User/login", requestOptions)
-    };*/
     const handleSubmit = (e) => {
         e.preventDefault();
         setFormErrors(validate(formValues));
@@ -53,11 +38,6 @@ function SectionConnexion() {
             .then( res => {
                 console.log(res);
                 localStorage.setItem('accessToken', JSON.stringify(res));
-               /* let inMemoryToken = res.token;
-                console.log( inMemoryToken );
-                // { Authorization: `Bearer  ${ inMemoryToken }`; }
-                return inMemoryToken;*/
-
               
               const token = localStorage.getItem('accessToken');
               if (token){
@@ -70,12 +50,6 @@ function SectionConnexion() {
     }
 
    
-
-
-
-
-
-
 
 
 

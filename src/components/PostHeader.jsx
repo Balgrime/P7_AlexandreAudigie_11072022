@@ -4,8 +4,6 @@ import { Link } from "react-router-dom";
 
 
 
-
-
 function PostHeader(props) {
 
     let post = props.post;

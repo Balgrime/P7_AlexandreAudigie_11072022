@@ -1,8 +1,6 @@
 import { useContext } from "react";
 import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import useAuth from "../Hooks/useAuth";
-
 
 
 function RequireAuth() {
@@ -13,7 +11,7 @@ function RequireAuth() {
     return (
         <>
             {
-                userContext?.role === 2834
+                userContext?.role === 2834 || 8759
                     ? <Outlet />
                     : <Navigate to="/pages/Connexion" state={{ from: location }} replace />
             }
@@ -22,21 +20,3 @@ function RequireAuth() {
 };
 
 export default RequireAuth;
-
-
-
-
-  /*
-const RequireAuth = ({ allowedRoles }) => {
-    const { auth } = useAuth();
-    const location = useLocation();
-
-
-
-    return (
-        auth?.role?.find(role => allowedRoles?.includes(role))
-            ? <Outlet />
-            : <Navigate to="/pages/Connexion" state={{ from: location }} replace />
-    );
-}
-*/

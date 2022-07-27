@@ -5,13 +5,10 @@ import Inscription from './Inscription';
 import Connexion from './Connexion';
 import Profil from './Profil';
 import React, { useEffect, useState } from 'react';
-import Layout from '../components/Layout';
 import { AuthContext } from '../context/AuthContext';
-import AuthenticatedRoute from '../components/AuthenticatedRoute';
 
 
-
-
+//A enlever avant la fin
 const role = {
   'User': 2834,
   'Admin': 8759
