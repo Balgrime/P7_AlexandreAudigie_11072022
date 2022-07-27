@@ -6,6 +6,7 @@ import Connexion from './Connexion';
 import Profil from './Profil';
 import React, { useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthContext';
+import AlreadyAuth from '../components/AlreadyAuth';
 
 
 //A enlever avant la fin
@@ -27,8 +28,10 @@ function Home() {
             <Route path="/" element={<Connexion />} />
 
             {/* public routes */}
-            {<Route path="/pages/Connexion" element={<Connexion />} />}
-            <Route path="/pages/Inscription" element={<Inscription />} />
+            <Route element={<AlreadyAuth />}>
+              {<Route path="/pages/Connexion" element={<Connexion />} />}
+              <Route path="/pages/Inscription" element={<Inscription />} />
+            </Route>
 
             {/*protected routes*/}
             <Route element={<RequireAuth />}>

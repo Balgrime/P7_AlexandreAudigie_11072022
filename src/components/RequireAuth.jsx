@@ -5,13 +5,13 @@ import { AuthContext } from "../context/AuthContext";
 
 function RequireAuth() {
 
-  let userContext = useContext(AuthContext);
+  let context = useContext(AuthContext);
   const location = useLocation();
-
+  console.log(context.userContext?.role);
     return (
         <>
             {
-            userContext?.role === "2834" || userContext?.role === "8759"
+            context.userContext?.role === "2834" || context.userContext?.role === "8759"
                 ? <Outlet />
                 : <Navigate to="/pages/Connexion" state={{ from: location }} replace />
             }
