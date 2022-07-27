@@ -76,6 +76,7 @@ exports.login = (req, res, next) => {
                 } else {
                     const role = user.role;
                     console.log("c'est"+role);
+                    const userId = user.userId;
                     // create JWTs token d'accès
                     const accessToken = jwt.sign(
                         {
@@ -108,7 +109,7 @@ exports.login = (req, res, next) => {
                     res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
 
                     // Send authorization roles and access token to user
-                    res.json({ role, accessToken });
+                    res.json({ role, userId, accessToken });
                 }
             }).catch(error => res.status(500).json({ error }));
         }

@@ -15,6 +15,7 @@ passwordSchema
 .is().not().oneOf(['Passw0rd', 'Password123', 'Password']); // Blacklist these values
 
 
+
 module.exports = (req, res, next) => {
     if(passwordSchema.validate(req.body.formValues.password)){
         next();
