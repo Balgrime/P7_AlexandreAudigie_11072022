@@ -1,12 +1,15 @@
 import { Link } from "react-router-dom";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClipboardUser, faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from "../context/AuthContext";
 
 
 
 function SectionInscription() {
 
+    let context = useContext(AuthContext);
+    let setUser = context.setUser;
 
     const initialValues = { firstName: "", name: "", email: "", password: "" };
     const [formValues, setFormValues] = useState(initialValues);
@@ -31,8 +34,24 @@ function SectionInscription() {
           body: JSON.stringify({ formValues })
       }
       fetch("http://localhost:3002/api/User/signup", requestOptions)
-      .then(res => res.json())
-      .then(res =>console.log(res.message))
+      .then(()=>{
+
+        
+        fetch("http://localhost:3002/api/User/login", requestOptions)
+            .then( res => res.json() )
+            .then( res => {
+                console.log(res);
+                localStorage.setItem('accessToken', JSON.stringify(res));
+              
+              const token = localStorage.getItem('accessToken');
+              if (token){
+                  let userAuth = JSON.parse(token);
+                  let role = userAuth.role;
+                  let userId = userAuth.userId;
+                  setUser(userAuth);
+              }
+          });
+      })
   }
 
 
