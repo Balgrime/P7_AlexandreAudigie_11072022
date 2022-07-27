@@ -11,7 +11,8 @@ function Navbar() {
     let navList ='';
     let context = useContext(AuthContext);
     let role = context.userContext.role;
-    console.log(role);
+    let userId = context.userContext.userId;
+    console.log(userId);
 
     if(role === "2834" || role === "8759"){
         navList = <ul>
@@ -24,7 +25,7 @@ function Navbar() {
                         </Link>
                     </li>
                     <li>
-                        <Link className="navbar__Lien" to="../pages/Profil">
+                        <Link className="navbar__Lien" to={`/pages/Profil/${userId}`}>
                             <div>
                                 <FontAwesomeIcon className="navbarIcon" icon={ faUserTie }></FontAwesomeIcon>
                             </div>
