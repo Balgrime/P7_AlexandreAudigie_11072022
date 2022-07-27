@@ -1,23 +1,26 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 
 function Logout() {
+
+    let context = useContext(AuthContext);
+    let setUser = context.setUser;
+
+
     /* On récupère le token CSRF depuis le localStorage */
     let accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
     console.log("pas de token");
     }
 
-    /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
-    accessToken = JSON.parse(accessToken);
-
     const [clic, editClic] = useState(false);
 
-    useEffect((e)=>{
 
+    const handleLogout = () => {
         const options = {
             method: 'DELETE',
             mode: 'cors',
@@ -31,11 +34,17 @@ function Logout() {
             .then( res => res.json() )
             .then( res => {
                 console.log(res);
-              //  storage.removeItem(accessToken);
+                localStorage.removeItem("accessToken");
+                setUser("");
         });
+    }
+
+    if (clic){
+        handleLogout();
+    }
 
 
-    },[clic])
+
 
     /*
         const handleLogout = (e) => {
@@ -52,7 +61,7 @@ function Logout() {
                 .then( res => res.json() )
                 .then( res => {
                     console.log(res);
-                  //  storage.removeItem(accessToken);
+                  //  storage.removeItem("accessToken");
             });
         }
     */

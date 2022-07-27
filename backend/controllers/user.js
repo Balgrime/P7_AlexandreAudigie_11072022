@@ -121,7 +121,8 @@ exports.login = (req, res, next) => {
 exports.logout = (req, res) => {
     // On client, also delete the accessToken
     res.json({message: "requête reçue!"});
-   /* const cookies = req.cookies;
+    /*const cookies = req.cookies;
+    console.log(cookies?.jwt)
     if (!cookies?.jwt) return res.sendStatus(204); //No content
     const refreshToken = cookies.jwt;
 
