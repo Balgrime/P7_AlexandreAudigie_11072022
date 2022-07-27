@@ -11,7 +11,7 @@ function RequireAuth() {
     return (
         <>
             {
-            userContext?.role === 2834 || 8759
+            userContext?.role === "2834" || userContext?.role === "8759"
                 ? <Outlet />
                 : <Navigate to="/pages/Connexion" state={{ from: location }} replace />
             }

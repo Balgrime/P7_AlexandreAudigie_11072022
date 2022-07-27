@@ -1,7 +1,6 @@
 /* On récupère le token CSRF depuis le localStorage */
 let accessToken = localStorage.getItem('accessToken');
 if (!accessToken) {
-  /* Traitement dans le cas où le token n'existe dans le localStorage */
   console.log("pas de token");
 }
 
@@ -12,7 +11,7 @@ export const options = {
   method: 'GET',
   mode: 'cors',
   headers: new Headers({
-    'Authorization': accessToken.accessToken
+    'Authorization': accessToken?.accessToken
   }),
   credentials: 'include'
 };

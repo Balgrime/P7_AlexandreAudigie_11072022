@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket, faUserFriends, faUserTie, faClipboardUser } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import Logout from "./Logout";
 
 
 function Navbar() {
@@ -33,12 +34,7 @@ function Navbar() {
                         </Link>
                     </li>
                     <li>
-                        <Link className="navbar__Lien" to="../pages/Connexion">
-                            <div>
-                                <FontAwesomeIcon label="Quitter" className="navbarIcon" icon={ faRightFromBracket }></FontAwesomeIcon>
-                            </div>
-                            <p className="navbar__Lien__Text" >Quitter</p>
-                        </Link>
+                        < Logout />
                     </li>
                 </ul>
     } else {

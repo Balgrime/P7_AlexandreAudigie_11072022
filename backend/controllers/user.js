@@ -117,11 +117,11 @@ exports.login = (req, res, next) => {
 
 
 
-/*
-exports.logout = async (req, res) => {
-    // On client, also delete the accessToken
 
-    const cookies = req.cookies;
+exports.logout = (req, res) => {
+    // On client, also delete the accessToken
+    res.json({message: "requête reçue!"});
+   /* const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(204); //No content
     const refreshToken = cookies.jwt;
 
@@ -138,9 +138,8 @@ exports.logout = async (req, res) => {
     console.log(result);
 
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
-    res.sendStatus(204);
+    res.sendStatus(204);*/
 }
-*/
 
 
 
