@@ -1,13 +1,16 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserTie, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 import useAuth from "../Hooks/useAuth";
 import apiRequest from "./apiRequest";
+import { AuthContext } from "../context/AuthContext";
 
 
 
 function SectionConnexion() {
+
+  let setUser = useContext(AuthContext);
 
     
     const initialValues = { email: "", password: "" };
@@ -54,7 +57,16 @@ function SectionConnexion() {
                 console.log( inMemoryToken );
                 // { Authorization: `Bearer  ${ inMemoryToken }`; }
                 return inMemoryToken;*/
-            });
+
+              
+              const token = localStorage.getItem('accessToken');
+              if (token){
+                  let userAuth = JSON.parse(token);
+                  let role = userAuth.role;
+                  let userId = userAuth.userId;
+                  setUser(userAuth);
+              }
+          });
     }
 
    

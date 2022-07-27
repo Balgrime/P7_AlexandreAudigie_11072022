@@ -34,7 +34,8 @@ exports.signup = (req, res, next) => {
                 name: form.name,
                 date: date,
                 email: form.email,
-                password: hash
+                password: hash,
+                role: 2834
             };
         console.log(user);
             //la requête SQL
