@@ -23,9 +23,9 @@ module.exports = (req, res, next) => {
       process.env.ACCESS_TOKEN_SECRET,
       (err, decoded) => {
           if (err) return res.sendStatus(403); //invalid token
-          console.log( decoded.UserInfo.userId);
+          console.log(decoded.UserInfo.userId);
           console.log(decoded.UserInfo.role);
-          let verifiedUserId = 82734;
+          let verifiedUserId = decoded.UserInfo.userId;
 
         //la requête SQL
         mysqlconnection.query(

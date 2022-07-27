@@ -8,13 +8,12 @@ import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
 
-
     let navList ='';
     let context = useContext(AuthContext);
     let role = context.userContext.role;
     console.log(role);
 
-    if (role === "2834" || role === "8759"){
+    if(role === "2834" || role === "8759"){
         navList = <ul>
                     <li>
                         <Link className="navbar__Lien" to="../pages/Forum">
@@ -62,7 +61,6 @@ function Navbar() {
                 </ul>
     }
 
-  
 
     return (
         <nav className='navbar'>

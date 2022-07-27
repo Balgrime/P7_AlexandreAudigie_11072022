@@ -27,7 +27,7 @@ function Home() {
             <Route path="/" element={<Connexion />} />
 
             {/* public routes */}
-            <Route path="/pages/Connexion" element={<Connexion />} />
+            {<Route path="/pages/Connexion" element={<Connexion />} />}
             <Route path="/pages/Inscription" element={<Inscription />} />
 
             {/*protected routes*/}
