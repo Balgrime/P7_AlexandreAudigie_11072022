@@ -20,7 +20,6 @@ function SectionProfil(props) {
 
 
 
-
     let context = useContext(AuthContext);
     let userId = context.userContext.userId;
     console.log(userId);
@@ -32,7 +31,6 @@ function SectionProfil(props) {
                         <span>Modifier mon profil</span>
                     </button>
     };
-
 
 
     return (

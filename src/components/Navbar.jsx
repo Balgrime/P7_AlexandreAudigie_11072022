@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logoBlanc from "../images/logoBlanc.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRightFromBracket, faUserFriends, faUserTie, faClipboardUser } from "@fortawesome/free-solid-svg-icons";
+import { faUserFriends, faUserTie, faClipboardUser } from "@fortawesome/free-solid-svg-icons";
 import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import Logout from "./Logout";

@@ -12,7 +12,7 @@ router.post('/signup', password, emailValidation, userCtrl.signup);
 router.post('/login', emailValidation, userCtrl.login);
 
 //Routes sécurisées par middleware auth
-router.delete('/logout', userCtrl.login);
+router.delete('/logout', userCtrl.logout);
 router.get('/', auth, userCtrl.getAllUsers);
 router.get('/:id', auth, userCtrl.getOneUser);
 
