@@ -1,7 +1,6 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require ('jsonwebtoken');
-const User = require('../models/User');
 
 const mysql = require("mysql");
 const dbName = process.env.dbName;
@@ -118,7 +117,7 @@ exports.login = (req, res, next) => {
 
 
 
-
+/*
 exports.logout = async (req, res) => {
     // On client, also delete the accessToken
 
@@ -141,7 +140,7 @@ exports.logout = async (req, res) => {
     res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
     res.sendStatus(204);
 }
-
+*/
 
 
 

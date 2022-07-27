@@ -8,8 +8,8 @@ import { AuthContext } from "../context/AuthContext";
 
 function SectionConnexion() {
 
-  let setUser = useContext(AuthContext);
-
+  let context = useContext(AuthContext);
+  let setUser = context.setUser;
     
     const initialValues = { email: "", password: "" };
     const [formValues, setFormValues] = useState(initialValues);

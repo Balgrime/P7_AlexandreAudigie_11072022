@@ -11,9 +11,9 @@ function RequireAuth() {
     return (
         <>
             {
-                userContext?.role === 2834 || 8759
-                    ? <Outlet />
-                    : <Navigate to="/pages/Connexion" state={{ from: location }} replace />
+            userContext?.role === 2834 || 8759
+                ? <Outlet />
+                : <Navigate to="/pages/Connexion" state={{ from: location }} replace />
             }
         </>
     )

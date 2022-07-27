@@ -22,8 +22,7 @@ function Home() {
   console.log("le contexte actuel est" + userContext.role);
 
   return (
-
-    <AuthContext.Provider value={setUser}>
+    <AuthContext.Provider value={{setUser, userContext}}>
       <Routes>
             <Route path="/" element={<Connexion />} />
 

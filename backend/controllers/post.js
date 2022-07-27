@@ -1,4 +1,3 @@
-const Sauce = require('../models/Sauce');
 const sanitize = require("validator");
 const fs = require('fs');
 
@@ -16,7 +15,7 @@ const mysqlconnection = mysql.createConnection({
 
 
 
-
+/*
 exports.createSauce = (req, res, next) => {
     const sauceObject = JSON.parse(req.body.sauce);
   
@@ -127,7 +126,7 @@ exports.getOneSauce = (req, res, next) => {
     )
   };
 
-
+*/
 
 exports.getAllPosts = (req, res, next) => {
 //la requête SQL
@@ -145,7 +144,7 @@ mysqlconnection.query(
 }
 
 
-
+/*
 
 exports.changeLike = (req, res, next) => {
     let currentId =  req.body.userId;
@@ -213,3 +212,4 @@ function removeLiking(sauce, currentId){
     sauce.usersDisliked.splice(positionUser, 1);
   };
 };
+*/
