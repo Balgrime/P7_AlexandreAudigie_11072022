@@ -32,7 +32,7 @@ function SectionInscription() {
       }
       fetch("http://localhost:3002/api/User/signup", requestOptions)
       .then(res => res.json())
-      .then(res =>console.log(res))
+      .then(res =>console.log(res.message))
   }
 
 
@@ -90,22 +90,22 @@ function SectionInscription() {
                     <label>Prénom :</label>
                     <input type="text" name="firstName" value={formValues.firstName} onChange={handleChange} />
                 
-                    <p>{formErrors.firstName}</p>
+                    <p className="red">{formErrors.firstName}</p>
 
                     <label>Nom :</label>
                     <input type="text" name="name" value={formValues.name} onChange={handleChange} />
                 
-                    <p>{formErrors.name}</p>
+                    <p className="red">{formErrors.name}</p>
                 
                     <label>Email :</label>
                     <input type="text" name="email" placeholder="exemple@hotmail.fr" value={formValues.email} onChange={handleChange} />
                 
-                    <p>{formErrors.email}</p>
+                    <p className="red">{formErrors.email}</p>
                 
                     <label>Mot de passe :</label>
                     <input type="password" name="password" value={formValues.password} onChange={handleChange} />
             
-                    <p>{formErrors.password}</p>
+                    <p className="red">{formErrors.password}</p>
                     <button className="greenButton">Inscription</button>
                 
                 </form>

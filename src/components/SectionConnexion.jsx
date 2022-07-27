@@ -100,12 +100,12 @@ function SectionConnexion() {
                     <label>Email :</label>
                     <input type="text" name="email" placeholder="exemple@hotmail.fr" value={formValues.email} onChange={handleChange} />
                 
-                    <p>{formErrors.email}</p>
+                    <p className="red">{formErrors.email}</p>
                 
                     <label>Mot de passe :</label>
                     <input type="password" name="password" value={formValues.password} onChange={handleChange} />
             
-                    <p>{formErrors.password}</p>
+                    <p className="red">{formErrors.password}</p>
                     <button className="greenButton">Connexion</button>
                 
                 </form>
