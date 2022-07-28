@@ -66,7 +66,7 @@ function Logout() {
     */
     return (
         <>
-            <div onClick={()=>editClic(true)}>
+            <div className="containerLogout" onClick={()=>editClic(true)}>
                 <div>
                     <FontAwesomeIcon label="Quitter" className="navbarIcon" icon={ faRightFromBracket }></FontAwesomeIcon>
                 </div>

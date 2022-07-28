@@ -35,6 +35,19 @@
     }
 }
 
+.containerLogout{
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+        background-color: darken($color: $primary, $amount: 15%);
+    }
+}
+
+
+
+
 
 
 
