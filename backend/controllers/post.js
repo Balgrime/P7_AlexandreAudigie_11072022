@@ -15,8 +15,10 @@ const mysqlconnection = mysql.createConnection({
 
 
 
-/*
-exports.createSauce = (req, res, next) => {
+
+exports.createPost = (req, res, next) => {
+  res.json("requête reçue")
+  /*
     const sauceObject = JSON.parse(req.body.sauce);
   
     sauceObject.name = sanitize.blacklist(sauceObject.name, "<>\"'/");
@@ -35,10 +37,13 @@ exports.createSauce = (req, res, next) => {
     });
     sauce.save()
       .then(() => res.status(201).json({ message: 'Sauce enregistré !'}))
-      .catch(error => res.status(400).json({ error }));
+      .catch(error => res.status(400).json({ error }));*/
   };
 
 
+
+
+  /*
 
 exports.getOneSauce = (req, res, next) => {
   Sauce.findOne({
