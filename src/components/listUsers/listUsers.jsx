@@ -12,7 +12,7 @@ function ListUsers() {
 
     
     return <div className="listUser__list">
-                {data?.map( user => <Link to={`/pages/Profil/${user.userId}`} className="infoUser">
+                {data?.map( user => <Link  key={user.userId} to={`/pages/Profil/${user.userId}`} className="infoUser">
                 {user.profilImageUrl ? 
                 <div>
                     <img className="imageProfil" src={user.profilImageUrl} alt="profil" />

@@ -11,7 +11,6 @@ function Posts() {
 
     const [clicPost, editClicPost] = useState("");
     
-
     const { data, error } = useFetch("/Post");
     if (error) console.log(error);
 

@@ -1,7 +1,6 @@
-import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 
@@ -34,7 +33,7 @@ function Logout() {
             .then( res => res.json() )
             .then( res => {
                 console.log(res);
-                localStorage?.removeItem("accessToken");
+                localStorage.removeItem("accessToken");
                 setUser("");
         });
     }

@@ -34,7 +34,7 @@ function Navbar() {
                         </Link>
                     </li>
                     <li>
-                        < Logout />
+                        <Logout />
                     </li>
                 </ul>
     } else {
