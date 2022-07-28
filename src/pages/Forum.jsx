@@ -1,5 +1,5 @@
 import FooterBar from "../components/FooterBar";
-import ListUsers from "../components/listUsers/listUsers";
+import ShowListUsers from "../components/listUsers/ShowListUsers";
 import Navbar from "../components/Navbar";
 import Posts from "../components/SectionForum";
 
@@ -10,7 +10,7 @@ function Forum() {
                 <Navbar />
             </header>
                 <Posts />
-                <ListUsers />
+                <ShowListUsers />
             <footer>
                 <FooterBar />
             </footer>

@@ -1,0 +1,23 @@
+.listUser{
+    position: fixed;
+    z-index: 8;
+    bottom: 54px;
+    width: 20%;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    &__list{
+        border: solid 3px $secondary;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        max-height: 400px;
+    }
+    &>button{
+        background-color: $secondary;
+    }
+}
+
+.iconList{
+    color: $clearest;
+    margin-right: 0.3rem;
+}

@@ -1,5 +1,7 @@
 import { useState } from "react";
-import ListUsers from "./listUsers";
+import ListUsers from "./ListUsers";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 function ShowListUsers() {
 
@@ -10,9 +12,19 @@ function ShowListUsers() {
     
     return (
         <div className="listUser">
-            <button type="button" onClick={()=>{editShow(<ListUsers />)}}>
-                Liste d'utilisateurs
-            </button>
+            {!show ? <button className="greenButton listButton" type="button" onClick={()=>{editShow(<ListUsers />)}}>
+                        <span>Liste d'utilisateurs</span>
+                        <div className="iconAnim">
+                            <FontAwesomeIcon className="section1__Icon iconList" icon={ faCaretUp }></FontAwesomeIcon>
+                        </div>
+                    </button> : 
+                    <button className="greenButton listButton" type="button" onClick={()=>editShow("")}>
+                        <span>Liste d'utilisateurs</span>
+                        <div className="iconAnim">
+                            <FontAwesomeIcon className="section1__Icon iconList" icon={ faCaretDown }></FontAwesomeIcon>
+                        </div>
+                    </button>}
+            {show}
         </div>
     )
 };

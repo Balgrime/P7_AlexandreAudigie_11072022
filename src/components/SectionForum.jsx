@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserFriends } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../Hooks/useFetch";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
@@ -25,9 +25,12 @@ function Posts() {
                         <FontAwesomeIcon className="section1__Icon" icon={ faUserFriends }></FontAwesomeIcon>
                     </div>
                     <div className="section1__bas">
-                        <button className="greenButton" type="button" onClick={()=> editClicPost(<CreatePost editClicPost={editClicPost} />)}>
-                            <span>Publier un nouveau post</span>
-                        </button>
+                        {!clicPost? <button className="greenButton" type="button" onClick={()=> editClicPost(<CreatePost editClicPost={editClicPost} />)}>
+                                        <span>Publier un nouveau post</span>
+                                    </button> : 
+                                    <div className="iconAnim">
+                                        <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
+                                    </div>}
                     </div>
                 </div>
             </section>
