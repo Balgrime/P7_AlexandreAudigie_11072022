@@ -8,7 +8,7 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 
 function ListUsers() {
 
-    const { data } = useFetch("/User");
+    const { data } = useFetch("http://localhost:3002/api/User");
 
     
     return <div className="listUser__list">

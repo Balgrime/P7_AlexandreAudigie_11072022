@@ -11,7 +11,7 @@ function useFetch(url) {
     console.log(options);
 const getData = ()=>{
     setLoading(true);
-        fetch(addressApi+url, options).then(res => res.json()).then((json)=>{setData(json);
+        fetch(url, options).then(res => res.json()).then((json)=>{setData(json);
         }).catch((err)=>{
             setError(err);
         }).finally(()=>{

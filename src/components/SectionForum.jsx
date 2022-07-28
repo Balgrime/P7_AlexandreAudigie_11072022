@@ -11,7 +11,7 @@ function Posts() {
 
     const [clicPost, editClicPost] = useState("");
     
-    const { data, error } = useFetch("/Post");
+    const { data, error } = useFetch("http://localhost:3002/api/Post");
     if (error) console.log(error);
 
 
@@ -35,7 +35,7 @@ function Posts() {
             </section>
             <div className="section2">
                 {clicPost}
-                {data?.filter(post =>!post.postFollowedId).sort((a, b)=> a.date - b.date).map(post => <Post key={post.postId} post={post} data={data} />)}
+                {data?.filter(post =>!post.postFollowedId).sort((a, b)=> b.Count - a.Count).map(post => <Post key={post.postId} post={post} data={data} />)}
             </div>
         </div>
     )

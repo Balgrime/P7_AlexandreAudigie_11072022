@@ -22,7 +22,7 @@ function Post(props) {
 
 
     let post= props.post;
-    let visible = props.data?.filter(comment => comment.postFollowedId === post.postId).map(comment => <Comment key={comment.postId} comment={comment} data={props.data} />)
+    let visible = props.data?.filter(comment => comment.postFollowedId === post.postId).sort((a, b)=> b.Count - a.Count).map(comment => <Comment key={comment.postId} comment={comment} data={props.data} />)
 
     
     return (

@@ -9,7 +9,7 @@ import { useContext } from "react";
 
 function SectionProfil(props) {
     const { id } = useParams();
-    const { data } = useFetch(`/User/${id}`);
+    const { data } = useFetch(`http://localhost:3002/api/User/${id}`);
     console.log(id);
     let img = data?.profilImageUrl ? 
         <div>
@@ -41,29 +41,29 @@ function SectionProfil(props) {
 
 
     return (
-    <div>
-     <section className="section1">
-         <h1>Profil</h1>
-         <div>
-             <div>
-                 <FontAwesomeIcon className="section1__Icon" icon={ faUserTie }></FontAwesomeIcon>
-             </div>
-             {btnModif}
-             {adminBtn}
-         </div>
-     </section>
-     <section className="sectionProfil">
-         <div className="sectionProfil__haut">
-            {img}
-            <div><p>{data?.firstName + " " + data?.name}</p><p>{data?.email}</p></div>
- 
-         </div>
-         {data?.isPrivate ? <div className="sectionProfil__bas">
-             <FontAwesomeIcon className="profilIcon" icon={ faUserSecret }></FontAwesomeIcon>
-             <p>Ce profil est en mode privé.</p></div> : <HistoriqueMessages data={data} />
-         }
-     </section>
-         </div>
+        <div>
+            <section className="section1">
+                <h1>Profil</h1>
+                <div>
+                    <div>
+                        <FontAwesomeIcon className="section1__Icon" icon={ faUserTie }></FontAwesomeIcon>
+                    </div>
+                    {btnModif}
+                    {adminBtn}
+                </div>
+            </section>
+            <section className="sectionProfil">
+                <div className="sectionProfil__haut">
+                    {img}
+                    <div><p>{data?.firstName + " " + data?.name}</p><p>{data?.email}</p></div>
+        
+                </div>
+                {data?.isPrivate ? <div className="sectionProfil__bas">
+                    <FontAwesomeIcon className="profilIcon" icon={ faUserSecret }></FontAwesomeIcon>
+                    <p>Ce profil est en mode privé.</p></div> : <HistoriqueMessages data={data} />
+                }
+            </section>
+        </div>
     )
 }
 
