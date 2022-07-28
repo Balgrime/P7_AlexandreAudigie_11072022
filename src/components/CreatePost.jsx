@@ -30,9 +30,13 @@ function CreatePost(props) {
         /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
         accessToken = JSON.parse(accessToken);
         
+        let postFollowedId = props.post?.postId;
+        console.log("ICIIIIIIII"+postFollowedId);
+
         let info = {
             text: text,
-            userId: userId
+            userId: userId,
+            postFollowedId: postFollowedId
         }
 
         const options = {
@@ -50,6 +54,7 @@ function CreatePost(props) {
             .then( res => res.json() )
             .then( res => {
                 console.log(res);
+                props.editClicPost("");
           });
         } else {
             editErrMsg("Veuillez écrire du texte ci-dessus!");

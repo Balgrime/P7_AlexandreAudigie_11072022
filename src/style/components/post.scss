@@ -8,6 +8,7 @@
     &--comment{
         background-color: $tertiary;
         width: 80%;
+        max-width: 30rem;
         margin: 0 0.5rem 0 0.5rem;
         animation: appears forwards ease-out 140ms;
         &:nth-child(even) {

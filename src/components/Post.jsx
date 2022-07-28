@@ -13,7 +13,6 @@ function Post(props) {
 
     let context = useContext(AuthContext);
     let role= context.userContext.role;
-    console.log(role);
     let adminBtn = "";
     if (role === "8759") adminBtn = <button className="greenButton greenButton--red">Supprimer le post</button>
 

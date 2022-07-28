@@ -26,6 +26,7 @@ exports.createPost = (req, res, next) => {
   let userId = req.body.userId;
   console.log(text)
   console.log(userId)
+  let postFollowedId = req.body?.postFollowedId;
 
   var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
   let date = new Date().toLocaleDateString([], options);
@@ -34,12 +35,13 @@ exports.createPost = (req, res, next) => {
   console.log(postId);
 
 
-const post = {
-  postId: postId,
-  userId: userId,
-  date: date,
-  text: text
-}
+  const post = {
+    postId: postId,
+    userId: userId,
+    postFollowedId: postFollowedId,
+    date: date,
+    text: text
+  }
 
   mysqlconnection.query(
     'INSERT INTO post SET ?', post, (error, results, fields)=>{
@@ -51,6 +53,18 @@ const post = {
             console.log(results);
             res.json({message:"post enregistré"});
         }
+    })
+    mysqlconnection.query(
+      `SELECT * FROM post WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
+      let commentsCount = results[0].comments;
+      commentsCount += 1;
+        console.log(commentsCount);
+
+      mysqlconnection.query(
+        `UPDATE post SET comments='${commentsCount}' WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
+        console.log(results);
+        console.log(error);
+      })
     })
   /*
     const sauceObject = JSON.parse(req.body.sauce);

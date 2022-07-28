@@ -6,10 +6,7 @@ import Like from './Like';
 
 
 
-
-
 function Comment(props) {
-
 
     let comment = props.comment;
 
@@ -19,9 +16,11 @@ function Comment(props) {
         {props.comment.profilImageUrl ? 
             <div>
                 <img className="imageProfil" src={comment.profilImageUrl} alt="profil" />
-            </div> : <div>
-                        <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
-                    </div>}
+            </div> : 
+            <div>
+                <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
+            </div>}
+
             <Link to={`/pages/Profil/${props.comment.userId}`}>
                 <p className="infoUser__user">{comment.firstName + " " + comment.name}</p>
                 <p className="infoUser__date">{comment.date}</p>
@@ -33,7 +32,7 @@ function Comment(props) {
                     <Like likes={comment.likes} />
                 </div>
             </div>
-    </article>)
-        
-    }
+    </article>)        
+}
+
 export default Comment;
