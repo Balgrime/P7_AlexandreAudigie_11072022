@@ -116,8 +116,6 @@ exports.login = (req, res, next) => {
 
 
 
-
-
 exports.logout = (req, res) => {
     // On client, also delete the accessToken
     res.json({message: "requête reçue!"});

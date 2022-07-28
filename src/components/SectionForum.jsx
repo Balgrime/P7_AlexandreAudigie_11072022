@@ -35,7 +35,7 @@ function Posts() {
             </section>
             <div className="section2">
                 {clicPost}
-                {data?.filter(post =>!post.postFollowedId).map(post => <Post key={post.postId} post={post} data={data} />)}
+                {data?.filter(post =>!post.postFollowedId).sort((a, b)=> a.date - b.date).map(post => <Post key={post.postId} post={post} data={data} />)}
             </div>
         </div>
     )

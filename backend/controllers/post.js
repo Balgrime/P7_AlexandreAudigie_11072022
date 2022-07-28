@@ -56,16 +56,18 @@ exports.createPost = (req, res, next) => {
     })
     mysqlconnection.query(
       `SELECT * FROM post WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
-      let commentsCount = results[0].comments;
-      commentsCount += 1;
+
+        let commentsCount = results[0]?.comments;
+        commentsCount += 1;
         console.log(commentsCount);
 
       mysqlconnection.query(
         `UPDATE post SET comments='${commentsCount}' WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
         console.log(results);
         console.log(error);
-      })
+        })
     })
+    
   /*
     const sauceObject = JSON.parse(req.body.sauce);
   
