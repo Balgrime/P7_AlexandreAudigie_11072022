@@ -36,7 +36,7 @@ function SectionConnexion() {
         fetch("http://localhost:3002/api/User/login", requestOptions)
             .then( res => res.json() )
             .then( res => {
-                console.log(res);
+                editErrMsg(res.message);
                 localStorage.setItem('accessToken', JSON.stringify(res));
               
               const token = localStorage.getItem('accessToken');
@@ -48,7 +48,7 @@ function SectionConnexion() {
               }
           });
     }
-
+    const [errMsg, editErrMsg] = useState("");
    
 
 
@@ -67,11 +67,6 @@ function SectionConnexion() {
       errors.email = "veuillez renseigner votre adresse email";
     } else if (!regex.test(values.email)) {
       errors.email = "Il ne s'agit pas d'une adresse email valide";
-    }
-    if (!values.password) {
-      errors.password = "Un mot de passe est requis";
-    } else if (values.password.length < 4) {
-      errors.password = "Le mot de passe doit faire plus que 4 caractères";
     }
     return errors;
   };
@@ -105,6 +100,8 @@ function SectionConnexion() {
                     <label>Mot de passe :</label>
                     <input type="password" name="password" value={formValues.password} onChange={handleChange} />
             
+                    <p className="red">{errMsg}</p>
+
                     <p className="red">{formErrors.password}</p>
                     <button className="greenButton">Connexion</button>
                 

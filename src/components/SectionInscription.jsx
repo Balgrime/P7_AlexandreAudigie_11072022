@@ -34,7 +34,7 @@ function SectionInscription() {
           body: JSON.stringify({ formValues })
       }
       fetch("http://localhost:3002/api/User/signup", requestOptions)
-      .then(()=>{
+      .then((err)=>{ 
 
         
         fetch("http://localhost:3002/api/User/login", requestOptions)
@@ -50,9 +50,14 @@ function SectionInscription() {
                   let userId = userAuth.userId;
                   setUser(userAuth);
               }
+            console.log(err.json().then(err => editPasswordErrors(err.message)))
           });
       })
   }
+
+  const [passwordErrors, editPasswordErrors] = useState("");
+
+
 
 
   useEffect(() => {
@@ -74,11 +79,6 @@ function SectionInscription() {
       errors.email = "veuillez renseigner votre adresse email";
     } else if (!regex.test(values.email)) {
       errors.email = "Il ne s'agit pas d'une adresse email valide";
-    }
-    if (!values.password) {
-      errors.password = "Un mot de passe est requis";
-    } else if (values.password.length < 4) {
-      errors.password = "Le mot de passe doit faire plus que 4 caractères";
     }
     return errors;
   };
@@ -124,7 +124,7 @@ function SectionInscription() {
                     <label>Mot de passe :</label>
                     <input type="password" name="password" value={formValues.password} onChange={handleChange} />
             
-                    <p className="red">{formErrors.password}</p>
+                    <p className="red">{passwordErrors}</p>
                     <button className="greenButton">Inscription</button>
                 
                 </form>

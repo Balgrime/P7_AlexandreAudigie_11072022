@@ -46,10 +46,13 @@ function CreatePost(props) {
             .then( res => {
                 console.log(res);
           });
+        } else {
+            editErrMsg("Veuillez écrire du texte ci-dessus!");
         }
     }
     
-    
+    const [errMsg, editErrMsg] = useState("");
+
 
 
     return (
@@ -59,6 +62,7 @@ function CreatePost(props) {
 
                 <textarea type="text" className="article__corps__texte" rows="4" cols="20" value={text} onChange={handleChange}  >
                 </textarea>
+                <p className="red">{errMsg}</p>
                 <div className="createPost__btn">
                     <button className="greenButton createPost__btn__btn" type="button" onClick={()=>props.editClicPost("")}>retour</button>
                     <button className="greenButton createPost__btn__btn" type="submit" onClick={()=>submit()}>envoyer</button>
