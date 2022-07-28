@@ -1,14 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Comment from './Comment';
 import CreatePost from './CreatePost';
 import Like from './Like';
 import PostHeader from './PostHeader';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { AuthContext } from '../context/AuthContext';
 
 
 
 function Post(props) {
+
+    let context = useContext(AuthContext);
+    let role= context.userContext.role;
+    console.log(role);
+    let adminBtn = "";
+    if (role === "8759") adminBtn = <button className="greenButton greenButton--red">
+                                        Supprimer le profil
+                                    </button>
+
 
     const [isVisible, editVisibility] = useState("");
     const [clicPost, editClicPost] = useState("");
@@ -18,7 +28,10 @@ function Post(props) {
     let visible = props.data?.filter(comment => comment.postFollowedId === post.postId).map(comment => <Comment key={comment.postId} comment={comment} data={props.data} />)
 
     
-    return (<article className="article">
+    return (
+        <>
+            {adminBtn}
+            <article className="article">
                 <PostHeader post={post} />
                 <div className="article__corps">
                     {post.postImageUrl ? 
@@ -31,7 +44,7 @@ function Post(props) {
                     <div className='likeContainer'>
                         <Like likes={post.likes} />
 
-                         {!clicPost? <button className='greenButton' type='button' onClick={() => editClicPost(<CreatePost post={post} editClicPost={editClicPost} />)}>
+                            {!clicPost? <button className='greenButton' type='button' onClick={() => editClicPost(<CreatePost post={post} editClicPost={editClicPost} />)}>
                             <span>Répondre</span>
                         </button> : <div className="iconAnim">
                                     <FontAwesomeIcon className="section1__Icon" icon={ faCaretDown }></FontAwesomeIcon>
@@ -44,6 +57,7 @@ function Post(props) {
                     </div>
                 </div>
             </article>
+        </>
         )
     }
 
