@@ -17,7 +17,41 @@ const mysqlconnection = mysql.createConnection({
 
 
 exports.createPost = (req, res, next) => {
-  res.json("requête reçue")
+  console.log("requête reçue");
+  console.log(req.body);
+
+  let textBefore = req.body.text;
+  let text = sanitize.blacklist(textBefore, "<>\"'/");
+
+  let userId = req.body.userId;
+  console.log(text)
+  console.log(userId)
+
+  var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
+  let date = new Date().toLocaleDateString([], options);
+
+  let postId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""))
+  console.log(postId);
+
+
+const post = {
+  postId: postId,
+  userId: userId,
+  date: date,
+  text: text
+}
+
+  mysqlconnection.query(
+    'INSERT INTO post SET ?', post, (error, results, fields)=>{
+        if (error){
+            console.log(error);
+            res.json({error});
+        } else {
+            console.log("--> results");
+            console.log(results);
+            res.json({message:"post enregistré"});
+        }
+    })
   /*
     const sauceObject = JSON.parse(req.body.sauce);
   
@@ -36,7 +70,9 @@ exports.createPost = (req, res, next) => {
       usersDisliked: []
     });
     sauce.save()
-      .then(() => res.status(201).json({ message: 'Sauce enregistré !'}))
+
+
+      .then(() => res.status(201).json({ message: 'Post enregistré !'}))
       .catch(error => res.status(400).json({ error }));*/
   };
 

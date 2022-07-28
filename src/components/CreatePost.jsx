@@ -10,10 +10,9 @@ function CreatePost(props) {
     if(!props.post) addImg =(<AddImageToPost />);
 
     let context = useContext(AuthContext);
-
+    let userId = context.userContext.userId;
 
     const [text, editText] = useState("");
-    console.log(text);
 
     const handleChange = (e) => {
         editText( e.target.value );
@@ -31,14 +30,20 @@ function CreatePost(props) {
         /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
         accessToken = JSON.parse(accessToken);
         
+        let info = {
+            text: text,
+            userId: userId
+        }
+
         const options = {
         method: 'POST',
         mode: 'cors',
         headers: new Headers({
-            'Authorization': accessToken?.accessToken
+            'Authorization': accessToken?.accessToken,
+            'Content-Type': 'application/json'
         }),
         credentials: 'include',
-        body: JSON.stringify( text )
+        body: JSON.stringify( info )
         };
         
         fetch("http://localhost:3002/api/Post", options)
