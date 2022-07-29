@@ -2,7 +2,8 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
 
 
@@ -31,9 +32,13 @@ function ListUsers() {
     };
 
 
+    let context = useContext(AuthContext);
+    let userChange = context.userChange;
+
+
     useEffect(()=> {
         fetch("http://localhost:3002/api/User", options).then(res => res.json()).then((json)=>{setData(json);
-    })}, []);
+    })}, [userChange]);
 
 
 

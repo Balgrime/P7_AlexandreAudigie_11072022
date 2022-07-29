@@ -2,14 +2,56 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser, faUserSecret, faUserTie } from "@fortawesome/free-solid-svg-icons";
 import HistoriqueMessages from "./HistoriqueMessages";
 import { useParams } from "react-router-dom";
-import useFetch from "../Hooks/useFetch";
 import { AuthContext } from "../context/AuthContext";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 
 
 function SectionProfil(props) {
     const { id } = useParams();
-    const { data } = useFetch(`http://localhost:3002/api/User/${id}`);
+
+    let context = useContext(AuthContext);
+
+    const [data, setData] = useState([]);
+
+    /* On récupère le token CSRF depuis le localStorage */
+    let accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+    console.log("pas de token");
+    }
+
+    /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
+    accessToken = JSON.parse(accessToken);
+    
+    const options = {
+    method: 'GET',
+    mode: 'cors',
+    headers: new Headers({
+        'Authorization': accessToken?.accessToken
+    }),
+    credentials: 'include'
+    };
+
+
+    let userChange = context.userChange;
+
+
+    useEffect(()=> {
+            console.log("ça boucle");
+        fetch(`http://localhost:3002/api/User/${id}`, options).then(res => res.json()).then((json)=>{setData(json);
+    })
+    }, [userChange]);
+
+
+
+
+
+
+
+
+
+
+
+    //const { data } = useFetch(`http://localhost:3002/api/User/${id}`);
     console.log(id);
     let img = data?.profilImageUrl ? 
         <div>
@@ -19,8 +61,7 @@ function SectionProfil(props) {
                 </div>
 
 
-
-    let context = useContext(AuthContext);
+    
     let userId = context.userContext.userId;
     console.log(userId);
     let btnModif = "";
