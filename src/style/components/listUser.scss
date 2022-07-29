@@ -6,12 +6,12 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
+    
     &__list{
-        border: solid 3px $secondary;
-        border-top-left-radius: 20px;
-        border-top-right-radius: 20px;
         max-height: 35vh;
+        overflow-y: scroll;      
     }
+    
     &>button{
         background-color: $secondary;
     }
@@ -20,4 +20,10 @@
 .iconList{
     color: $clearest;
     margin-right: 0.3rem;
+}
+
+.userText{
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

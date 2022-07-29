@@ -1,14 +1,40 @@
 
 import { Link } from "react-router-dom";
-import useFetch from "../../Hooks/useFetch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
 
 
 function ListUsers() {
 
-    const { data } = useFetch("http://localhost:3002/api/User");
+
+
+    const [data, setData] = useState([]);
+
+    /* On récupère le token CSRF depuis le localStorage */
+    let accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+    console.log("pas de token");
+    }
+
+    /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
+    accessToken = JSON.parse(accessToken);
+    
+    const options = {
+    method: 'GET',
+    mode: 'cors',
+    headers: new Headers({
+        'Authorization': accessToken?.accessToken
+    }),
+    credentials: 'include'
+    };
+
+
+    useEffect(()=> {
+        fetch("http://localhost:3002/api/User", options).then(res => res.json()).then((json)=>{setData(json);
+    })}, [data]);
+
 
 
 
@@ -21,10 +47,10 @@ function ListUsers() {
                                     <div>
                                         <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
                                     </div>}
-                                        <p className="infoUser__user">{user.firstName + " " + user.name}</p>
+                                    <p className="infoUser__user userText">{user.firstName + " " + user.name}</p>
                                     </Link>
-        )}
-    </div>
+                )}
+            </div>
 };
 
 export default ListUsers;
