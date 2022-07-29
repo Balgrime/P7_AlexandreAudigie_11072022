@@ -173,3 +173,35 @@ mysqlconnection.query(
         }
     })
 }
+
+
+exports.deleteUser = (req, res, next) => {
+
+    console.log("requete reçue");
+    /*
+    Sauce.findOne({ _id: req.params.id }).then(
+      (sauce) => {
+        if (!sauce) {
+          res.status(404).json({
+            error: new Error('No such Thing!')
+          });
+        }
+        if (sauce.userId !== req.auth.userId) {
+          res.status(403).json({
+            error: new Error('Unauthorized user!')
+          });
+        } else {
+          Sauce.findOne({ _id: req.params.id })
+            .then(sauce => {
+              const filename = sauce.imageUrl.split('/images/')[1];
+              fs.unlink(`images/${filename}`, () => {
+                Sauce.deleteOne({ _id: req.params.id })
+                  .then(() => res.status(200).json({ message: 'Sauce supprimée !'}))
+                  .catch(error => res.status(400).json({ error }));
+              });
+            })
+            .catch(error => res.status(500).json({ error }));
+        }
+      }
+    )*/
+  };

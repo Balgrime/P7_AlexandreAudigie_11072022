@@ -10,7 +10,7 @@ function SectionProfil(props) {
     const { id } = useParams();
 
     let context = useContext(AuthContext);
-
+    let userChangeEdit = context.userChangeEdit;
     const [data, setData] = useState([]);
 
     /* On récupère le token CSRF depuis le localStorage */
@@ -31,9 +31,7 @@ function SectionProfil(props) {
     credentials: 'include'
     };
 
-
     let userChange = context.userChange;
-
 
     useEffect(()=> {
             console.log("ça boucle");
@@ -61,8 +59,55 @@ function SectionProfil(props) {
                 </div>
 
 
+
+
+
+let userId = context.userContext.userId;
+
+
+
+
+
+
+    const [clic, editClic] = useState(false);
+
+    const handleLogout = () => {
+        
+        let info = {
+            postId: userId
+        }
+
+        const options = {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: new Headers({
+            'Authorization': accessToken.accessToken,
+            'Content-Type': 'application/json'
+        }),
+        credentials: 'include',
+        body: JSON.stringify( info )
+        };
+
+        fetch("http://localhost:3002/api/User/Delete", options)
+            .then( res => res.json() )
+            .then( res => {
+                console.log(res);
+                localStorage.removeItem("accessToken");
+        }).then(()=> userChangeEdit(count => count+1));
+    }
+
+    if (clic){
+        handleLogout();
+    }
+
+
+
+
+
+
+
     
-    let userId = context.userContext.userId;
+    
     console.log(userId);
     let btnModif = "";
     let idNb = parseInt(id);
@@ -72,7 +117,7 @@ function SectionProfil(props) {
                     <button className="greenButton" type="button" onClick={() => props.switchToEdit(true)}>
                         <span>Modifier mon profil</span>
                     </button>
-                    <button className="greenButton greenButton--red" type="button" onClick={() => props.switchToEdit(true)}>
+                    <button className="greenButton greenButton--red" type="button" onClick={()=>editClic(true)}>
                         <span>Supprimer mon profil</span>
                     </button>
                     </>
@@ -82,7 +127,7 @@ function SectionProfil(props) {
     let role = context.userContext.role;
     console.log(role);
     let adminBtn = "";
-    if(role === "8759") adminBtn = <button className="greenButton greenButton--red"><span>Supprimer le profil</span></button>
+    if(role === "8759") adminBtn = <button className="greenButton greenButton--red" onClick={()=>editClic(true)}><span>Supprimer le profil</span></button>
 
 
 

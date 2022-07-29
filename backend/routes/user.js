@@ -15,6 +15,6 @@ router.post('/login', emailValidation, userCtrl.login);
 router.delete('/logout', userCtrl.logout);
 router.get('/', auth, userCtrl.getAllUsers);
 router.get('/:id', auth, userCtrl.getOneUser);
-
+//router.delete('/Delete', userCtrl.deleteUser);
 
 module.exports = router;
