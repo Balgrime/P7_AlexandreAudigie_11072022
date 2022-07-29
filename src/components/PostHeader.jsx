@@ -9,7 +9,7 @@ function PostHeader(props) {
     let post = props.post;
     
     return(
-        <Link to={`/pages/Profil/${post.userId}`} className="infoUserList">
+        <Link to={`/pages/Profil/${post.userId}`} className="infoUser">
             {post.profilImageUrl ? 
             <div>
                 <img className="imageProfil" src={post.profilImageUrl} alt="profil" />

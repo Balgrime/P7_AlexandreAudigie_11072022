@@ -90,3 +90,28 @@
     text-align: center;
     opacity: 0.8;
 }
+
+
+
+
+
+
+.containerBtnPostHeader{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.editBtnContainer{
+    display: flex;
+    flex-flow: row nowrap;
+    column-gap: 0.7rem;
+    margin-right: 0.5rem;
+}
+
+.editIcon{
+    width: 27px;
+    height: 20px;
+}

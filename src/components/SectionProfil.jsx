@@ -27,9 +27,14 @@ function SectionProfil(props) {
     let idNb = parseInt(id);
     console.log(idNb)
     if(!idNb || idNb === userId){
-        btnModif = <button className="greenButton" type="button" onClick={() => props.switchToEdit(true)}>
+        btnModif = <>
+                    <button className="greenButton" type="button" onClick={() => props.switchToEdit(true)}>
                         <span>Modifier mon profil</span>
                     </button>
+                    <button className="greenButton greenButton--red" type="button" onClick={() => props.switchToEdit(true)}>
+                        <span>Supprimer mon profil</span>
+                    </button>
+                    </>
     };
 
 

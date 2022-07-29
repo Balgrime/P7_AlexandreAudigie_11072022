@@ -54,6 +54,7 @@ exports.createPost = (req, res, next) => {
             res.json({message:"post enregistré"});
         }
     })
+
     mysqlconnection.query(
       `SELECT * FROM post WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
 
@@ -67,6 +68,7 @@ exports.createPost = (req, res, next) => {
         console.log(error);
         })
     })
+    
     
   /*
     const sauceObject = JSON.parse(req.body.sauce);

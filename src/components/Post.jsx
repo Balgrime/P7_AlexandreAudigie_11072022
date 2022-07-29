@@ -4,7 +4,7 @@ import CreatePost from './CreatePost';
 import Like from './Like';
 import PostHeader from './PostHeader';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
+import { faCaretDown, faXmark, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from '../context/AuthContext';
 
 
@@ -12,24 +12,44 @@ import { AuthContext } from '../context/AuthContext';
 function Post(props) {
 
     let context = useContext(AuthContext);
-    let role= context.userContext.role;
-    let adminBtn = "";
-    if (role === "8759") adminBtn = <button className="greenButton greenButton--red">Supprimer le post</button>
+    let role = context.userContext.role;
+    let userId = context.userContext.userId;
+    let post= props.post;
 
+
+    let editBtn = "";
+    let supprBtn = "";
+    if (role === "8759" || userId === post.userId) supprBtn = <button className="greenButton greenButton--red"><FontAwesomeIcon className="navbarIcon editIcon" icon={ faXmark }></FontAwesomeIcon></button>
+    if (userId === post.userId) editBtn = <button className="greenButton"><FontAwesomeIcon className="navbarIcon editIcon" icon={ faEdit }></FontAwesomeIcon></button>
 
     const [isVisible, editVisibility] = useState("");
     const [clicPost, editClicPost] = useState("");
 
 
-    let post= props.post;
     let visible = props.data?.filter(comment => comment.postFollowedId === post.postId).sort((a, b)=> b.Count - a.Count).map(comment => <Comment key={comment.postId} comment={comment} data={props.data} />)
+
+
+
+
+
+
+
+
+
+
 
     
     return (
-        <>
-            {adminBtn}
+        <>  
             <article className="article">
-                <PostHeader post={post} />
+                <div className='containerBtnPostHeader'>
+                    <PostHeader post={post} />
+                    <div className='editBtnContainer'>
+                        {editBtn}
+                        {supprBtn}
+                    </div>
+                </div>
+                
                 <div className="article__corps">
                     {post.postImageUrl ? 
                     <div className='article__corps__image'>
