@@ -156,8 +156,11 @@ exports.getOneSauce = (req, res, next) => {
     )
   };
 
+*/
+  exports.deletePost = (req, res, next) => {
 
-  exports.deleteSauce = (req, res, next) => {
+    console.log("requete reçue");
+    /*
     Sauce.findOne({ _id: req.params.id }).then(
       (sauce) => {
         if (!sauce) {
@@ -182,10 +185,15 @@ exports.getOneSauce = (req, res, next) => {
             .catch(error => res.status(500).json({ error }));
         }
       }
-    )
+    )*/
   };
 
-*/
+
+
+
+
+
+
 
 
 exports.getAllPosts = (req, res, next) => {

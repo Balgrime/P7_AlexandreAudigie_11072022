@@ -15,23 +15,65 @@ function Post(props) {
     let role = context.userContext.role;
     let userId = context.userContext.userId;
     let post= props.post;
+    let postChangeEdit = context.postChangeEdit;
 
-
-    let editBtn = "";
-    let supprBtn = "";
-    if (role === "8759" || userId === post.userId) supprBtn = <button className="greenButton greenButton--red"><FontAwesomeIcon className="navbarIcon editIcon" icon={ faXmark }></FontAwesomeIcon></button>
-    if (userId === post.userId) editBtn = <button className="greenButton"><FontAwesomeIcon className="navbarIcon editIcon" icon={ faEdit }></FontAwesomeIcon></button>
-
-    
-
-
-    const [data, setData] = useState([]);
 
     /* On récupère le token CSRF depuis le localStorage */
     let accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
     console.log("pas de token");
     }
+
+
+
+    const [clic, editClic] = useState(false);
+
+    const handleLogout = () => {
+        
+        let info = {
+            postId: post.postId,
+            post: post.userId
+        }
+
+        const options = {
+        method: 'DELETE',
+        mode: 'cors',
+        headers: new Headers({
+            'Authorization': accessToken.accessToken,
+            'Content-Type': 'application/json'
+        }),
+        credentials: 'include',
+        body: JSON.stringify( info )
+        };
+    
+        fetch("http://localhost:3002/api/Post/Delete", options)
+            .then( res => res.json() )
+            .then( res => {
+                console.log(res);
+                localStorage.removeItem("accessToken");
+        }).then(()=> postChangeEdit(count => count+1));
+    }
+
+    if (clic){
+        handleLogout();
+    }
+
+
+
+    let editBtn = "";
+    let supprBtn = "";
+    if (role === "8759" || userId === post.userId) supprBtn = <button className="greenButton greenButton--red" onClick={()=>editClic(true)}>
+                                                                <FontAwesomeIcon className="navbarIcon editIcon" icon={ faXmark }></FontAwesomeIcon>
+                                                            </button>
+    if (userId === post.userId) editBtn = <button className="greenButton">
+                                            <FontAwesomeIcon className="navbarIcon editIcon" icon={ faEdit }></FontAwesomeIcon>
+                                        </button>
+
+    
+
+
+    const [data, setData] = useState([]);
+
 
     /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
     accessToken = JSON.parse(accessToken);
