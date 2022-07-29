@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faUserFriends } from "@fortawesome/free-solid-svg-icons";
 import useFetch from "../Hooks/useFetch";
@@ -10,11 +10,19 @@ import CreatePost from "./CreatePost";
 function Posts() {
 
     const [clicPost, editClicPost] = useState("");
+
+
+    /*let { data, error } = useFetch("http://localhost:3002/api/Post");
+    if (error) console.log(error);*/
     
-    const { data, error } = useFetch("http://localhost:3002/api/Post");
-    if (error) console.log(error);
+    const [data, setData] = useState([]);
 
+    useEffect(()=> {
+        fetch("http://localhost:3002/api/Post").then(res => res.json()).then((json)=>{setData(json);
+    })}, [data]);
+    
 
+    
     return (
         <div>
             <section className="section1">
