@@ -33,7 +33,7 @@ function ListUsers() {
 
     useEffect(()=> {
         fetch("http://localhost:3002/api/User", options).then(res => res.json()).then((json)=>{setData(json);
-    })}, [data]);
+    })}, []);
 
 
 

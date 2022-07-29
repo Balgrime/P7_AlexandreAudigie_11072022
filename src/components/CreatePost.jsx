@@ -18,7 +18,6 @@ function CreatePost(props) {
         editText( e.target.value );
     };
 
-
     function submit(){
         if(text !== ""){
             /* On récupère le token CSRF depuis le localStorage */
@@ -31,7 +30,7 @@ function CreatePost(props) {
         accessToken = JSON.parse(accessToken);
         
         let postFollowedId = props.post?.postId;
-        console.log("ICIIIIIIII"+postFollowedId);
+        console.log("pas de "+postFollowedId);
 
         let info = {
             text: text,
@@ -50,12 +49,15 @@ function CreatePost(props) {
         body: JSON.stringify( info )
         };
         
+
+        let editPostChange = context.editPostChange;
+
         fetch("http://localhost:3002/api/Post", options)
             .then( res => res.json() )
             .then( res => {
                 console.log(res);
                 props.editClicPost("");
-          });
+          }).then(()=>editPostChange(count => count+1));
         } else {
             editErrMsg("Veuillez écrire du texte ci-dessus!");
         }

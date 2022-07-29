@@ -19,11 +19,12 @@ const role = {
 function Home() {
 
   const [userContext, setUser] = useState("");
+  const [postChange, editPostChange] = useState(0);
 
   console.log("le contexte actuel est" + userContext.role);
 
   return (
-    <AuthContext.Provider value={{setUser, userContext}}>
+    <AuthContext.Provider value={{setUser, userContext, postChange, editPostChange}}>
       <Routes>
             <Route path="/" element={<Connexion />} />
 

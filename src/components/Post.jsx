@@ -45,10 +45,12 @@ function Post(props) {
     credentials: 'include'
     };
 
+    let postChange = context.postChange;
 
     useEffect(()=> {
+        console.log(postChange);
         fetch("http://localhost:3002/api/Post", options).then(res => res.json()).then((json)=>{setData(json);
-    })}, [data]);
+    })}, [postChange]);
 
     useEffect(()=> {editVisibility("")}, []);
 

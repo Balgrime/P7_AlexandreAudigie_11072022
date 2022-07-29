@@ -187,10 +187,11 @@ exports.getOneSauce = (req, res, next) => {
 
 */
 
+
 exports.getAllPosts = (req, res, next) => {
 //la requête SQL
 mysqlconnection.query(
-    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, likes, usersLiked, post.date, post.text, post.Count, post.userId FROM post INNER JOIN user ON post.userId = user.userId',  (error, results, fields)=>{
+    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, likes, usersLiked, post.date, post.text, post.Count, user.userId FROM post INNER JOIN user ON post.userId = user.userId',  (error, results, fields)=>{
         if (error){
             console.log(error);
             res.json({error});
