@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Comment from './Comment';
 import CreatePost from './CreatePost';
 import Like from './Like';
@@ -22,20 +22,42 @@ function Post(props) {
     if (role === "8759" || userId === post.userId) supprBtn = <button className="greenButton greenButton--red"><FontAwesomeIcon className="navbarIcon editIcon" icon={ faXmark }></FontAwesomeIcon></button>
     if (userId === post.userId) editBtn = <button className="greenButton"><FontAwesomeIcon className="navbarIcon editIcon" icon={ faEdit }></FontAwesomeIcon></button>
 
-    const [isVisible, editVisibility] = useState("");
+    
+
+
+    const [data, setData] = useState([]);
+
+    /* On récupère le token CSRF depuis le localStorage */
+    let accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+    console.log("pas de token");
+    }
+
+    /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
+    accessToken = JSON.parse(accessToken);
+    
+    const options = {
+    method: 'GET',
+    mode: 'cors',
+    headers: new Headers({
+        'Authorization': accessToken?.accessToken
+    }),
+    credentials: 'include'
+    };
+
+
+    useEffect(()=> {
+        fetch("http://localhost:3002/api/Post", options).then(res => res.json()).then((json)=>{setData(json);
+    })}, [data]);
+
+    useEffect(()=> {editVisibility("")}, []);
+
+
+    let visible = data?.filter(comment => comment.postFollowedId === post.postId).sort((a, b)=> a.Count - b.Count).map(comment => <Comment key={comment.postId} comment={comment} data={data} />)
+
+
+    const [isVisible, editVisibility] = useState(visible);
     const [clicPost, editClicPost] = useState("");
-
-
-    let visible = props.data?.filter(comment => comment.postFollowedId === post.postId).sort((a, b)=> b.Count - a.Count).map(comment => <Comment key={comment.postId} comment={comment} data={props.data} />)
-
-
-
-
-
-
-
-
-
 
 
     

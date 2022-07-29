@@ -17,8 +17,27 @@ function Posts() {
     
     const [data, setData] = useState([]);
 
+    /* On récupère le token CSRF depuis le localStorage */
+    let accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+    console.log("pas de token");
+    }
+
+    /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
+    accessToken = JSON.parse(accessToken);
+    
+    const options = {
+    method: 'GET',
+    mode: 'cors',
+    headers: new Headers({
+        'Authorization': accessToken?.accessToken
+    }),
+    credentials: 'include'
+    };
+
+
     useEffect(()=> {
-        fetch("http://localhost:3002/api/Post").then(res => res.json()).then((json)=>{setData(json);
+        fetch("http://localhost:3002/api/Post", options).then(res => res.json()).then((json)=>{setData(json);
     })}, [data]);
     
 

@@ -25,9 +25,9 @@ function useFetch(url) {
     credentials: 'include'
     };
 
-
     console.log(options);
-const getData = ()=>{
+    
+const getData = (url, options)=>{
     setLoading(true);
         fetch(url, options).then(res => res.json()).then((json)=>{setData(json);
         }).catch((err)=>{
@@ -37,7 +37,7 @@ const getData = ()=>{
         })
 };
 
-    useEffect(getData, [url]);
+    useEffect(getData, [data]);
 
 
     return { data, loading, error};
