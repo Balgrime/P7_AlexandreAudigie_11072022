@@ -103,8 +103,8 @@ exports.login = (req, res, next) => {
                                 }
                             })
                             
-                    // Creates Secure Cookie with refresh token
-                    res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
+                    // Creates Secure Cookie with refresh token : je désactive pour le developpement
+                    //res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
 
                     // Send authorization roles and access token to user
                     res.json({ role, userId, accessToken });

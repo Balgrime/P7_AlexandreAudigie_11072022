@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { options } from "../modules/FetchHeaders";
 
 function useFetch(url) {
 
@@ -7,7 +6,26 @@ function useFetch(url) {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const addressApi = "http://localhost:3002/api";
+
+    /* On récupère le token CSRF depuis le localStorage */
+    let accessToken = localStorage.getItem('accessToken');
+    if (!accessToken) {
+    console.log("pas de token");
+    }
+
+    /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
+    accessToken = JSON.parse(accessToken);
+    
+    const options = {
+    method: 'GET',
+    mode: 'cors',
+    headers: new Headers({
+    'authorization': accessToken?.accessToken
+    }),
+    credentials: 'include'
+    };
+
+
     console.log(options);
 const getData = ()=>{
     setLoading(true);

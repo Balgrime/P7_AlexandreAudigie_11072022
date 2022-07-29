@@ -68,7 +68,7 @@ exports.createPost = (req, res, next) => {
         console.log(error);
         })
     })
-    
+
     
   /*
     const sauceObject = JSON.parse(req.body.sauce);
@@ -190,7 +190,7 @@ exports.getOneSauce = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
 //la requête SQL
 mysqlconnection.query(
-    'SELECT * FROM post',  (error, results, fields)=>{
+    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, likes, usersLiked, post.date, post.text, post.Count, post.userId FROM post INNER JOIN user ON post.userId = user.userId',  (error, results, fields)=>{
         if (error){
             console.log(error);
             res.json({error});

@@ -10,17 +10,19 @@ function ListUsers() {
 
     const { data } = useFetch("http://localhost:3002/api/User");
 
-    
+
+
     return <div className="listUser__list">
-                {data?.map( user => <Link  key={user.userId} to={`/pages/Profil/${user.userId}`} className="infoUser">
+                {data?.map(user => <Link key={user.userId} to={`/pages/Profil/${user.userId}`} className="infoUser">
                 {user.profilImageUrl ? 
-                <div>
-                    <img className="imageProfil" src={user.profilImageUrl} alt="profil" />
-                </div> : <div>
-                            <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
-                        </div>}
-                <p className="infoUser__user">{user.firstName + " " + user.name}</p>
-            </Link>
+                                    <div>
+                                        <img className="imageProfil" src={user.profilImageUrl} alt="profil" />
+                                    </div> : 
+                                    <div>
+                                        <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
+                                    </div>}
+                                        <p className="infoUser__user">{user.firstName + " " + user.name}</p>
+                                    </Link>
         )}
     </div>
 };
