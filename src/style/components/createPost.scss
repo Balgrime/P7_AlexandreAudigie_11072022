@@ -20,6 +20,17 @@
             justify-self: center;
         }
     }
+    &>input[type="file"]{
+        transform: translateY(-83%);
+        width: 100%;
+        opacity: 0;
+        height: 40%;
+        border: solid 2px green;
+        position: absolute;
+        justify-self: baseline;
+        z-index: 4;
+        cursor: pointer;
+    }
 }
 
 .containerClicPost{
@@ -27,17 +38,7 @@
     justify-content: center;
 }
 
-input[type="file"]{
-    transform: translateY(-83%);
-    width: 100%;
-    opacity: 0;
-    height: 40%;
-    border: solid 2px green;
-    position: absolute;
-    justify-self: baseline;
-    z-index: 4;
-    cursor: pointer;
-}
+
 
 .iconFile{
     font-size: 5rem;

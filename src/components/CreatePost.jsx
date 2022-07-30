@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthContext";
 import AddImageToPost from "./AddImageToPost";
 
@@ -9,14 +9,12 @@ function CreatePost(props) {
 
     const [text, editText] = useState("");
     const [file, setFile] = useState("");
-    const [filename, setFilename] = useState("");
 
 
     let addImg ="";
-    if(!props.post) addImg =(<AddImageToPost setFile={setFile} setFilename={setFilename} file={file} />);
+    if(!props.post) addImg =(<AddImageToPost setFile={setFile} file={file} />);
 
     let context = useContext(AuthContext);
-    let userId = context.userContext.userId;
 
 
     const handleChange = (e) => {
@@ -38,18 +36,14 @@ function CreatePost(props) {
 
         
 
-
+        // on rassemble les infos du futur post à créer
         let infoObj = {
             text: text,
             postFollowedId: postFollowedId
         }
 
-
-
         const formData = new FormData();
         const info = JSON.stringify( infoObj );
-
-        
 
         formData.append('info', info);
 
@@ -57,7 +51,6 @@ function CreatePost(props) {
             formData.append('image', file);
         }
         
-
 
         const options = {
         method: 'POST',
@@ -69,7 +62,6 @@ function CreatePost(props) {
         body: formData
         };
         
-
 
         let editPostChange = context.editPostChange;
 

@@ -7,12 +7,15 @@ import SectionProfil from "../components/SectionProfil";
 function Profil() {
     const [editClic, switchToEdit] = useState(false);
 
+    
+    const [data, setData] = useState([]);
+
     return (
         <>
             <header>
                 <Navbar />
             </header>
-            {!editClic? <SectionProfil switchToEdit={switchToEdit} /> : <ModifyProfil switchToEdit={switchToEdit} />}
+            {!editClic? <SectionProfil switchToEdit={switchToEdit} setData={setData} data={data} /> : <ModifyProfil switchToEdit={switchToEdit} setData={setData} data={data} />}
             <footer>
                 <FooterBar />
             </footer>

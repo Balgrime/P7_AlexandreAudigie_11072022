@@ -7,10 +7,9 @@ function AddImageToPost(props) {
 
     const onChange = (e) =>{
         props.setFile(e.target.files[0]);
-        props.setFilename(e.target.files[0].name);
     }
     
-
+    
 
     // Enclenche la prévisualisation de l'image lorsqu'un fichier est présent
     const [preview, showPreview] = useState("");
@@ -31,7 +30,7 @@ function AddImageToPost(props) {
 
     return (
         <>
-        <input type="file" id="postImage" accept="image/png, image/jp, image/jpeg" onChange={onChange}></input>
+        <input type="file" accept="image/png, image/jp, image/jpeg" onChange={onChange}></input>
         <label htmlFor="file">
             Cliquez pour ajouter une image
             <div>

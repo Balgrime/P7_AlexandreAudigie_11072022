@@ -18,7 +18,10 @@ const role = {
 
 function Home() {
 
+  // Etat global qui définit le rôle et le userId
   const [userContext, setUser] = useState("");
+
+  // Etats globaux qui s'auto-incrémentent à chaque modification d'un utilisateur ou d'un post
   const [postChange, editPostChange] = useState(0);
   const [userChange, editUserChange] = useState(0);
 

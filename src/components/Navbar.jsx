@@ -14,6 +14,7 @@ function Navbar() {
     let role = context.userContext.role;
     let userId = context.userContext.userId;
     console.log(userId);
+    
 
     if(role === "2834" || role === "8759"){
         navList = <ul>

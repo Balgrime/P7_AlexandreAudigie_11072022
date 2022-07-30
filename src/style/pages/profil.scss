@@ -18,6 +18,17 @@
             flex-flow: column nowrap;
             row-gap: 0.1rem;
         }
+        &__img{
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+            align-items: center;
+            &>label{
+                margin-bottom: 0.4rem;
+                font-weight: 700;
+                color: $secondary;
+            }
+        }
     }
     &__milieu{
         display: flex;
@@ -49,4 +60,27 @@
     flex-flow: row nowrap;
     align-items: flex-end;
     column-gap: 0.4rem;
+}
+
+.changeProfilImg{
+    width: 8rem;
+    opacity: 0;
+    height: 8rem;
+    border: solid 2px green;
+    position: absolute;
+    justify-self: baseline;
+    z-index: 4;
+    cursor: pointer;
+}
+
+.imageProfil--preview{
+    transform: translateY(0.7rem);
+    border-radius: 500px;
+    height: 5.7rem;
+    width: 5.7rem;
+    object-fit: cover;
+    position: absolute;
+    justify-self: baseline;
+    z-index: 3;
+    cursor: pointer;
 }
