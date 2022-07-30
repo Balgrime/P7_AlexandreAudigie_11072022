@@ -14,6 +14,7 @@ const mysqlconnection = mysql.createConnection({
 
 
 
+  
 exports.signup = (req, res, next) => {
     console.log(req.body.formValues.password);
     let form = req.body.formValues;
@@ -176,7 +177,6 @@ mysqlconnection.query(
 
 
 exports.deleteUser = (req, res, next) => {
-
     console.log("requete reçue");
     /*
     Sauce.findOne({ _id: req.params.id }).then(

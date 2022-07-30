@@ -94,12 +94,13 @@ app.use('/images', express.static(path.join(__dirname, 'images')));
 
 
 
-
+// Mes routes principales
 const userRoutes = require('./routes/user');
 const postRoutes = require('./routes/post');
 
 app.use('/api/User', userRoutes);
 app.use('/api/Post', postRoutes);
+
 
 
 

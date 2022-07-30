@@ -18,73 +18,66 @@ const mysqlconnection = mysql.createConnection({
 
 
 exports.createPost = (req, res, next) => {
-  console.log("requête reçue");
-  console.log(req.body);
-
+  console.log("laaaaaaa"+req.body);
   let textBefore = req.body.text;
-  let text = sanitize.escape(textBefore, "<>\"'/");
-
-
+  let text = sanitize.blacklist(textBefore, "<>\"'/");
 
 
   //On récupère le userId qui fait la requête depuis les headers du token 
   const token = req.headers.authorization;
-  console.log(req.headers);
 
   jwt.verify(
     token,
     process.env.ACCESS_TOKEN_SECRET,
     (err, decoded) => {
         if (err) return res.sendStatus(403); //invalid token
-        console.log(decoded.UserInfo.userId);
-        console.log(decoded.UserInfo.role);
     
-
   let userId = decoded.UserInfo.userId;
 
 
 
-  console.log(text)
-  console.log(userId)
+  // On récupère le postId du post suivi si jamais on écrit un commentaire
   let postFollowedId = req.body?.postFollowedId;
 
+
+  // On récupère la date actuelle et on créé un nouveau postId
   var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
   let date = new Date().toLocaleDateString([], options);
 
-  let postId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""))
-  console.log(postId);
+  let postId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""));
 
 
+  //création du contenu du post à partir des infos récupérées
   const post = {
     postId: postId,
     userId: userId,
     postFollowedId: postFollowedId,
     date: date,
+    //postImageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
     text: text
   }
 
+
+  //on insère le post dans la bdd
   mysqlconnection.query(
     'INSERT INTO post SET ?', post, (error, results, fields)=>{
         if (error){
             console.log(error);
             res.json({error});
         } else {
-            console.log("--> results");
-            console.log(results);
             res.json({message:"post enregistré"});
         }
     })
 
+
+    // Si le nouveau post est un commentaire, on lance des requêtes pour mettre à jour le nombre de commentaires du post référent dans la bdd
     mysqlconnection.query(
       `SELECT * FROM post WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
-
         let commentsCount = results[0]?.comments;
         commentsCount += 1;
-        console.log(commentsCount);
 
       mysqlconnection.query(
         `UPDATE post SET comments='${commentsCount}' WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
-        console.log(results);
         console.log(error);
         })
     })
@@ -180,7 +173,7 @@ exports.getOneSauce = (req, res, next) => {
 */
   exports.deletePost = (req, res, next) => {
 
-    console.log("requete reçue");
+    res.json({message:"post supprimé"});
     /*
     Sauce.findOne({ _id: req.params.id }).then(
       (sauce) => {
@@ -225,8 +218,6 @@ mysqlconnection.query(
             console.log(error);
             res.json({error});
         } else {
-            console.log("--> results");
-            console.log(results);
             res.json(results);
         }
     })

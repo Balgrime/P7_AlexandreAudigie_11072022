@@ -9,16 +9,16 @@ function CreatePost(props) {
 
     const [text, editText] = useState("");
     const [file, setFile] = useState("");
-    const [filename, setFileName] = useState("");
+    const [filename, setFilename] = useState("");
 
 
     let addImg ="";
-    if(!props.post) addImg =(<AddImageToPost setFile={setFile} setFileName={setFileName} />);
+    if(!props.post) addImg =(<AddImageToPost setFile={setFile} setFilename={setFilename} />);
 
     let context = useContext(AuthContext);
     let userId = context.userContext.userId;
 
-    
+    console.log(file);
 
 
     const handleChange = (e) => {
@@ -38,26 +38,33 @@ function CreatePost(props) {
         accessToken = JSON.parse(accessToken);
         
         let postFollowedId = props.post?.postId;
-        console.log("pas de "+postFollowedId);
 
-        let info = {
+        
+
+        let infoObj = {
             text: text,
             userId: userId,
-            postFollowedId: postFollowedId,
-            postImageUrl: file
+            postFollowedId: postFollowedId
         }
 
+        const formData = new FormData();
+        const info = JSON.stringify( infoObj );
+
+        formData.append('file', file);
+        formData.append('info', info);
+
+        
         const options = {
         method: 'POST',
         mode: 'cors',
         headers: new Headers({
-            'Authorization': accessToken?.accessToken,
-            'Content-Type': 'application/json',
+            'Authorization': accessToken?.accessToken
         }),
         credentials: 'include',
-        body: JSON.stringify( info )
+        body: formData
         };
         
+
 
         let editPostChange = context.editPostChange;
 

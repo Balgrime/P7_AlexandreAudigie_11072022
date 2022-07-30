@@ -9,12 +9,12 @@ function AddImageToPost(props) {
     const [filename, setFileName] = useState("");*/
 
 
-/*
+
     const onChange = (e) =>{
         props.setFile(e.target.files[0]);
         props.setFilename(e.target.files[0].name);
     }
-    */
+    
 
     const uploadedImage = "";
 
@@ -22,7 +22,7 @@ function AddImageToPost(props) {
 
     return (
         <>
-        <input type="file" id="postImage" accept="image/png, image/jp, image/jpeg"></input>
+        <input type="file" id="postImage" accept="image/png, image/jp, image/jpeg" onChange={onChange}></input>
         <label htmlFor="file">
             Cliquez pour ajouter une image
             <div>
