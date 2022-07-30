@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 
@@ -18,6 +18,25 @@ function AddImageToPost(props) {
 
     const uploadedImage = "";
 
+/*
+    if (props.file && props.file.type.substr(0, 5) === "image"){
+    const reader = new FileReader();
+    }*/
+
+    const [preview, showPreview] = useState("");
+
+    useEffect(()=>{
+        if(props.file && props.file.type.substr(0, 5) === "image"){
+            const reader = new FileReader();
+            reader.onloadend = ()=>{
+                showPreview(reader.result);
+            };
+            reader.readAsDataURL(props.file)
+        } else {
+            showPreview("");
+        }
+    }, [props.file])
+
 
 
     return (
@@ -28,11 +47,8 @@ function AddImageToPost(props) {
             <div>
                 <FontAwesomeIcon className="navbarIcon iconFile" icon={ faImage }></FontAwesomeIcon>
             </div>
-        </label>
-        
-        <div className="image__display">
-
-        </div>
+        </label>        
+        {preview ? <img className="imagePost" src={preview} alt="prévisualisation du fichier" ></img> : ""}
         </>
     )
 };

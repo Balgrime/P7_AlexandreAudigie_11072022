@@ -13,17 +13,14 @@ function CreatePost(props) {
 
 
     let addImg ="";
-    if(!props.post) addImg =(<AddImageToPost setFile={setFile} setFilename={setFilename} />);
+    if(!props.post) addImg =(<AddImageToPost setFile={setFile} setFilename={setFilename} file={file} />);
 
     let context = useContext(AuthContext);
     let userId = context.userContext.userId;
 
-    console.log(file);
-
 
     const handleChange = (e) => {
         editText( e.target.value );
-        
     };
 
     function submit(){
@@ -53,8 +50,6 @@ function CreatePost(props) {
         const info = JSON.stringify( infoObj );
 
         
-
-
 
         formData.append('info', info);
 
