@@ -21,15 +21,14 @@ function Home() {
   // Etat global qui définit le rôle et le userId
   const [userContext, setUser] = useState("");
 
-  // Etats globaux qui s'auto-incrémentent à chaque modification d'un utilisateur ou d'un post
+  // Etat global qui s'auto-incrémente à chaque modification d'un post
   const [postChange, editPostChange] = useState(0);
-  const [userChange, editUserChange] = useState(0);
 
 
   console.log("le contexte actuel est" + userContext.role);
 
   return (
-    <AuthContext.Provider value={{setUser, userContext, postChange, editPostChange, userChange, editUserChange}}>
+    <AuthContext.Provider value={{setUser, userContext, postChange, editPostChange}}>
       <Routes>
             <Route path="/" element={<Connexion />} />
 

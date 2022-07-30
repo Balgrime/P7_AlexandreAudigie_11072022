@@ -55,13 +55,11 @@ function ModifyProfil(props) {
     };
     
 
-    let editUserChange = context.editUserChange;
-
-    fetch("http://localhost:3002/api/Post", options)
+    fetch("http://localhost:3002/api/UpdateUser", options)
         .then( res => res.json() )
         .then( res => {
             console.log(res);
-      }).then(()=>editUserChange(count => count+1));
+      });
     }
 
 

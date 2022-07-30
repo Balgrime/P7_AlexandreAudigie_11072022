@@ -33,12 +33,12 @@ function ListUsers() {
 
 
     let context = useContext(AuthContext);
-    let userChange = context.userChange;
 
 
     useEffect(()=> {
+        console.log("boucle")
         fetch("http://localhost:3002/api/User", options).then(res => res.json()).then((json)=>{setData(json);
-    })}, [userChange]);
+    })}, []);
 
 
 

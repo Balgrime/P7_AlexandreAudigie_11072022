@@ -12,7 +12,6 @@ function SectionProfil(props) {
     const { id } = useParams();
 
     let context = useContext(AuthContext);
-    let userChangeEdit = context.userChangeEdit;
 
     /* On récupère le token CSRF depuis le localStorage */
     let accessToken = localStorage.getItem('accessToken');
@@ -32,13 +31,12 @@ function SectionProfil(props) {
     credentials: 'include'
     };
 
-    let userChange = context.userChange;
 
     useEffect(()=> {
             console.log("ça boucle");
         fetch(`http://localhost:3002/api/User/${id}`, options).then(res => res.json()).then((json)=>{props.setData(json);
     })
-    }, [userChange]);
+    }, [id]);
 
 
 
@@ -80,7 +78,7 @@ function SectionProfil(props) {
             .then( res => {
                 console.log(res);
                 localStorage.removeItem("accessToken");
-        }).then(()=> userChangeEdit(count => count+1));
+        });
     }
 
     if (clic){
