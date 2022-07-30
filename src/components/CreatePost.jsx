@@ -40,19 +40,17 @@ function CreatePost(props) {
         let postFollowedId = props.post?.postId;
 
         
-
         let infoObj = {
             text: text,
-            userId: userId,
             postFollowedId: postFollowedId
         }
 
         const formData = new FormData();
         const info = JSON.stringify( infoObj );
 
-        formData.append('file', file);
+        
         formData.append('info', info);
-
+        formData.append('image', file);
         
         const options = {
         method: 'POST',

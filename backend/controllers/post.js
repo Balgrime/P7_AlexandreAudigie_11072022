@@ -18,8 +18,9 @@ const mysqlconnection = mysql.createConnection({
 
 
 exports.createPost = (req, res, next) => {
-  console.log("laaaaaaa"+req.body);
-  let textBefore = req.body.text;
+  let json = JSON.parse(req.body.info);
+  console.log(json)
+  let textBefore = json.text;
   let text = sanitize.blacklist(textBefore, "<>\"'/");
 
 
@@ -53,7 +54,7 @@ exports.createPost = (req, res, next) => {
     userId: userId,
     postFollowedId: postFollowedId,
     date: date,
-    //postImageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
+    postImageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.name}`,
     text: text
   }
 
