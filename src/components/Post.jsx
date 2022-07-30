@@ -6,6 +6,7 @@ import PostHeader from './PostHeader';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faXmark, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { AuthContext } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 
 
@@ -118,9 +119,12 @@ function Post(props) {
                 
                 <div className="article__corps">
                     {post.postImageUrl ? 
-                    <div className='article__corps__image'>
+                    /*<div className='article__corps__image'>
                         <img className="imagePost" src={post.postImageUrl} alt="publication du post" />
-                    </div> : ''}
+                    </div>*/
+                    <Link to="#" className='article__corps__image'>
+                    <img className="imagePost" src={post.postImageUrl} alt="illustrant le post" />
+                </Link> : ''}
                     <div className="article__corps__texte">
                         <p>{post.text}</p>
                     </div>

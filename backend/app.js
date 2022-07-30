@@ -52,7 +52,7 @@ app.use(cookieParser());
 
 
 app.use(helmet());
-/*
+
 // Configuration des headers :
 app.use((req, res, next) => {
   // res.setHeader('Access-Control-Request-Headers', '*');
@@ -69,7 +69,7 @@ app.use((req, res, next) => {
   // );
   res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
   next();
-});*/
+});
 
 
 

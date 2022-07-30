@@ -54,7 +54,7 @@ exports.createPost = (req, res, next) => {
     userId: userId,
     postFollowedId: postFollowedId,
     date: date,
-    postImageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.name}`,
+    postImageUrl: `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`,
     text: text
   }
 
