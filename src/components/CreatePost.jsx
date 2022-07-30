@@ -6,16 +6,24 @@ import AddImageToPost from "./AddImageToPost";
 
 function CreatePost(props) {
 
+
+    const [text, editText] = useState("");
+    const [file, setFile] = useState("");
+    const [filename, setFileName] = useState("");
+
+
     let addImg ="";
-    if(!props.post) addImg =(<AddImageToPost />);
+    if(!props.post) addImg =(<AddImageToPost setFile={setFile} setFileName={setFileName} />);
 
     let context = useContext(AuthContext);
     let userId = context.userContext.userId;
 
-    const [text, editText] = useState("");
+    
+
 
     const handleChange = (e) => {
         editText( e.target.value );
+        
     };
 
     function submit(){
@@ -35,7 +43,8 @@ function CreatePost(props) {
         let info = {
             text: text,
             userId: userId,
-            postFollowedId: postFollowedId
+            postFollowedId: postFollowedId,
+            postImageUrl: file
         }
 
         const options = {
@@ -43,7 +52,7 @@ function CreatePost(props) {
         mode: 'cors',
         headers: new Headers({
             'Authorization': accessToken?.accessToken,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         }),
         credentials: 'include',
         body: JSON.stringify( info )

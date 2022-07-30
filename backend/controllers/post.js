@@ -1,3 +1,4 @@
+const jwt = require ('jsonwebtoken');
 const sanitize = require("validator");
 const fs = require('fs');
 
@@ -21,9 +22,28 @@ exports.createPost = (req, res, next) => {
   console.log(req.body);
 
   let textBefore = req.body.text;
-  let text = sanitize.blacklist(textBefore, "<>\"'/");
+  let text = sanitize.escape(textBefore, "<>\"'/");
 
-  let userId = req.body.userId;
+
+
+
+  //On récupère le userId qui fait la requête depuis les headers du token 
+  const token = req.headers.authorization;
+  console.log(req.headers);
+
+  jwt.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET,
+    (err, decoded) => {
+        if (err) return res.sendStatus(403); //invalid token
+        console.log(decoded.UserInfo.userId);
+        console.log(decoded.UserInfo.role);
+    
+
+  let userId = decoded.UserInfo.userId;
+
+
+
   console.log(text)
   console.log(userId)
   let postFollowedId = req.body?.postFollowedId;
@@ -92,6 +112,7 @@ exports.createPost = (req, res, next) => {
 
       .then(() => res.status(201).json({ message: 'Post enregistré !'}))
       .catch(error => res.status(400).json({ error }));*/
+    })
   };
 
 
