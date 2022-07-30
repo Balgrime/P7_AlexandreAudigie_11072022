@@ -1,3 +1,32 @@
 @mixin box-shadow {
     box-shadow: 4px 3px 10px grayscale($color: $secondary);
 }
+
+
+
+
+
+@mixin phone-version{
+    @media (max-width: $breakpoint-tablet){
+        @content;
+    }
+}
+
+
+@mixin tablet-version{
+    @media (min-width: $breakpoint-tablet) and (max-width: ($breakpoint-desktop - 1px)){
+        @content;
+    }
+}
+
+@mixin desktop-version{
+    @media (min-width: $breakpoint-desktop) and (max-width: ($breakpoint-large - 1px)){
+        @content;
+    }
+}
+
+@mixin large-version{
+    @media (min-width: $breakpoint-large){
+        @content;
+    }
+}

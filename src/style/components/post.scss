@@ -38,6 +38,12 @@
             }
         }
     }
+    @include phone-version{
+        width: 90%;
+    }
+    @include tablet-version{
+        min-width: 33rem;
+    }
 }
 
 .containerComments{
@@ -83,6 +89,9 @@
     justify-content: center;
     &>p:hover{
         cursor: pointer;
+    }
+    &>p{
+        text-align: center;
     }
 }
 

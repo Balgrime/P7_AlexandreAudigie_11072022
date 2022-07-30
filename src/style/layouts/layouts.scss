@@ -9,6 +9,9 @@
     bottom: 0;
     width: 100%;
     margin: auto;
+    @include phone-version{
+        flex-flow: column nowrap;
+    }
 }
 
 

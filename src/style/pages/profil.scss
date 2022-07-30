@@ -29,6 +29,18 @@
         flex-flow: column nowrap;
         align-items: center;
     }
+    @include large-version{
+        min-width: 64rem;
+    }
+    @include desktop-version{
+        min-width: 63rem;
+    }
+    @include tablet-version{
+        width: 100%;
+    }
+    @include phone-version{
+        width: 100%;
+    }
 }
 
 .check{
