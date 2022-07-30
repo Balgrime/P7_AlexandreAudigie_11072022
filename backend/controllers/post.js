@@ -20,7 +20,7 @@ const mysqlconnection = mysql.createConnection({
 exports.createPost = (req, res, next) => {
   let json = JSON.parse(req.body.info);
   console.log(json)
-  let textBefore = json.text;
+  let textBefore = json?.text;
   let text = sanitize.blacklist(textBefore, "<>\"'/");
 
 
@@ -38,7 +38,7 @@ exports.createPost = (req, res, next) => {
 
 
   // On récupère le postId du post suivi si jamais on écrit un commentaire
-  let postFollowedId = req.body?.postFollowedId;
+  let postFollowedId = json?.postFollowedId;
 
 
   // On récupère la date actuelle et on créé un nouveau postId
@@ -48,13 +48,22 @@ exports.createPost = (req, res, next) => {
   let postId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""));
 
 
+
+
+  let postImg = null;
+  if(req.file?.filename !== undefined){
+    postImg = `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`;
+  }
+
+
+
   //création du contenu du post à partir des infos récupérées
   const post = {
     postId: postId,
     userId: userId,
     postFollowedId: postFollowedId,
     date: date,
-    postImageUrl: `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`,
+    postImageUrl: postImg,
     text: text
   }
 
