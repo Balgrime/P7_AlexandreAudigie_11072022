@@ -17,7 +17,6 @@ const mysqlconnection = mysql.createConnection({
 
 exports.createPost = (req, res, next) => {
   let json = JSON.parse(req.body.info);
-  console.log(json)
   let textBefore = json?.text;
   let text = sanitize.blacklist(textBefore, "<>\"/");
 
@@ -33,6 +32,7 @@ exports.createPost = (req, res, next) => {
     
   let userId = decoded.UserInfo.userId;
 
+  
 
 
   // On récupère le postId du post suivi si jamais on écrit un commentaire
@@ -217,7 +217,7 @@ exports.getOneSauce = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
 //la requête SQL
 mysqlconnection.query(
-    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, post.likes, post.date, post.text, post.Count, user.userId, indexlikes.hasLiked FROM post INNER JOIN user ON post.userId = user.userId LEFT JOIN indexlikes ON indexlikes.userId = user.userId', (error, results, fields)=>{
+    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, post.likes, post.date, post.text, post.Count, user.userId, indexlikes.hasLiked FROM post INNER JOIN user ON post.userId = user.userId LEFT JOIN indexlikes ON indexlikes.postIdLiked = post.postId', (error, results, fields)=>{
         if (error){
             console.log(error);
             res.json({error});
@@ -225,31 +225,76 @@ mysqlconnection.query(
             res.json(results);
         }
     })
-}
-
-
+};
 
 
 exports.changeLiking = (req, res, next) => {
-    res.json({message:"requête reçue"});
-  /*
-    let currentId =  req.body.userId;
-    let currentLike = req.body.like;
+  let { postId, liking, likes } = req.body.info;
+  console.log(postId);
 
-    let intCurrentLike = parseInt(currentLike);
 
-  
-    Sauce.findOne({ _id: req.params.id }).then((sauce) => {
-        res.status(201).json({ message: 'Like modifié !'})
-        
-        if (liking === 1){
-        addLiking();
-      } else if (liking === 0){
-        removeLiking();
-      };
+  //On récupère le userId qui fait la requête depuis les headers du token 
+  const token = req.headers.authorization;
+  jwt.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET,
+    (err, decoded) => {
+        if (err) return res.sendStatus(403); //invalid token
+  let userId = decoded.UserInfo.userId;
+
+  // Retrouve tous les utilisateurs qui ont liké le post pour savoir si l'utilisateur à l'origine de la requête a déjà liké
+  mysqlconnection.query(
+    `SELECT userIdThatLiked FROM indexlikes WHERE postIdLiked = ${postId}`, (error, results, fields)=>{
+      console.log(results)
+      if (results.indexOf(userId) === -1){
+
+        const like = {
+          postIdLiked: postId,
+          userIdThatLiked: userId,
+          hasLiked: true
+        }
+        // Ajoute un index d'utilisateurs ayant liké le post
+        mysqlconnection.query(
+          `INSERT INTO indexlikes SET ?`, like, (error, results, fields)=>{
+              if (error){
+                  console.log(error);
+                  res.json({error});
+              } else {
+                  console.log("--> results");
+                  console.log(results);
+                  res.json({message:"like fait"});
+              }
+          })
+
+          // Ajoute un like au compteur de likes du post
+          mysqlconnection.query(
+            `UPDATE post SET likes ='${likes+1}' WHERE postId='${postId}'`, (error, results, fields)=>{
+            console.log(error);
+            })
+      }
     })
-    .catch(error => res.status(400).json({ error }));*/
+/*
+
+  //création du contenu du post à partir des infos récupérées
+  if (liking === 1){
+    addLiking();
+  } else if (liking === 0){
+    removeLiking();
   };
+  let tata = 0;
+  let tato = 1;
+  //on insère le post dans la bdd
+  mysqlconnection.query(
+    `UPDATE indexlikes SET hasLiked='${tata}' WHERE indexlikes.userId ='${tato}'`, (error, results, fields)=>{
+        if (error){
+            console.log(error);
+            res.json({error});
+        } else {
+            res.json({message:"post enregistré"});
+        }
+      }
+    )*/}
+)}
 
 
 
@@ -258,4 +303,5 @@ function addLiking(liking){
 
 
 function removeLiking(liking){
+  console.log(liking)
 };

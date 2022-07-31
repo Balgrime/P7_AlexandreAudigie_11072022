@@ -40,7 +40,7 @@ function Comment(props) {
         {props.comment.profilImageUrl ? 
             <div>
                 <img className="imageProfil" src={comment.profilImageUrl} alt="profil" />
-            </div> : 
+            </div> :
             <div>
                 <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
             </div>}
@@ -57,7 +57,7 @@ function Comment(props) {
                     <Like post={comment} />
                 </div>
             </div>
-    </article>)        
+    </article>)
 }
 
 export default Comment;

@@ -22,30 +22,29 @@ function Like(props) {
 
         
         // on rassemble les infos du futur like
-        let infoObj = {
-            postId: props.post?.postId,
-            liking: liking
+        let info = {
+            postId: props.post.postId,
+            liking: liking,
+            likes: props.post?.likes
         }
 
-        const formData = new FormData();
+        /*const formData = new FormData();
         const info = JSON.stringify( infoObj );
         formData.append('info', info);
+        console.log(info)*/
 
         const options = {
         method: 'PUT',
         mode: 'cors',
-        headers: new Headers({
-            'Authorization': accessToken?.accessToken
-        }),
+        headers: { 'Content-Type': 'application/json', 'authorization': accessToken?.accessToken },
         credentials: 'include',
-        body: formData
+        body: JSON.stringify({ info })
         };
 
         let editPostChange = context.editPostChange;
 
         fetch("http://localhost:3002/api/Post/Like", options)
-            .then( res => res.json() )
-            .then( res => {console.log(res)})
+            //.then( res => res.json() )
             .then(()=>editPostChange(count => count+1));
     }
 

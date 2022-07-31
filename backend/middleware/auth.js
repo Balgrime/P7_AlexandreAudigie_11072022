@@ -17,22 +17,17 @@ const mysqlconnection = mysql.createConnection({
 module.exports = (req, res, next) => {
   try {
     const token = req.headers.authorization;
-    console.log(req.headers);
 
     jwt.verify(
       token,
       process.env.ACCESS_TOKEN_SECRET,
       (err, decoded) => {
           if (err) return res.sendStatus(403); //invalid token
-          console.log(decoded.UserInfo.userId);
-          console.log(decoded.UserInfo.role);
           let verifiedUserId = decoded.UserInfo.userId;
-          console.log("iciiiiii"+ verifiedUserId)
 
         //la requête SQL
         mysqlconnection.query(
           `SELECT userId FROM user WHERE userId ='${verifiedUserId}'`, (error, results, fields)=>{
-            console.log(results[0].userId);
               if (results[0].userId !== undefined){
                 next();
               } else {

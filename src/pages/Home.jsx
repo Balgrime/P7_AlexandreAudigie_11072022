@@ -34,11 +34,11 @@ function Home() {
   return (
     <AuthContext.Provider value={{setUser, userContext, postChange, editPostChange}}>
       <Routes>
-            <Route path="/" element={<Connexion />} />
-
+            
             {/* public routes */}
             <Route element={<AlreadyAuth />}>
-              {<Route path="/pages/Connexion" element={<Connexion />} />}
+              <Route path="/" element={<Connexion />} />
+              <Route path="/pages/Connexion" element={<Connexion />} />
               <Route path="/pages/Inscription" element={<Inscription />} />
             </Route>
 

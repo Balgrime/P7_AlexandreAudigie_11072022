@@ -61,7 +61,7 @@ exports.signup = (req, res, next) => {
 
 exports.login = (req, res, next) => {
     
-    let { email, password} = req.body.formValues;
+    let {email, password} = req.body.formValues;
     mysqlconnection.query('SELECT * FROM user', (error, result)=>{
         let userArray = result.filter(user => user.email === email)
         let user = userArray[0];
