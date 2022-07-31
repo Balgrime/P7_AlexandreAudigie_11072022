@@ -36,7 +36,7 @@ function Logout() {
             .then( res => res.json() )
             .then( res => {
                 console.log(res);
-                localStorage.removeItem("accessToken");
+                localStorage?.removeItem("accessToken");
                 setUser("");
         });
     }

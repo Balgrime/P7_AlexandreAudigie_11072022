@@ -43,6 +43,16 @@
                 padding-top: 0.4rem;
             }
         }
+        & input[type="file"]{
+            width: 13rem;
+            opacity: 0;
+            height: 6rem;
+            border: solid 2px green;
+            position: absolute;
+            justify-self: baseline;
+            z-index: 4;
+            cursor: pointer;
+        }
     }
     @include phone-version{
         width: 90%;
@@ -65,6 +75,7 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
+    justify-content: space-around;
     &__user{
         font-weight: 700;
         margin-bottom: 0.2rem;
@@ -130,4 +141,18 @@
 .editIcon{
     width: 27px;
     height: 20px;
+}
+
+.containerChangePostImg{
+    position: relative;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.center>div{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
 }

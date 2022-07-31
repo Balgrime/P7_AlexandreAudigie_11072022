@@ -8,10 +8,6 @@ function CreatePost(props) {
 
 
 
-    const [editMode, switchToEditMode] = useState("");
-
-
-
     const [text, editText] = useState("");
     const [file, setFile] = useState("");
 
