@@ -54,7 +54,7 @@ function Comment(props) {
             <div className="article__corps--comment">
                 <p>{comment.text}</p>
                 <div>
-                    <Like likes={comment.likes} />
+                    <Like post={comment} />
                 </div>
             </div>
     </article>)        

@@ -1,17 +1,17 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from "../context/AuthContext";
 
 
 function Like(props) {
-
-    console.log(props)
     let context = useContext(AuthContext);
 
 
-    // Lance la requête pour modifier le like
+    // Lance la requête pour modifier le liking d'un post
     function submit(liking){
+
+        console.log(props.post.postId);
         /* On récupère le token CSRF depuis le localStorage */
         let accessToken = localStorage.getItem('accessToken');
         if (!accessToken) {
@@ -21,9 +21,9 @@ function Like(props) {
         accessToken = JSON.parse(accessToken);
 
         
-        // on rassemble les infos du futur like à créer
+        // on rassemble les infos du futur like
         let infoObj = {
-            postId: props.post.postId,
+            postId: props.post?.postId,
             liking: liking
         }
 
@@ -48,7 +48,6 @@ function Like(props) {
             .then( res => {console.log(res)})
             .then(()=>editPostChange(count => count+1));
     }
-
 
 
 

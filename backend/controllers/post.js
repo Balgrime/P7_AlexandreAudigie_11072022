@@ -15,8 +15,6 @@ const mysqlconnection = mysql.createConnection({
 });
 
 
-
-
 exports.createPost = (req, res, next) => {
   let json = JSON.parse(req.body.info);
   console.log(json)
@@ -230,9 +228,11 @@ mysqlconnection.query(
 }
 
 
-/*
 
-exports.changeLike = (req, res, next) => {
+
+exports.changeLiking = (req, res, next) => {
+    res.json({message:"requête reçue"});
+  /*
     let currentId =  req.body.userId;
     let currentLike = req.body.like;
 
@@ -242,60 +242,20 @@ exports.changeLike = (req, res, next) => {
     Sauce.findOne({ _id: req.params.id }).then((sauce) => {
         res.status(201).json({ message: 'Like modifié !'})
         
-        if (intCurrentLike === 1){
-        addLiking(sauce, currentId);
-        sauce.save();
-
-      } else if (intCurrentLike === 0){
-        removeLiking(sauce, currentId);
-        sauce.save();
-
-      } else if (intCurrentLike === -1){
-        addDisliking(sauce, currentId);
-        sauce.save();
-
+        if (liking === 1){
+        addLiking();
+      } else if (liking === 0){
+        removeLiking();
       };
     })
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => res.status(400).json({ error }));*/
   };
 
 
 
-function addLiking(sauce, currentId){
-  if(sauce.usersLiked.indexOf(currentId) === -1 && sauce.usersDisliked.indexOf(currentId) === -1){
-    sauce.likes += 1;
-    sauce.usersLiked.push(currentId);
-  } else if (sauce.usersLiked.indexOf(currentId) === -1 && sauce.usersDisliked.indexOf(currentId) !== -1){
-    removeLiking(sauce, currentId);
-    sauce.likes += 1;
-    sauce.usersLiked.push(currentId);
-  };
+function addLiking(liking){
 };
 
 
-function addDisliking(sauce, currentId){
-  if(sauce.usersLiked.indexOf(currentId) === -1 && sauce.usersDisliked.indexOf(currentId) === -1){
-    sauce.dislikes += 1;
-    sauce.usersDisliked.push(currentId);
-  } else if (sauce.usersLiked.indexOf(currentId) !== -1 && sauce.usersDisliked.indexOf(currentId) === -1){
-    removeLiking(sauce, currentId);
-    sauce.dislikes += 1;
-    sauce.usersDisliked.push(currentId);
-  };
+function removeLiking(liking){
 };
-
-
-
-function removeLiking(sauce, currentId){
-  if(sauce.usersLiked.indexOf(currentId) !== -1){
-    sauce.likes -= 1;
-    let positionUser = sauce.usersLiked.indexOf(currentId);
-    sauce.usersLiked.splice(positionUser, 1);
-  };
-  if (sauce.usersDisliked.indexOf(currentId) !== -1){
-    sauce.dislikes -= 1;
-    let positionUser = sauce.usersDisliked.indexOf(currentId);
-    sauce.usersDisliked.splice(positionUser, 1);
-  };
-};
-*/
