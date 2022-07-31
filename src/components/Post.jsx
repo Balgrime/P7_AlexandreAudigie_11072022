@@ -148,7 +148,8 @@ function Post(props) {
 
 
 
-
+    
+    const [file, setFile] = useState("");
     const [text, modifTextArea] = useState(post.text)
 
     const handleChange = (e) => {
@@ -170,7 +171,7 @@ function Post(props) {
                 </div>
                 
                 <div className="article__corps">
-                    {editMode ? <ChangePostImg /> : ""}
+                    {editMode ? <ChangePostImg  setFile={setFile} file={file} post={post} /> : ""}
                     {!editMode ? currentPostImg : ""}
                     <div className="article__corps__texte">
                         <p>{!editMode ? post.text : modifText}</p>

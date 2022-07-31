@@ -46,7 +46,8 @@
         & input[type="file"]{
             width: 13rem;
             opacity: 0;
-            height: 6rem;
+            height: 100%;
+            min-height: 6rem;
             border: solid 2px green;
             position: absolute;
             justify-self: baseline;
@@ -75,7 +76,9 @@
     display: flex;
     flex-flow: row nowrap;
     align-items: flex-start;
-    justify-content: space-around;
+    &--comment{
+        justify-content: space-around;
+    }
     &__user{
         font-weight: 700;
         margin-bottom: 0.2rem;
@@ -96,6 +99,15 @@
     padding: 0 0.3rem 0 0.3rem;
 }
 
+.changePostImg{
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    object-fit: cover;
+    max-width: 5rem;
+    min-width: 5rem;
+    max-height: 16rem;
+    padding: 0 0.3rem 0 0.3rem;
+}
 
 
 

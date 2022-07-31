@@ -36,7 +36,7 @@ function Comment(props) {
 
 
     return (<article className="article article--comment">
-    <div className="infoUser">
+    <div className="infoUser infoUser--comment">
         {props.comment.profilImageUrl ? 
             <div>
                 <img className="imageProfil" src={comment.profilImageUrl} alt="profil" />

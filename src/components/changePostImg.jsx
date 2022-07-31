@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 
 function ChangePostImg(props) {
@@ -8,9 +9,8 @@ function ChangePostImg(props) {
     const onChange = (e) =>{
         props.setFile(e.target.files[0]);
     }
-    
 
-    // Enclenche la prévisualisation de l'image lorsqu'un fichier est présent
+    // Gère la présence et l'affichage d'une image de preview
     const [preview, showPreview] = useState("");
 
     useEffect(()=>{
@@ -26,6 +26,14 @@ function ChangePostImg(props) {
     }, [props.file])
 
 
+    let imgAlreadyUrl = props.post.postImageUrl;
+    let imgAlready = <Link to="#" className='article__corps__image'>
+                        <img className="imagePost" src={imgAlreadyUrl} alt="illustrant le post" />
+                    </Link>
+
+
+
+    let imgPreview = <img className="imagePost" src={preview} alt="prévisualisation du fichier" ></img>;
 
     return (
         <div className="containerChangePostImg">
@@ -36,7 +44,8 @@ function ChangePostImg(props) {
                 <FontAwesomeIcon className="navbarIcon iconFile" icon={ faImage }></FontAwesomeIcon>
             </div>
         </label>        
-        {preview ? <img className="imagePost" src={preview} alt="prévisualisation du fichier" ></img> : ""}
+        {preview ? imgPreview : ""}
+        {preview ? "" : (imgAlreadyUrl ? imgAlready : "")}
         </div>
     )
 };
