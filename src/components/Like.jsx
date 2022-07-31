@@ -5,22 +5,29 @@ import { useState } from 'react';
 
 function Like(props) {
 
+    console.log(props)
 
-    const [clic, editClic] = useState("grey")
+    const [clic, editClic] = useState("")
 
-    function checkInList(props){
-        /* si l'id de connexion de l'utilisateur actuellement connecté est inclus dans le tableau 
-            des usersLiked du post, alors le clic passe en "cliqué"
-        */
-    }
 
-    return (
-        <div className={`like border${clic}`}>
-            <p className={clic}>{props.likes}</p>
-            <div>
-                <FontAwesomeIcon className={clic} icon={ faHeart }></FontAwesomeIcon>
-            </div>
-        </div>
+    const unliked = <div className="like bordergrey">
+                        <p className="grey">{props.likes}</p>
+                        <div>
+                            <FontAwesomeIcon className="grey" icon={ faHeart }></FontAwesomeIcon>
+                        </div>
+                    </div>
+
+    const liked = <div className="like border">
+                        <p>{props.likes}</p>
+                        <div>
+                            <FontAwesomeIcon icon={ faHeart }></FontAwesomeIcon>
+                        </div>
+                    </div>
+
+
+    return (<>
+        {props.hasLiked ? liked : unliked}
+    </>
     )
 };
 

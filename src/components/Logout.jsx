@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightFromBracket } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 
@@ -9,10 +9,7 @@ function Logout() {
     let context = useContext(AuthContext);
     let setUser = context.setUser;
 
-
-    const [clic, editClic] = useState(false);
-
-
+    // Gère la déconnexion en supprimant l'access token du localStorage et le contexte de l'utilisateur
     const handleLogout = () => {
 
         /* On récupère le token CSRF depuis le localStorage */
@@ -21,7 +18,6 @@ function Logout() {
         if (!accessToken) {
         console.log("pas de token");
         }
-
 
         const options = {
             method: 'DELETE',
@@ -41,14 +37,9 @@ function Logout() {
         });
     }
 
-    if (clic){
-        handleLogout();
-    }
-
-
     return (
         <>
-            <div className="containerLogout" onClick={()=>editClic(true)}>
+            <div className="containerLogout" onClick={()=>handleLogout()}>
                 <div>
                     <FontAwesomeIcon label="Quitter" className="navbarIcon" icon={ faRightFromBracket }></FontAwesomeIcon>
                 </div>

@@ -21,7 +21,7 @@ exports.createPost = (req, res, next) => {
   let json = JSON.parse(req.body.info);
   console.log(json)
   let textBefore = json?.text;
-  let text = sanitize.blacklist(textBefore, "<>\"'/");
+  let text = sanitize.blacklist(textBefore, "<>\"/");
 
 
   //On récupère le userId qui fait la requête depuis les headers du token 
@@ -49,7 +49,7 @@ exports.createPost = (req, res, next) => {
 
 
 
-
+  // S'assure que l'image du post est nulle si aucune url n'a été fournie
   let postImg = null;
   if(req.file?.filename !== undefined){
     postImg = `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`;
@@ -92,7 +92,6 @@ exports.createPost = (req, res, next) => {
         })
     })
 
-    
   /*
     const sauceObject = JSON.parse(req.body.sauce);
   
@@ -217,13 +216,10 @@ exports.getOneSauce = (req, res, next) => {
 
 
 
-
-
-
 exports.getAllPosts = (req, res, next) => {
 //la requête SQL
 mysqlconnection.query(
-    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, likes, usersLiked, post.date, post.text, post.Count, user.userId FROM post INNER JOIN user ON post.userId = user.userId',  (error, results, fields)=>{
+    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, post.likes, post.date, post.text, post.Count, user.userId, indexlikes.hasLiked FROM post INNER JOIN user ON post.userId = user.userId LEFT JOIN indexlikes ON indexlikes.userId = user.userId', (error, results, fields)=>{
         if (error){
             console.log(error);
             res.json({error});

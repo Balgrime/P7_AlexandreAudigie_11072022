@@ -177,7 +177,7 @@ function Post(props) {
                         <p>{!editMode ? post.text : modifText}</p>
                     </div>
                     <div className='likeContainer'>
-                        <Like likes={post.likes} />
+                        <Like likes={post.likes} hasLiked={post?.hasLiked} />
 
                         {!editMode ? repondre : enregistrer}
                     </div>

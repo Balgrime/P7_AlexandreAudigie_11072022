@@ -121,6 +121,9 @@
     }
     &>p{
         text-align: center;
+        @include phone-version{
+            font-size: 0.8rem;
+        }
     }
 }
 
