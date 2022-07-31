@@ -5,13 +5,20 @@ import { AuthContext } from "../context/AuthContext";
 
 function RequireAuth() {
 
-  let context = useContext(AuthContext);
-  const location = useLocation();
-  console.log(context.userContext?.role);
+    const location = useLocation();
+
+    let context = useContext(AuthContext);
+    let role = context.userContext.role;
+
+
+    let accessToken = localStorage.getItem('accessToken');
+    accessToken = JSON.parse(accessToken);
+    let localStorageRole = accessToken?.role;
+
     return (
         <>
             {
-            context.userContext?.role === "2834" || context.userContext?.role === "8759"
+            role === "2834" || role === "8759" || localStorageRole === "2834" || localStorageRole === "8759"
                 ? <Outlet />
                 : <Navigate to="/pages/Connexion" state={{ from: location }} replace />
             }

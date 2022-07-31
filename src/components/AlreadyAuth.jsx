@@ -5,13 +5,17 @@ import { AuthContext } from "../context/AuthContext";
 
 function AlreadyAuth() {
 
-  let context = useContext(AuthContext);
   const location = useLocation();
-  console.log(context.userContext?.role);
+
+    let context = useContext(AuthContext);
+    let role = context.userContext.role;
+
+    
+
     return (
         <>
             {
-            context.userContext?.role === "2834" || context.userContext?.role === "8759"
+            role === "2834" || role === "8759"
                 ? <Navigate to="/pages/Forum" state={{ from: location }} replace />
                 : <Outlet />
             }

@@ -5,12 +5,9 @@ import Post from "./Post";
 
 function HistoriqueMessages(props) {
     
-    //const { data } = useFetch("http://localhost:3002/api/Post");
-
-
     const [data, setData] = useState([]);
 
-    /* On récupère le token CSRF depuis le localStorage */
+    // On récupère le token CSRF depuis le localStorage 
     let accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
     console.log("pas de token");
@@ -33,15 +30,14 @@ function HistoriqueMessages(props) {
     let postChange = context.postChange;
 
 
+    // On va chercher les données des potsts à chaque changement global d'un post
     useEffect(()=> {
-            console.log("ça boucle");
         fetch("http://localhost:3002/api/Post", options).then(res => res.json()).then((json)=>{setData(json);
     })
     }, [postChange]);
 
 
-
-
+    // On affiche les posts de l'utilisateur en question
     return (
         <>
             <h2>Historique des posts</h2>

@@ -10,10 +10,14 @@ import Logout from "./Logout";
 function Navbar() {
 
     let navList ='';
+
+    // On cherche le userId depuis le context global
     let context = useContext(AuthContext);
-    let role = context.userContext.role;
     let userId = context.userContext.userId;
-    console.log(userId);
+
+    let accessToken = localStorage.getItem('accessToken');
+    accessToken = JSON.parse(accessToken);
+    let role = accessToken?.role;
     
 
     if(role === "2834" || role === "8759"){

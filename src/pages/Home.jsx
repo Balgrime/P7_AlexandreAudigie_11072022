@@ -9,12 +9,6 @@ import { AuthContext } from '../context/AuthContext';
 import AlreadyAuth from '../components/AlreadyAuth';
 
 
-//A enlever avant la fin
-const role = {
-  'User': 2834,
-  'Admin': 8759
-}
-
 
 function Home() {
 
@@ -25,7 +19,17 @@ function Home() {
   const [postChange, editPostChange] = useState(0);
 
 
-  console.log("le contexte actuel est" + userContext.role);
+
+  // Permet s'il est présent au niveau du localStorage, de récupérer le role et le userId après un rafraichissement de la page
+  useEffect(()=> {
+    let accessToken = localStorage.getItem('accessToken');
+    accessToken = JSON.parse(accessToken);
+    let role = accessToken?.role;
+    let userId = accessToken?.userId;
+    setUser({ role, userId });
+    console.log("le contexte actuel est" + role);
+  }, [])
+
 
   return (
     <AuthContext.Provider value={{setUser, userContext, postChange, editPostChange}}>

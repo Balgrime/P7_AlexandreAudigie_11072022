@@ -10,16 +10,19 @@ function Logout() {
     let setUser = context.setUser;
 
 
-    /* On récupère le token CSRF depuis le localStorage */
-    let accessToken = localStorage.getItem('accessToken');
-    if (!accessToken) {
-    console.log("pas de token");
-    }
-
     const [clic, editClic] = useState(false);
 
 
     const handleLogout = () => {
+
+        /* On récupère le token CSRF depuis le localStorage */
+        let accessToken = localStorage.getItem('accessToken');
+        accessToken = JSON.parse(accessToken);
+        if (!accessToken) {
+        console.log("pas de token");
+        }
+
+
         const options = {
             method: 'DELETE',
             mode: 'cors',
