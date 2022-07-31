@@ -6,8 +6,6 @@ import AddImageToPost from "./AddImageToPost";
 
 function CreatePost(props) {
 
-
-
     const [text, editText] = useState("");
     const [file, setFile] = useState("");
 
@@ -22,6 +20,10 @@ function CreatePost(props) {
         editText( e.target.value );
     };
 
+
+
+
+    // La requête qui créé un nouveau post
     function submit(){
         if(text !== ""){
             /* On récupère le token CSRF depuis le localStorage */
@@ -29,13 +31,9 @@ function CreatePost(props) {
         if (!accessToken) {
         console.log("pas de token");
         }
-
         /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
         accessToken = JSON.parse(accessToken);
-        
         let postFollowedId = props.post?.postId;
-
-        
 
         // on rassemble les infos du futur post à créer
         let infoObj = {
@@ -45,7 +43,6 @@ function CreatePost(props) {
 
         const formData = new FormData();
         const info = JSON.stringify( infoObj );
-
         formData.append('info', info);
 
         if (!postFollowedId){
