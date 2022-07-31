@@ -13,6 +13,16 @@
         column-gap: 3rem;
         margin-top: 2rem;
         margin-bottom: 1rem;
+        @include tablet-version{
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+        }
+        @include phone-version{
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: center;
+        }
         &>form{
             display: flex;
             flex-flow: column nowrap;

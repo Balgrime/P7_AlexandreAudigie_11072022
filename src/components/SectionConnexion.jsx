@@ -38,15 +38,13 @@ function SectionConnexion() {
             .then( res => {
                 editErrMsg(res.message);
                 localStorage.setItem('accessToken', JSON.stringify(res));
-              
+                
               const token = localStorage.getItem('accessToken');
-              if (token){
+                if (token){
                   let userAuth = JSON.parse(token);
-                  let role = userAuth.role;
-                  let userId = userAuth.userId;
                   setUser(userAuth);
               }
-          });
+          })
     }
     const [errMsg, editErrMsg] = useState("");
    

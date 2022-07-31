@@ -11,11 +11,16 @@ function AlreadyAuth() {
     let role = context.userContext.role;
 
     
+    let accessToken = localStorage.getItem('accessToken');
+    accessToken = JSON.parse(accessToken);
+    let localRole = accessToken?.role;
+
+    
 
     return (
         <>
             {
-            role === "2834" || role === "8759"
+            role === "2834" || role === "8759" || localRole === "2834" || localRole === "8759"
                 ? <Navigate to="/pages/Forum" state={{ from: location }} replace />
                 : <Outlet />
             }

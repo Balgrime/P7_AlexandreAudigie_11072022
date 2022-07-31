@@ -14,13 +14,13 @@ function Navbar() {
     // On cherche le userId depuis le context global
     let context = useContext(AuthContext);
     let userId = context.userContext.userId;
-
+    let role = context.userContext.role;
+    
     let accessToken = localStorage.getItem('accessToken');
     accessToken = JSON.parse(accessToken);
-    let role = accessToken?.role;
-    
+    let localRole = accessToken?.role;
 
-    if(role === "2834" || role === "8759"){
+    if(role === "2834" || role === "8759" || localRole === "2834" || localRole === "8759"){
         navList = <ul>
                     <li>
                         <Link className="navbar__Lien" to="../pages/Forum">

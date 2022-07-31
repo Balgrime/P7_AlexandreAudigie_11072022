@@ -27,7 +27,7 @@ function Logout() {
             method: 'DELETE',
             mode: 'cors',
             headers: new Headers({
-            'Authorization': accessToken.accessToken
+            'Authorization': accessToken?.accessToken
             }),
             credentials: 'include'
         };
@@ -46,28 +46,6 @@ function Logout() {
     }
 
 
-    
-
-
-    /*
-        const handleLogout = (e) => {
-            const options = {
-                method: 'DELETE',
-                mode: 'cors',
-                headers: new Headers({
-                'Authorization': accessToken.accessToken
-                }),
-                credentials: 'include'
-            };
-        
-            fetch("http://localhost:3002/api/User/logout", options)
-                .then( res => res.json() )
-                .then( res => {
-                    console.log(res);
-                  //  storage.removeItem("accessToken");
-            });
-        }
-    */
     return (
         <>
             <div className="containerLogout" onClick={()=>editClic(true)}>

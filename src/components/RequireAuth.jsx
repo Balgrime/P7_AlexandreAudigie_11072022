@@ -13,12 +13,12 @@ function RequireAuth() {
 
     let accessToken = localStorage.getItem('accessToken');
     accessToken = JSON.parse(accessToken);
-    let localStorageRole = accessToken?.role;
+    let localRole = accessToken?.role;
 
     return (
         <>
             {
-            role === "2834" || role === "8759" || localStorageRole === "2834" || localStorageRole === "8759"
+            role === "2834" || role === "8759" || localRole === "2834" || localRole === "8759"
                 ? <Outlet />
                 : <Navigate to="/pages/Connexion" state={{ from: location }} replace />
             }

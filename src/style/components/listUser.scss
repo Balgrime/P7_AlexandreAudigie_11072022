@@ -6,7 +6,8 @@
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    
+    background-color: $clearest;
+    border-top-right-radius: 30px;
     &__list{
         max-height: 35vh;
         overflow-y: scroll;      

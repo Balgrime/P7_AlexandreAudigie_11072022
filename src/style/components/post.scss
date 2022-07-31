@@ -11,6 +11,12 @@
         max-width: 30rem;
         margin: 0 0.5rem 0 0.5rem;
         animation: appears forwards ease-out 140ms;
+        @include tablet-version{
+            min-width: 80% !important;
+        }
+        @include phone-version{
+            width: 80% !important;
+        }
         &:nth-child(even) {
             align-self: flex-end;
         }
