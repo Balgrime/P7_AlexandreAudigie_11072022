@@ -96,13 +96,14 @@ function ModifyProfil(props) {
     const onChange = (e) =>{
         setFile(e.target.files[0]);
     }
-    const [file, setFile] = useState("");
+    const [file, setFile] = useState(data?.profilImageUrl);
 
     // Enclenche la prévisualisation de l'image lorsqu'un fichier est présent
     const [preview, showPreview] = useState("");
 
     useEffect(()=>{
-        if(file && file.type.substr(0, 5) === "image"){
+        console.log("boucle")
+        if(file && file.type?.substr(0, 5) === "image"){
             const reader = new FileReader();
             reader.onloadend = ()=>{
                 showPreview(reader.result);

@@ -18,7 +18,7 @@ function PostHeader(props) {
                     </div>}
             <div>
                 <p className="infoUser__user">{post.firstName + " " + post.name}</p>
-                <p className="infoUser__date">{post.date}</p>
+                <p className="infoUser__date">{post.modifDate ? "modifié le : "+post.modifDate : post.date}</p>
             </div>
         </Link>
     )

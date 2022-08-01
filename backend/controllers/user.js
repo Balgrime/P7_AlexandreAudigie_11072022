@@ -243,22 +243,32 @@ exports.deleteUser = (req, res, next) => {
               console.log("LAAAAAAAA"+results[0].profilImageUrl);
               let urlToRemove = results[0].profilImageUrl;
   
-              if (urlToRemove !== undefined){
-                const filenameToRemove = urlToRemove.split('/images/')[1];
+              // S'il y a un fichier dans la requête et qu'il y avait déjà une image dans la bdd, on supprime cette dernière
+              if(urlToRemove !== undefined){
+                const filenameToRemove = urlToRemove?.split('/images/')[1];
                 fs.unlink(`images/${filenameToRemove}`, (res, err) => {
-                if(err) console.log('error', err);})
-              }
+                if(err) console.log('error', err);})  
+              }   
             })
           }
         
   
     //création du profil mis à jour avec les nouvelles infos
-    const profil = {
+    let profil = {};
+    if (req.file){
+        profil = {
         firstName: json.firstName,
         name: json.name,
         profilImageUrl: profilImg,
         email: json.email
-    }
+        }
+      } else {
+        profil = {
+            firstName: json.firstName,
+            name: json.name,
+            email: json.email
+      }
+      }
   
     //on insère le post dans la bdd
     mysqlconnection.query(

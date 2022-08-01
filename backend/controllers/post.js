@@ -115,34 +115,42 @@ exports.createPost = (req, res, next) => {
       postImg = `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`;
 
 
-
-      // On supprime l'ancienne image du dossier image si une nouvelle est choisie
+    // On supprime l'ancienne image du dossier image seulement si une nouvelle est choisie
     if (req.file){
       mysqlconnection.query(
         `SELECT postImageUrl FROM post WHERE postId='${json.postId}' AND userId='${userId}'`, (error, results, fields)=>{
             console.log("LAAAAAAAA"+results[0].postImageUrl);
             let urlToRemove = results[0].postImageUrl;
 
-            if (urlToRemove !== undefined){
-              const filenameToRemove = urlToRemove.split('/images/')[1];
-              fs.unlink(`images/${filenameToRemove}`, (res, err) => {
-              if(err) console.log('error', err);})
-            }
+
+              // S'il y a un fichier dans la requête et qu'il y avait déjà une image dans la bdd, on supprime cette dernière
+              if(urlToRemove !== undefined){
+                const filenameToRemove = urlToRemove?.split('/images/')[1];
+                fs.unlink(`images/${filenameToRemove}`, (res, err) => {
+                if(err) console.log('error', err);})  
+              }   
           })
         }
       }
 
 
-
-    console.log("icii"+postImg)
     // Création du contenu du post à partir des infos récupérées
-    const modifPost = {
-      postId: json.postId,
-      modifDate: date,
-      postImageUrl: postImg,
-      text: text
+    let modifPost = {}
+    if (req.file){
+      modifPost = {
+        postId: json.postId,
+        modifDate: date,
+        postImageUrl: postImg,
+        text: text
+      }
+    } else {
+        modifPost = {
+          postId: json.postId,
+          modifDate: date,
+          text: text
+      }
     }
-  
+    
     // On update les informations du post
     mysqlconnection.query(
       `UPDATE post SET ? WHERE postId='${json.postId}' AND userId='${userId}'`, modifPost, (error, results, fields)=>{
@@ -155,6 +163,7 @@ exports.createPost = (req, res, next) => {
         })
        })
     };
+
 
 
 
