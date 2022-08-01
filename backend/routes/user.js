@@ -6,6 +6,7 @@ const userCtrl = require('../controllers/user');
 const password = require("../middleware/password");
 const emailValidation = require("../middleware/emailValidation");
 const auth = require('../middleware/auth');
+const multer = require('../middleware/multer-config');
 
 
 router.post('/signup', password, emailValidation, userCtrl.signup);
@@ -16,5 +17,6 @@ router.delete('/logout', userCtrl.logout);
 router.get('/', auth, userCtrl.getAllUsers);
 router.get('/:id', auth, userCtrl.getOneUser);
 //router.delete('/Delete', userCtrl.deleteUser);
+router.post('/Edit', auth, multer, userCtrl.editUser);
 
 module.exports = router;

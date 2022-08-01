@@ -1,4 +1,5 @@
 require('dotenv').config();
+const sanitize = require("validator");
 const bcrypt = require('bcrypt');
 const jwt = require ('jsonwebtoken');
 
@@ -207,3 +208,51 @@ exports.deleteUser = (req, res, next) => {
     )*/
   };
   
+
+
+  exports.editUser = (req, res, next) => {
+    console.log("requete reçue");
+    let json = JSON.parse(req.body.info);
+    console.log(json)
+  
+  
+    //On récupère le userId qui fait la requête depuis les headers du token 
+    const token = req.headers.authorization;
+  
+    jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN_SECRET,
+      (err, decoded) => {
+          if (err) return res.sendStatus(403); //invalid token
+      
+    let userId = decoded.UserInfo.userId;
+  
+  
+  
+    // S'assure que l'image du post est nulle si aucune url n'a été fournie
+    let profilImg = null;
+    if(req.file?.filename !== undefined){
+      profilImg = `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`;
+    }
+  
+  
+    //création du profil mis à jour avec les nouvelles infos
+    const profil = {
+        firstName: json.firstName,
+        name: json.name,
+        profilImageUrl: profilImg,
+        email: json.email
+    }
+  
+    //on insère le post dans la bdd
+    mysqlconnection.query(
+        `UPDATE user SET firstName='${json.firstName}', name='${json.name}', profilImageUrl='${json.profilImg}', email='${json.email}'  WHERE userId='${userId}'`, (error, user, fields)=>{
+          if (error){
+              console.log(error);
+              res.json({error});
+          } else {
+              res.json({message:"profil updaté"});
+          }
+        })
+      })
+    };

@@ -5,10 +5,9 @@ import { AuthContext } from "../context/AuthContext";
 
 
 function ModifyProfil(props) {
-
+    
     let data = props.data;
     let context = useContext(AuthContext);
-    let setUser = context.setUser;
 
     const initialValues = {firstName: data?.firstName, name: data?.name, email: data?.email, isPrivate: data?.isPrivate};
     const [formValues, setFormValues] = useState(initialValues);
@@ -21,31 +20,38 @@ function ModifyProfil(props) {
     };
 
     
-
-  function handleSubmit(){
+    console.log(formValues)
+    //Lance la requête qui update l'utilisateur
+    function handleSubmit(){
     setFormErrors(validate(formValues));
     setIsSubmit(true);
-    
-    /* On récupère le token CSRF depuis le localStorage */
+    console.log(formValues)
+    // On récupère le token CSRF depuis le localStorage 
     let accessToken = localStorage.getItem('accessToken');
     if (!accessToken) {
     console.log("pas de token");
     }
 
-    /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
+    // Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON 
     accessToken = JSON.parse(accessToken);
-        
 
-    // On rassemble les infos de l'utilisateur qui auraient pu changer   
+    console.log(formValues);
+    // on rassemble les infos de la page pour update l'utilisateur
+    let infoObj = {
+        firstName: formValues.firstName,
+        name: formValues.name,
+        email: formValues.email
+    }
+         
     const formData = new FormData();
-    const info = JSON.stringify( formValues );
-
+    const info = JSON.stringify( infoObj );
     formData.append('info', info);
     formData.append('image', file);
     
+    console.log(info);
     
     const options = {
-    method: 'PUT',
+    method: 'POST',
     mode: 'cors',
     headers: new Headers({
         'Authorization': accessToken?.accessToken
@@ -54,16 +60,12 @@ function ModifyProfil(props) {
     body: formData
     };
     
-
-    fetch("http://localhost:3002/api/UpdateUser", options)
-        .then( res => res.json() )
-        .then( res => {
-            console.log(res);
-      });
+    
+    fetch("http://localhost:3002/api/User/Edit", options)
     }
 
 
-
+    
     //Gère les erreurs éventuels du formulaire de profil
     useEffect(() => {
     console.log(formErrors);
@@ -129,6 +131,7 @@ function ModifyProfil(props) {
             </div>
 
 
+
     return (
         <>
             <section className="section1">
@@ -153,7 +156,7 @@ function ModifyProfil(props) {
                         {preview ? <img className="imageProfil--preview" src={preview} alt="prévisualisation du fichier" ></img> : ""}
                     </div>
 
-                    <form className="section2__formulaire" onSubmit={handleSubmit}>
+                    <form className="section2__formulaire">
                     
                     <label>Prénom :</label>
                     <input type="text" name="firstName" value={formValues.firstName} onChange={handleChange} />
@@ -173,7 +176,7 @@ function ModifyProfil(props) {
                     <label>Rendre le profil privé : </label>
                     <input type="checkbox" value={formValues.isPrivate} onChange={handleChange} />
 
-                    <button className="greenButton">Enregistrer mes modifications</button>
+                    <button className="greenButton" type="submit" onClick={()=>handleSubmit()}>Enregistrer mes modifications</button>
                 
                 </form>
                 </div>

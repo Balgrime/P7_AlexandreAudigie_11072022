@@ -21,8 +21,6 @@ function CreatePost(props) {
     };
 
 
-
-
     // La requête qui créé un nouveau post
     function submit(){
         if(text !== ""){

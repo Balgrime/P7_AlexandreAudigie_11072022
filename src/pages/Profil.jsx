@@ -15,7 +15,7 @@ function Profil() {
             <header>
                 <Navbar />
             </header>
-            {!editClic? <SectionProfil switchToEdit={switchToEdit} setData={setData} data={data} /> : <ModifyProfil switchToEdit={switchToEdit} setData={setData} data={data} />}
+            {!editClic? <SectionProfil switchToEdit={switchToEdit} setData={setData} data={data} /> : <ModifyProfil switchToEdit={switchToEdit} data={data} />}
             <footer>
                 <FooterBar />
             </footer>
