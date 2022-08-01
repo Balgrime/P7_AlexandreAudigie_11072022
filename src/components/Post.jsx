@@ -35,8 +35,7 @@ function Post(props) {
     //La requête pour delete le post
     function handleDelete(){
         let info = {
-            postId: post.postId,
-            userId: post.userId
+            postId: post.postId
         }
 
         const options = {

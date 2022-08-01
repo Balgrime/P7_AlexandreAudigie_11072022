@@ -124,7 +124,7 @@ exports.createPost = (req, res, next) => {
 
 
               // S'il y a un fichier dans la requête et qu'il y avait déjà une image dans la bdd, on supprime cette dernière
-              if(urlToRemove !== undefined){
+              if(urlToRemove !== null){
                 const filenameToRemove = urlToRemove?.split('/images/')[1];
                 fs.unlink(`images/${filenameToRemove}`, (res, err) => {
                 if(err) console.log('error', err);})  
@@ -166,7 +166,6 @@ exports.createPost = (req, res, next) => {
 
 
   exports.deletePost = (req, res, next) => {
-    let postUserId = req.body.userId;
     let postId = req.body.postId
     console.log(postId)
     //On récupère le userId qui fait la requête depuis les headers du token 
@@ -182,6 +181,21 @@ exports.createPost = (req, res, next) => {
     console.log(userId);
   
   
+    // Supprime l'image du post du dossier images (si elle était présente)
+    mysqlconnection.query(
+      `SELECT postImageUrl FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
+        if (error) console.log(error);
+        
+          console.log(results[0]?.postImageUrl);
+          let urlToRemove = results[0]?.postImageUrl;
+
+            // S'il y avait une image associée au post, on supprime cette dernière du dossier images
+            if(urlToRemove !== null){
+              const filenameToRemove = urlToRemove.split('/images/')[1];
+              fs.unlink(`images/${filenameToRemove}`, (res, err) => {
+              if(err) console.log('error', err);})  
+            } 
+        })
       // On supprime le post correspondant au postId, seulement si le userId décodé correspond au userId qui a créé le post
       mysqlconnection.query(
         `DELETE FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
@@ -191,23 +205,6 @@ exports.createPost = (req, res, next) => {
         } else {
             res.json({message:"post supprimé"});
         }
-
-              // Supprime l'image du post du dossier images (si elle était présente)
-              mysqlconnection.query(
-                `SELECT postImageUrl FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
-                  if (error) console.log(error);
-                  
-                    console.log("LAAAAAAAA"+results[0]);
-                    let urlToRemove = results[0];
-        
-                      // S'il y avait une image associée au post, on supprime cette dernière du dossier images
-                      if(urlToRemove !== undefined){
-                        const filenameToRemove = urlToRemove?.split('/images/')[1];
-                        fs.unlink(`images/${filenameToRemove}`, (res, err) => {
-                        if(err) console.log('error', err);})  
-                      } 
-                  })
-
               // Supprime les commentaires associés au post initial
               mysqlconnection.query(
                 `DELETE FROM post WHERE postFollowedId='${postId}'`, (error, results, fields)=>{
