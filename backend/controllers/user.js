@@ -246,7 +246,7 @@ exports.deleteUser = (req, res, next) => {
   
     //on insère le post dans la bdd
     mysqlconnection.query(
-        `UPDATE user SET firstName='${json.firstName}', name='${json.name}', profilImageUrl='${json.profilImg}', email='${json.email}'  WHERE userId='${userId}'`, (error, user, fields)=>{
+        `UPDATE user SET ? WHERE userId='${userId}'`, profil, (error, user, fields)=>{
           if (error){
               console.log(error);
               res.json({error});
