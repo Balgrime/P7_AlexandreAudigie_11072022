@@ -40,7 +40,7 @@ exports.signup = (req, res, next) => {
                 role: 2834
             };
         console.log(user);
-        //la requête SQL
+        // on enregistre l'utilisateur dans la bdd
         mysqlconnection.query(
             'INSERT INTO user SET ?', user, (error, results, fields)=>{
                 if (error){
@@ -54,9 +54,6 @@ exports.signup = (req, res, next) => {
             })
     });
 }
-
-
-
 
 
 
@@ -77,7 +74,6 @@ exports.login = (req, res, next) => {
                     return res.status(401).json({ message: 'Le mot de passe ou l\'identifiant est incorrect !' })
                 } else {
                     const role = user.role;
-                    console.log("c'est"+role);
                     const userId = user.userId;
                     // create JWTs token d'accès
                     const accessToken = jwt.sign(
@@ -106,7 +102,6 @@ exports.login = (req, res, next) => {
                                     console.log(user);
                                 }
                             })
-                            
                     // Creates Secure Cookie with refresh token : je désactive pour le developpement
                     //res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
 
@@ -117,7 +112,6 @@ exports.login = (req, res, next) => {
         }
     });
 };
-
 
 
 exports.logout = (req, res) => {
@@ -133,12 +127,10 @@ exports.logout = (req, res) => {
   // On compare le userId du token à celui de la bdd
   mysqlconnection.query(
     `SELECT userId FROM user WHERE userId = ${userId}`, (error, results, fields)=>{
-      if (res) res.json({message:"logout effectué"});
+      if (results) res.json({message:"logout effectué"});
         })
     })
 }
-
-
 
 
 
@@ -206,10 +198,7 @@ exports.deleteUser = (req, res, next) => {
 
 
   exports.editUser = (req, res, next) => {
-    console.log("requete reçue");
     let json = JSON.parse(req.body.info);
-    console.log(json)
-  
   
     //On récupère le userId qui fait la requête depuis les headers du token 
     const token = req.headers.authorization;
@@ -234,7 +223,6 @@ exports.deleteUser = (req, res, next) => {
     if (req.file){
         mysqlconnection.query(
           `SELECT profilImageUrl FROM user WHERE userId='${userId}'`, (error, results, fields)=>{
-              console.log("LAAAAAAAA"+results[0].profilImageUrl);
               let urlToRemove = results[0].profilImageUrl;
   
               // S'il y a un fichier dans la requête et qu'il y avait déjà une image dans la bdd, on supprime cette dernière
@@ -261,7 +249,7 @@ exports.deleteUser = (req, res, next) => {
             firstName: json.firstName,
             name: json.name,
             email: json.email
-      }
+        }
       }
   
     //on insère le post dans la bdd

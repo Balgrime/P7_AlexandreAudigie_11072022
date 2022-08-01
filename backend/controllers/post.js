@@ -178,7 +178,6 @@ exports.createPost = (req, res, next) => {
           if (err) return res.sendStatus(403); //invalid token
       
     let userId = decoded.UserInfo.userId;
-    console.log(userId);
   
   
     // Supprime l'image du post du dossier images (si elle était présente)
@@ -204,12 +203,13 @@ exports.createPost = (req, res, next) => {
             res.json({error});
         } else {
             res.json({message:"post supprimé"});
+
+          // Supprime les commentaires associés au post initial
+          mysqlconnection.query(
+            `DELETE FROM post WHERE postFollowedId='${postId}'`, (error, results, fields)=>{
+              if (error) console.log(error);
+          })
         }
-              // Supprime les commentaires associés au post initial
-              mysqlconnection.query(
-                `DELETE FROM post WHERE postFollowedId='${postId}'`, (error, results, fields)=>{
-                  if (error) console.log(error);
-              })
           })
         }
       )}
