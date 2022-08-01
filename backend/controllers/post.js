@@ -33,8 +33,6 @@ exports.createPost = (req, res, next) => {
   let userId = decoded.UserInfo.userId;
 
   
-
-
   // On récupère le postId du post suivi si jamais on écrit un commentaire
   let postFollowedId = json?.postFollowedId;
 
@@ -42,7 +40,6 @@ exports.createPost = (req, res, next) => {
   // On récupère la date actuelle et on créé un nouveau postId
   var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
   let date = new Date().toLocaleDateString([], options);
-
   let postId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""));
 
 
@@ -53,8 +50,6 @@ exports.createPost = (req, res, next) => {
     postImg = `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`;
   }
 
-
-
   //création du contenu du post à partir des infos récupérées
   const post = {
     postId: postId,
@@ -64,7 +59,6 @@ exports.createPost = (req, res, next) => {
     postImageUrl: postImg,
     text: text
   }
-
 
   //on insère le post dans la bdd
   mysqlconnection.query(
@@ -88,53 +82,73 @@ exports.createPost = (req, res, next) => {
         `UPDATE post SET comments='${commentsCount}' WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
         console.log(error);
         })
-    })
-
-  /*
-    const sauceObject = JSON.parse(req.body.sauce);
-  
-    sauceObject.name = sanitize.blacklist(sauceObject.name, "<>\"'/");
-    sauceObject.manufacturer = sanitize.blacklist(sauceObject.manufacturer, "<>\"'/");
-    sauceObject.description = sanitize.blacklist(sauceObject.description, "<>\"'/");
-    sauceObject.mainPepper = sanitize.blacklist(sauceObject.mainPepper, "<>\"'/");
-
-    delete sauceObject._id;
-    const sauce = new Sauce({
-      ...sauceObject,
-      imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`,
-      likes: 0,
-      dislikes: 0,
-      usersLiked: [],
-      usersDisliked: []
-    });
-    sauce.save()
-
-
-      .then(() => res.status(201).json({ message: 'Post enregistré !'}))
-      .catch(error => res.status(400).json({ error }));*/
+      })
     })
   };
 
 
 
-
-  /*
-
-exports.getOneSauce = (req, res, next) => {
-  Sauce.findOne({
-    _id: req.params.id
-  }).then(
-    (sauce) => {
-      res.status(200).json(sauce);
+  exports.editPost = (req, res, next) => {
+    let json = JSON.parse(req.body.info);
+    let text = json.text;
+    
+    //On récupère le userId qui fait la requête depuis les headers du token 
+    const token = req.headers.authorization;
+  
+    jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN_SECRET,
+      (err, decoded) => {
+          if (err) return res.sendStatus(403); //invalid token
+      
+    let userId = decoded.UserInfo.userId;
+  
+  
+    // On récupère la date actuelle de modification du post
+    var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
+    let date = new Date().toLocaleDateString([], options);
+  
+  
+    // S'assure que l'image du post est nulle si aucune url n'a été fournie
+    let postImg = null;
+    if(req.file?.filename !== undefined){
+      postImg = `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`;
     }
-  ).catch(
-    (error) => {
-      res.status(404).json({
-        error: error
-      });
+  
+    // Création du contenu du post à partir des infos récupérées
+    const modifPost = {
+      postId: json.postId,
+      modifDate: date,
+      postImageUrl: postImg,
+      text: text
     }
-  );
-};
+  
+    // On update les informations du post
+    mysqlconnection.query(
+      `UPDATE post SET ? WHERE postId='${json.postId}' AND userId='${userId}'`, modifPost, (error, results, fields)=>{
+          if (error){
+              console.log(error);
+              res.json({error});
+          } else {
+              res.json({message:"post modifié"});
+          }
+        })
+       })
+    };
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 
 
   exports.modifySauce = (req, res, next) => {

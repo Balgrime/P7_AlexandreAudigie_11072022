@@ -125,7 +125,7 @@ function ModifyProfil(props) {
 
     const img = data?.profilImageUrl ? 
     <div>
-        <img className="imageProfil" src={data.profilImageUrl} alt="profil" />
+        <img className="imageProfil imageProfil--big" src={data.profilImageUrl} alt="profil" />
     </div> : <div>
                 <FontAwesomeIcon className="profilIcon" icon={ faCircleUser }></FontAwesomeIcon>
             </div>

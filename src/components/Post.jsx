@@ -32,19 +32,8 @@ function Post(props) {
 
 
 
-    const submitPut = () => {
-        
-
-    }
-
-
-
-
-
-    const [clic, editClic] = useState(false);
-
-    const handleDelete = () => {
-        
+    //La requête pour delete le post
+    function handleDelete(){
         let info = {
             postId: post.postId,
             post: post.userId
@@ -69,9 +58,68 @@ function Post(props) {
         }).then(()=> postChangeEdit(count => count+1));
     }
 
-    if (clic){
-        handleDelete();
+
+
+    // La requête pour update un post
+    function submitPut(){
+        if(text !== ""){
+            /* On récupère le token CSRF depuis le localStorage */
+        let accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+        console.log("pas de token");
+        }
+        /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
+        accessToken = JSON.parse(accessToken);
+        let postFollowedId = props.post?.postId;
+
+        // on rassemble les infos du post à modifier
+        let infoObj = {
+            postId: post.postId,
+            text: text,
+            postFollowedId: postFollowedId
+        }
+
+        const formData = new FormData();
+        const info = JSON.stringify( infoObj );
+        formData.append('info', info);
+
+        if (!postFollowedId){
+            formData.append('image', file);
+        }
+        
+
+        const options = {
+        method: 'PUT',
+        mode: 'cors',
+        headers: new Headers({'Authorization': accessToken?.accessToken}),
+        credentials: 'include',
+        body: formData
+        };
+        
+
+        let editPostChange = context.editPostChange;
+
+        fetch("http://localhost:3002/api/Post/Edit", options)
+            .then( res => res.json() )
+            .then( res => {console.log(res)})
+            .then(()=>editPostChange(count => count+1));
+        } else {
+            editErrMsg("Veuillez écrire du texte ci-dessus!");
+        }
     }
+
+    const [errMsg, editErrMsg] = useState("");
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -176,6 +224,7 @@ function Post(props) {
                     <div className="article__corps__texte">
                         <p>{!editMode ? post.text : modifText}</p>
                     </div>
+                    <p className="red">{errMsg}</p>
                     <div className='likeContainer'>
                         <Like post={post} />
 

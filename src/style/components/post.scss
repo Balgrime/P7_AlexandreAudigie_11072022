@@ -22,6 +22,8 @@
         }
     }
     &__corps{
+        display: flex;
+        flex-flow: column nowrap;
         &--comment{
             border-bottom-left-radius: 25px;
             border-bottom-right-radius: 25px;
@@ -34,7 +36,13 @@
         }
         &__texte{
             background-color: $clearest;
-            padding: 0rem 0.5rem 0.5rem 0.5rem;
+            padding: 0rem 4rem 0.5rem 4rem;
+            @include tablet-version{
+                padding: 0rem 2rem 0.5rem 2rem;
+            }
+            @include phone-version{
+                padding: 0rem 1.5rem 0.5rem 1.5rem;
+            }
             margin: 0rem 0.3rem 0rem 0.3rem;
             border-bottom-left-radius: 25px;
             border-bottom-right-radius: 25px;

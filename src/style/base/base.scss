@@ -81,6 +81,10 @@ h1, h2, h3, p, a, label{
     &--icon{
         color: $secondary;
     }
+    &--big{
+        height: 5.5rem;
+        width: 5.5rem;
+    }
 }
 
 
