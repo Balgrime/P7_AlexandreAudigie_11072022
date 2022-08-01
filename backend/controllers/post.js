@@ -113,7 +113,25 @@ exports.createPost = (req, res, next) => {
     let postImg = null;
     if(req.file?.filename !== undefined){
       postImg = `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`;
-    }
+
+
+
+      // On supprime l'ancienne image du dossier image si une nouvelle est choisie
+    if (req.file){
+      mysqlconnection.query(
+        `SELECT postImageUrl FROM post WHERE postId='${json.postId}' AND userId='${userId}'`, (error, results, fields)=>{
+            console.log("LAAAAAAAA"+results[0].postImageUrl);
+            let urlToRemove = results[0].postImageUrl;
+
+            const filenameToRemove = urlToRemove.split('/images/')[1];
+            fs.unlink(`images/${filenameToRemove}`, (res, err) => {
+              if(err) console.log('error', err);})
+          })
+        }
+      }
+
+
+
     console.log("icii"+postImg)
     // Création du contenu du post à partir des infos récupérées
     const modifPost = {
