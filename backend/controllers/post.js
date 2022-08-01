@@ -123,9 +123,11 @@ exports.createPost = (req, res, next) => {
             console.log("LAAAAAAAA"+results[0].postImageUrl);
             let urlToRemove = results[0].postImageUrl;
 
-            const filenameToRemove = urlToRemove.split('/images/')[1];
-            fs.unlink(`images/${filenameToRemove}`, (res, err) => {
+            if (urlToRemove !== undefined){
+              const filenameToRemove = urlToRemove.split('/images/')[1];
+              fs.unlink(`images/${filenameToRemove}`, (res, err) => {
               if(err) console.log('error', err);})
+            }
           })
         }
       }

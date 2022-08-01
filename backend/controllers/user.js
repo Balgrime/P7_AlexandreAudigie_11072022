@@ -1,4 +1,5 @@
 require('dotenv').config();
+const fs = require('fs');
 const sanitize = require("validator");
 const bcrypt = require('bcrypt');
 const jwt = require ('jsonwebtoken');
@@ -229,12 +230,27 @@ exports.deleteUser = (req, res, next) => {
   
   
   
-    // S'assure que l'image du post est nulle si aucune url n'a été fournie
+    // S'assure que l'image du profil est nulle si aucune url n'a été fournie
     let profilImg = null;
     if(req.file?.filename !== undefined){
       profilImg = `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`;
     }
+
+    // Supprime l'ancienne image du dossier si une nouvelle image de profil est choisie
+    if (req.file){
+        mysqlconnection.query(
+          `SELECT profilImageUrl FROM user WHERE userId='${userId}'`, (error, results, fields)=>{
+              console.log("LAAAAAAAA"+results[0].profilImageUrl);
+              let urlToRemove = results[0].profilImageUrl;
   
+              if (urlToRemove !== undefined){
+                const filenameToRemove = urlToRemove.split('/images/')[1];
+                fs.unlink(`images/${filenameToRemove}`, (res, err) => {
+                if(err) console.log('error', err);})
+              }
+            })
+          }
+        
   
     //création du profil mis à jour avec les nouvelles infos
     const profil = {
