@@ -17,7 +17,7 @@ function Post(props) {
     let role = context.userContext.role;
     let userId = context.userContext.userId;
     let post= props.post;
-    let postChangeEdit = context.postChangeEdit;
+    let editPostChange = context.editPostChange;
 
 
 
@@ -36,7 +36,7 @@ function Post(props) {
     function handleDelete(){
         let info = {
             postId: post.postId,
-            post: post.userId
+            userId: post.userId
         }
 
         const options = {
@@ -51,12 +51,9 @@ function Post(props) {
         };
     
         fetch("http://localhost:3002/api/Post/Delete", options)
-            .then( res => res.json() )
-            .then( res => {
-                console.log(res);
-                localStorage.removeItem("accessToken");
-        }).then(()=> postChangeEdit(count => count+1));
+        .then(()=> editPostChange(count => count+1));
     }
+    
 
 
 

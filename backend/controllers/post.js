@@ -133,7 +133,6 @@ exports.createPost = (req, res, next) => {
         }
       }
 
-
     // Création du contenu du post à partir des infos récupérées
     let modifPost = {}
     if (req.file){
@@ -150,7 +149,6 @@ exports.createPost = (req, res, next) => {
           text: text
       }
     }
-    
     // On update les informations du post
     mysqlconnection.query(
       `UPDATE post SET ? WHERE postId='${json.postId}' AND userId='${userId}'`, modifPost, (error, results, fields)=>{
@@ -167,92 +165,57 @@ exports.createPost = (req, res, next) => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-  exports.modifySauce = (req, res, next) => {
-    Sauce.findOne({ _id: req.params.id }).then(
-      (sauce) => {
-        if (!sauce) {
-          res.status(404).json({
-            error: new Error('No such Thing!')
-          });
-        }
-        if (sauce.userId !== req.auth.userId) {
-          res.status(403).json({
-            error: new Error('Unauthorized user!')
-          });
-        } else {
-          req.body.name = sanitize.blacklist(req.body.name, "<>\"'/");
-          req.body.manufacturer = sanitize.blacklist(req.body.manufacturer, "<>\"'/");
-          req.body.description = sanitize.blacklist(req.body.description, "<>\"'/");
-          req.body.mainPepper = sanitize.blacklist(req.body.mainPepper, "<>\"'/");
-
-          const sauceObject = req.file ?
-        {
-          ...JSON.parse(req.body.sauce),
-          imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
-        } : { ...req.body };
-          if (req.file){
-            const filename = sauce.imageUrl.split('/images/')[1];
-              fs.unlink(`images/${filename}`, () => {
-                Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-              .then(() => res.status(200).json({ message: 'Sauce modifié !'}))
-              .catch(error => res.status(400).json({ error }));
-            });
-          } else {
-            Sauce.updateOne({ _id: req.params.id }, { ...sauceObject, _id: req.params.id })
-          .then(() => res.status(200).json({ message: 'Sauce modifié !'}))
-          .catch(error => res.status(400).json({ error }));
-          }
-        }
-      }
-    )
-  };
-
-*/
   exports.deletePost = (req, res, next) => {
-
-    res.json({message:"post supprimé"});
-    /*
-    Sauce.findOne({ _id: req.params.id }).then(
-      (sauce) => {
-        if (!sauce) {
-          res.status(404).json({
-            error: new Error('No such Thing!')
-          });
-        }
-        if (sauce.userId !== req.auth.userId) {
-          res.status(403).json({
-            error: new Error('Unauthorized user!')
-          });
+    let postUserId = req.body.userId;
+    let postId = req.body.postId
+    console.log(postId)
+    //On récupère le userId qui fait la requête depuis les headers du token 
+    const token = req.headers.authorization;
+  
+    jwt.verify(
+      token,
+      process.env.ACCESS_TOKEN_SECRET,
+      (err, decoded) => {
+          if (err) return res.sendStatus(403); //invalid token
+      
+    let userId = decoded.UserInfo.userId;
+    console.log(userId);
+  
+  
+      // On supprime le post correspondant au postId, seulement si le userId décodé correspond au userId qui a créé le post
+      mysqlconnection.query(
+        `DELETE FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
+          if (error){
+            console.log(error);
+            res.json({error});
         } else {
-          Sauce.findOne({ _id: req.params.id })
-            .then(sauce => {
-              const filename = sauce.imageUrl.split('/images/')[1];
-              fs.unlink(`images/${filename}`, () => {
-                Sauce.deleteOne({ _id: req.params.id })
-                  .then(() => res.status(200).json({ message: 'Sauce supprimée !'}))
-                  .catch(error => res.status(400).json({ error }));
-              });
-            })
-            .catch(error => res.status(500).json({ error }));
+            res.json({message:"post supprimé"});
         }
-      }
-    )*/
-  };
 
+              // Supprime l'image du post du dossier images (si elle était présente)
+              mysqlconnection.query(
+                `SELECT postImageUrl FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
+                  if (error) console.log(error);
+                  
+                    console.log("LAAAAAAAA"+results[0]);
+                    let urlToRemove = results[0];
+        
+                      // S'il y avait une image associée au post, on supprime cette dernière du dossier images
+                      if(urlToRemove !== undefined){
+                        const filenameToRemove = urlToRemove?.split('/images/')[1];
+                        fs.unlink(`images/${filenameToRemove}`, (res, err) => {
+                        if(err) console.log('error', err);})  
+                      } 
+                  })
 
+              // Supprime les commentaires associés au post initial
+              mysqlconnection.query(
+                `DELETE FROM post WHERE postFollowedId='${postId}'`, (error, results, fields)=>{
+                  if (error) console.log(error);
+              })
+          })
+        }
+      )}
 
 
 
