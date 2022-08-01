@@ -78,16 +78,12 @@ function Post(props) {
             text: text,
             postFollowedId: postFollowedId
         }
-
         const formData = new FormData();
         const info = JSON.stringify( infoObj );
         formData.append('info', info);
-
-        if (!postFollowedId){
-            formData.append('image', file);
-        }
+        formData.append('image', file);
         
-
+        
         const options = {
         method: 'PUT',
         mode: 'cors',
@@ -102,7 +98,9 @@ function Post(props) {
         fetch("http://localhost:3002/api/Post/Edit", options)
             .then( res => res.json() )
             .then( res => {console.log(res)})
-            .then(()=>editPostChange(count => count+1));
+            .then(()=>editPostChange(count => count+1))
+            .then(()=> switchToEditMode(false))
+            .then(()=>editErrMsg(""))
         } else {
             editErrMsg("Veuillez écrire du texte ci-dessus!");
         }

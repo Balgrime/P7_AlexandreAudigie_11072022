@@ -32,6 +32,8 @@
             &>p{
                 margin-top: 0rem;
                 text-align: center;
+                color: $secondary;
+                font-weight: 600;
             }
         }
         &__texte{
@@ -47,6 +49,8 @@
             border-bottom-left-radius: 25px;
             border-bottom-right-radius: 25px;
             &>p{
+                color: $secondary;
+                font-weight: 600;
                 margin-top: 0rem;
                 padding-top: 0.4rem;
             }

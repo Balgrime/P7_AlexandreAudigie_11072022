@@ -114,7 +114,7 @@ exports.createPost = (req, res, next) => {
     if(req.file?.filename !== undefined){
       postImg = `${req.protocol}://${req.get('host')}/images/${req.file?.filename}`;
     }
-  
+    console.log("icii"+postImg)
     // Création du contenu du post à partir des infos récupérées
     const modifPost = {
       postId: json.postId,
