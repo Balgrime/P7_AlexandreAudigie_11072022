@@ -121,27 +121,21 @@ exports.login = (req, res, next) => {
 
 
 exports.logout = (req, res) => {
-    // On client, also delete the accessToken
-    res.json({message: "requête reçue!"});
-    /*const cookies = req.cookies;
-    console.log(cookies?.jwt)
-    if (!cookies?.jwt) return res.sendStatus(204); //No content
-    const refreshToken = cookies.jwt;
+    //On récupère le userId qui fait la requête depuis les headers du token 
+  const token = req.headers.authorization;
+  jwt.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET,
+    (err, decoded) => {
+        if (err) return res.sendStatus(403); //invalid token
+  let userId = decoded.UserInfo.userId;
 
-    // Is refreshToken in db?
-    const foundUser = await User.findOne({ refreshToken }).exec();
-    if (!foundUser) {
-        res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
-        return res.sendStatus(204);
-    }
-
-    // Delete refreshToken in db
-    foundUser.refreshToken = '';
-    const result = await foundUser.save();
-    console.log(result);
-
-    res.clearCookie('jwt', { httpOnly: true, sameSite: 'None', secure: true });
-    res.sendStatus(204);*/
+  // On compare le userId du token à celui de la bdd
+  mysqlconnection.query(
+    `SELECT userId FROM user WHERE userId = ${userId}`, (error, results, fields)=>{
+      if (res) res.json({message:"logout effectué"});
+        })
+    })
 }
 
 
