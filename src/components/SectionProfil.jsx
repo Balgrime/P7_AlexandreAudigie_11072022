@@ -54,12 +54,12 @@ function SectionProfil(props) {
     let userId = context.userContext.userId;
 
 
+    
     const handleDelete = () => {
         
         let info = {
             userId: data.userId
         }
-
         const options = {
         method: 'DELETE',
         mode: 'cors',
@@ -73,10 +73,11 @@ function SectionProfil(props) {
         fetch("http://localhost:3002/api/User/Delete", options)
         .then( res => res.json() )
             .then( res => {
-                if(role !== "8759")
                 console.log(res);
-                localStorage?.removeItem("accessToken");
-                setUser("");
+                if(role !== "8759"){
+                    localStorage?.removeItem("accessToken");
+                    setUser("");
+                }
         });
     }
 
