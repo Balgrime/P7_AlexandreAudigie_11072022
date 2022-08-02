@@ -312,17 +312,19 @@ exports.changeLiking = (req, res, next) => {
 
   // Retrouve l'index like/utilisateur correspondant à l'utilisateur pouvant liker ce post
   mysqlconnection.query(
-    `SELECT * FROM indexlikes WHERE postIdLiked = ${postId} AND userIdThatLiked = ${userId}`, (error, results, fields)=>{
+    `SELECT * FROM indexlikes WHERE postIdLiked = '${postId}' AND userIdThatLiked = '${userId}'`, (error, results, fields)=>{
       console.log(results[0]?.hasLiked);
       let hasLiked = results[0]?.hasLiked;
 
-      // Vérifie qu'il n'ait pas déjà liké
+
+      if (liking ===1){
+        // Vérifie qu'il n'ait pas déjà liké
       if (hasLiked !== 1){
 
         const like = {
           postIdLiked: postId,
           userIdThatLiked: userId,
-          hasLiked: true
+          hasLiked: 1
         }
         // Ajoute le like à l'index des likes d'utilisateurs 
         mysqlconnection.query(
@@ -341,6 +343,35 @@ exports.changeLiking = (req, res, next) => {
             `UPDATE post SET likes ='${likes+1}' WHERE postId='${postId}'`, (error, results, fields)=>{
             console.log(error);
             })
+        }
+      } else if (liking ===0){
+      // Vérifie qu'il ait déjà liké avant de retirer son like
+      if (hasLiked === 1){
+
+        /*const like = {
+          postIdLiked: postId,
+          userIdThatLiked: userId,
+          hasLiked: 0
+        }*/
+
+        // Ajoute le like à l'index des likes d'utilisateurs 
+        mysqlconnection.query(
+          `DELETE FROM indexlikes WHERE postIdLiked = '${postId}' AND userIdThatLiked = '${userId}'`, (error, results, fields)=>{
+              if (error){
+                  console.log(error);
+                  res.json({error});
+              } else {
+                  console.log("--> results");
+                  console.log(results);
+                  res.json({message:"like retiré"});
+              }
+          })
+          // Ajoute un like au compteur de likes du post
+          mysqlconnection.query(
+            `UPDATE post SET likes ='${likes-1}' WHERE postId='${postId}'`, (error, results, fields)=>{
+            console.log(error);
+          })
+        }
       }
     })
 /*

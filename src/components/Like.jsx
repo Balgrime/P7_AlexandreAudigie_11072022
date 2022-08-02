@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from "../context/AuthContext";
 
 
@@ -37,7 +37,7 @@ function Like(props) {
         let editPostChange = context.editPostChange;
 
         fetch("http://localhost:3002/api/Post/Like", options)
-            .then(()=>editPostChange(count => count+1));
+        .then(()=>editPostChange(count => count+1));
     }
 
 
