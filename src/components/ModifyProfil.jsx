@@ -1,15 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faUserGear, faCaretDown } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../context/AuthContext";
+import { faCircleUser, faUserGear, faCaretDown, faCheck, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { useEffect, useState } from "react";
 
 
 function ModifyProfil(props) {
     
     let data = props.data;
-    let context = useContext(AuthContext);
 
-    const initialValues = {firstName: data?.firstName, name: data?.name, email: data?.email, isPrivate: data?.isPrivate};
+    const initialValues = {firstName: data?.firstName, name: data?.name};
     const [formValues, setFormValues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
@@ -20,48 +18,49 @@ function ModifyProfil(props) {
     };
 
     
-    console.log(formValues)
     //Lance la requête qui update l'utilisateur
-    function handleSubmit(){
-    setFormErrors(validate(formValues));
-    setIsSubmit(true);
-    console.log(formValues)
-    // On récupère le token CSRF depuis le localStorage 
-    let accessToken = localStorage.getItem('accessToken');
-    if (!accessToken) {
-    console.log("pas de token");
-    }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setFormErrors(validate(formValues));
+        setIsSubmit(true);
+        // On récupère le token CSRF depuis le localStorage 
+        let accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+        console.log("pas de token");
+        }
 
-    // Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON 
-    accessToken = JSON.parse(accessToken);
-
-    console.log(formValues);
-    // on rassemble les infos de la page pour update l'utilisateur
-    let infoObj = {
-        firstName: formValues.firstName,
-        name: formValues.name,
-        email: formValues.email
-    }
-         
-    const formData = new FormData();
-    const info = JSON.stringify( infoObj );
-    formData.append('info', info);
-    formData.append('image', file);
-    
-    console.log(info);
-    
-    const options = {
-    method: 'POST',
-    mode: 'cors',
-    headers: new Headers({
-        'Authorization': accessToken?.accessToken
-    }),
-    credentials: 'include',
-    body: formData
-    };
-    
-    
-    fetch("http://localhost:3002/api/User/Edit", options)
+        // Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON 
+        accessToken = JSON.parse(accessToken);
+        console.log(isPrivate)
+        console.log(formValues);
+        // on rassemble les infos de la page pour update l'utilisateur
+        let infoObj = {
+            firstName: formValues.firstName,
+            name: formValues.name,
+            isPrivate: isPrivate
+        }
+            
+        const formData = new FormData();
+        const info = JSON.stringify( infoObj );
+        formData.append('info', info);
+        formData.append('image', file);
+        
+        console.log(info);
+        
+        const options = {
+        method: 'PUT',
+        mode: 'cors',
+        headers: new Headers({
+            'Authorization': accessToken?.accessToken
+        }),
+        credentials: 'include',
+        body: formData
+        };
+        
+        
+        fetch("http://localhost:3002/api/User/Edit", options)
+        .then( res => res.json() )
+        .then( res => console.log(res))
     }
 
 
@@ -75,18 +74,12 @@ function ModifyProfil(props) {
     
     const validate = (values) => {
     const errors = {};
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/i;
     if (!values.name) {
       errors.name = "Veuillez renseigner votre nom";
     }
     if (!values.firstName) {
         errors.firstName = "Veuillez renseigner votre prénom";
       }
-    if (!values.email) {
-      errors.email = "veuillez renseigner votre adresse email";
-    } else if (!regex.test(values.email)) {
-      errors.email = "Il ne s'agit pas d'une adresse email valide";
-    }
     return errors;
   };
 
@@ -133,6 +126,20 @@ function ModifyProfil(props) {
 
 
 
+    // Les boutons qui gèrent le mode privé
+    const [isPrivate, changePrivacy] = useState(data?.isPrivate)
+    console.log(isPrivate);
+    const unCheckedPrivacy = <div onClick={()=>changePrivacy(1)}>
+                                <FontAwesomeIcon className="section1__Icon greyCheck" icon={ faCircleCheck }></FontAwesomeIcon>
+                            </div>
+
+    const checkedPrivacy = <div onClick={()=>changePrivacy(0)}>
+                                <FontAwesomeIcon className="section1__Icon greenCheck" icon={ faCircleCheck }></FontAwesomeIcon>
+                            </div>
+
+
+
+
     return (
         <>
             <section className="section1">
@@ -157,7 +164,7 @@ function ModifyProfil(props) {
                         {preview ? <img className="imageProfil--preview" src={preview} alt="prévisualisation du fichier" ></img> : ""}
                     </div>
 
-                    <form className="section2__formulaire">
+                <form className="section2__formulaire" onSubmit={handleSubmit}>
                     
                     <label>Prénom :</label>
                     <input type="text" name="firstName" value={formValues.firstName} onChange={handleChange} />
@@ -168,16 +175,11 @@ function ModifyProfil(props) {
                     <input type="text" name="name" value={formValues.name} onChange={handleChange} />
                 
                     <p className="red">{formErrors.name}</p>
-                
-                    <label>Email :</label>
-                    <input type="text" name="email" value={formValues.email} onChange={handleChange} />
-                
-                    <p className="red">{formErrors.email}</p>
 
                     <label>Rendre le profil privé : </label>
-                    <input type="checkbox" value={formValues.isPrivate} onChange={handleChange} />
+                    {isPrivate ? checkedPrivacy : unCheckedPrivacy}
 
-                    <button className="greenButton" type="submit" onClick={()=>handleSubmit()}>Enregistrer mes modifications</button>
+                    <button className="greenButton">Enregistrer mes modifications</button>
                 
                 </form>
                 </div>

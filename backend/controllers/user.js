@@ -196,7 +196,6 @@ exports.deleteUser = (req, res, next) => {
   };
   
 
-
   exports.editUser = (req, res, next) => {
     let json = JSON.parse(req.body.info);
   
@@ -234,21 +233,21 @@ exports.deleteUser = (req, res, next) => {
             })
           }
         
-  
     //création du profil mis à jour avec les nouvelles infos selon la présence de l'image
     let profil = {};
     if (req.file){
         profil = {
         firstName: json.firstName,
         name: json.name,
-        profilImageUrl: profilImg,
-        email: json.email
+        isPrivate: json.isPrivate,
+        profilImageUrl: profilImg
         }
       } else {
         profil = {
             firstName: json.firstName,
             name: json.name,
-            email: json.email
+            email: json.email,
+            isPrivate: json.isPrivate
         }
       }
   

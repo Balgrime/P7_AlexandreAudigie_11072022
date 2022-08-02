@@ -39,18 +39,15 @@ function SectionInscription() {
         
         fetch("http://localhost:3002/api/User/login", requestOptions)
             .then( res => res.json() )
-            .then( res => {
-                console.log(res);
+            .then( res => { console.log(res);
                 localStorage.setItem('accessToken', JSON.stringify(res));
               
-              const token = localStorage.getItem('accessToken');
-              if (token){
-                  let userAuth = JSON.parse(token);
-                  let role = userAuth.role;
-                  let userId = userAuth.userId;
-                  setUser(userAuth);
-              }
-            console.log(err.json().then(err => editPasswordErrors(err.message)))
+                const token = localStorage.getItem('accessToken');
+                if (token){
+                    let userAuth = JSON.parse(token);
+                    setUser(userAuth);
+                }
+              console.log(err.json().then(err => editPasswordErrors(err.message)))
           });
       })
   }
