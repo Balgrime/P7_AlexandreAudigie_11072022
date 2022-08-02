@@ -180,7 +180,7 @@ exports.createPost = (req, res, next) => {
 
     // Supprime l'image du post du dossier images (si elle était présente)
     mysqlconnection.query(
-      `SELECT postImageUrl FROM post WHERE postId='${postId}' OR userId='${userId}' OR userId='${adminId}'`, (error, results, fields)=>{
+      `SELECT postImageUrl FROM post WHERE postId='${postId}' AND userId='${userId}' OR userId='${adminId}'`, (error, results, fields)=>{
         if (error){
           console.log(error);
         } else if (results) {
@@ -196,11 +196,11 @@ exports.createPost = (req, res, next) => {
       })
       // On supprime le post correspondant au postId, seulement si le userId décodé correspond au userId qui a créé le post
       mysqlconnection.query(
-        `DELETE FROM post WHERE postId='${postId}' OR userId='${userId}' OR userId='${adminId}'`, (error, results, fields)=>{
+        `DELETE FROM post WHERE postId='${postId}' AND userId='${userId}' OR userId='${adminId}'`, (error, results, fields)=>{
           if (error){
             console.log(error);
             res.json({error});
-        } else {
+        } else if (results) {
           // Si le post deleted était un commentaire, on lance des requêtes pour mettre à jour le nombre de commentaires du post référent dans la bdd
           mysqlconnection.query(
             `SELECT * FROM post WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
