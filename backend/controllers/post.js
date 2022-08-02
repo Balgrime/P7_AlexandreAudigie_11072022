@@ -258,7 +258,7 @@ exports.createPost = (req, res, next) => {
               commentsCount -= 1;
 
           mysqlconnection.query(
-            `UPDATE post SET comments='${commentsCount}' WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
+            `UPDATE post SET comments='${commentsCount}' WHERE postId='${postFollowedId}' AND userId='${userId}'`, (error, results, fields)=>{
             console.log(error);
             })
           })
