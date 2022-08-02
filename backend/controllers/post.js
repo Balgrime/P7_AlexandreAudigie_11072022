@@ -43,7 +43,6 @@ exports.createPost = (req, res, next) => {
   let postId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""));
 
 
-
   // S'assure que l'image du post est nulle si aucune url n'a été fournie
   let postImg = null;
   if(req.file?.filename !== undefined){
@@ -163,11 +162,9 @@ exports.createPost = (req, res, next) => {
     };
 
 
-
-
   exports.deletePost = (req, res, next) => {
-    let postId = req.body.postId
-    console.log(postId)
+    let postId = req.body.postId;
+    let postFollowedId = req.body.postFollowedId;
     //On récupère le userId qui fait la requête depuis les headers du token 
     const token = req.headers.authorization;
   
@@ -179,22 +176,23 @@ exports.createPost = (req, res, next) => {
       
     let userId = decoded.UserInfo.userId;
   
-  
+
     // Supprime l'image du post du dossier images (si elle était présente)
     mysqlconnection.query(
       `SELECT postImageUrl FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
-        if (error) console.log(error);
-        
+        if (error){
+          console.log(error);
+        } else if (results) {
           console.log(results[0]?.postImageUrl);
           let urlToRemove = results[0]?.postImageUrl;
 
-            // S'il y avait une image associée au post, on supprime cette dernière du dossier images
-            if(urlToRemove !== null){
-              const filenameToRemove = urlToRemove.split('/images/')[1];
-              fs.unlink(`images/${filenameToRemove}`, (res, err) => {
-              if(err) console.log('error', err);})  
-            } 
-        })
+          if(urlToRemove !== null){
+            const filenameToRemove = urlToRemove?.split('/images/')[1];
+            fs.unlink(`images/${filenameToRemove}`, (res, err) => {
+            if(err) console.log('error', err);})  
+          } 
+        }
+      })
       // On supprime le post correspondant au postId, seulement si le userId décodé correspond au userId qui a créé le post
       mysqlconnection.query(
         `DELETE FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
@@ -202,6 +200,22 @@ exports.createPost = (req, res, next) => {
             console.log(error);
             res.json({error});
         } else {
+          // Si le post deleted était un commentaire, on lance des requêtes pour mettre à jour le nombre de commentaires du post référent dans la bdd
+          mysqlconnection.query(
+            `SELECT * FROM post WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
+              let commentsCount = results[0]?.comments;
+              commentsCount -= 1;
+
+          mysqlconnection.query(
+            `UPDATE post SET comments='${commentsCount}' WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
+            console.log(error);
+            })
+          })
+
+
+
+
+
             res.json({message:"post supprimé"});
 
           // Supprime les commentaires associés au post initial

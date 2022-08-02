@@ -34,6 +34,16 @@ function Post(props) {
 
     //La requête pour delete le post
     function handleDelete(){
+
+         /* On récupère le token CSRF depuis le localStorage */
+         let accessToken = localStorage.getItem('accessToken');
+         if (!accessToken) {
+         console.log("pas de token");
+         }
+         /* Le localStorage stocke les données sous forme de chaines de caractères nous transformons donc la donnée en JSON */
+         accessToken = JSON.parse(accessToken);
+
+
         let info = {
             postId: post.postId
         }
@@ -105,19 +115,6 @@ function Post(props) {
     const [errMsg, editErrMsg] = useState("");
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     //Les boutons pour éditer et supprimer
     let editBtn = "";
     let supprBtn = "";
@@ -152,11 +149,10 @@ function Post(props) {
     let postChange = context.postChange;
 
     useEffect(()=> {
-        console.log(postChange);
         fetch("http://localhost:3002/api/Post", options).then(res => res.json()).then((json)=>{setData(json);
     })}, [postChange]);
 
-    useEffect(()=> {editVisibility("")}, []);
+    useEffect(()=> {editVisibility("")}, [postChange]);
 
 
     let visible = data?.filter(comment => comment.postFollowedId === post.postId).sort((a, b)=> a.Count - b.Count).map(comment => <Comment key={comment.postId} comment={comment} data={data} />)
@@ -164,8 +160,6 @@ function Post(props) {
 
     const [isVisible, editVisibility] = useState(visible);
     const [clicPost, editClicPost] = useState("");
-
-
 
 
 
