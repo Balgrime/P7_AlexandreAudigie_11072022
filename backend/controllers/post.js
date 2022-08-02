@@ -17,7 +17,7 @@ const mysqlconnection = mysql.createConnection({
 exports.createPost = (req, res, next) => {
   let json = JSON.parse(req.body.info);
   let textBefore = json?.text;
-  let text = sanitize.blacklist(textBefore, "<>\"/");
+  let text = sanitize.blacklist(textBefore, "<>/");
 
 
   //On récupère le userId qui fait la requête depuis les headers du token 
@@ -88,7 +88,8 @@ exports.createPost = (req, res, next) => {
 
   exports.editPost = (req, res, next) => {
     let json = JSON.parse(req.body.info);
-    let text = json.text;
+    let textBefore = json?.text;
+    let text = sanitize.blacklist(textBefore, "<>/");
     
     //On récupère le userId qui fait la requête depuis les headers du token 
     const token = req.headers.authorization;
@@ -132,7 +133,7 @@ exports.createPost = (req, res, next) => {
       }
 
     // Création du contenu du post à partir des infos récupérées
-    let modifPost = {}
+    let modifPost = {};
     if (req.file){
       modifPost = {
         postId: json.postId,
