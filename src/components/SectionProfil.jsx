@@ -92,7 +92,8 @@ function SectionProfil(props) {
     let btnModif = "";
     let idNb = parseInt(id);
     if(!idNb || idNb === userId){
-    btnModif = <>
+        if (id !== "12199815"){
+            btnModif = <>
         <button className="greenButton" type="button" onClick={() => props.switchToEdit(true)}>
             <span>Modifier mon profil</span>
         </button>
@@ -100,10 +101,11 @@ function SectionProfil(props) {
             <span>Supprimer mon profil</span>
         </button>
         </>
+        }
     };
     let role = context.userContext.role;
     let adminBtn = "";
-    if(role === "8759") adminBtn = <button className="greenButton greenButton--red" onClick={()=>editClic(true)}><span>Supprimer le profil</span></button>
+    if(role === "8759" && id !== "12199815") adminBtn = <button className="greenButton greenButton--red" onClick={()=>editClic(true)}><span>Supprimer le profil</span></button>
 
 
     return (

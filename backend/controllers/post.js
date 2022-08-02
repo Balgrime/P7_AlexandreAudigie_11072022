@@ -175,11 +175,12 @@ exports.createPost = (req, res, next) => {
           if (err) return res.sendStatus(403); //invalid token
       
     let userId = decoded.UserInfo.userId;
+    let adminId = 12199815;
   
 
     // Supprime l'image du post du dossier images (si elle était présente)
     mysqlconnection.query(
-      `SELECT postImageUrl FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
+      `SELECT postImageUrl FROM post WHERE postId='${postId}' OR userId='${userId}' OR userId='${adminId}'`, (error, results, fields)=>{
         if (error){
           console.log(error);
         } else if (results) {
@@ -195,7 +196,7 @@ exports.createPost = (req, res, next) => {
       })
       // On supprime le post correspondant au postId, seulement si le userId décodé correspond au userId qui a créé le post
       mysqlconnection.query(
-        `DELETE FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
+        `DELETE FROM post WHERE postId='${postId}' OR userId='${userId}' OR userId='${adminId}'`, (error, results, fields)=>{
           if (error){
             console.log(error);
             res.json({error});
@@ -211,10 +212,6 @@ exports.createPost = (req, res, next) => {
             console.log(error);
             })
           })
-
-
-
-
 
             res.json({message:"post supprimé"});
 
