@@ -235,7 +235,7 @@ exports.deleteUser = (req, res, next) => {
           }
         
   
-    //création du profil mis à jour avec les nouvelles infos
+    //création du profil mis à jour avec les nouvelles infos selon la présence de l'image
     let profil = {};
     if (req.file){
         profil = {

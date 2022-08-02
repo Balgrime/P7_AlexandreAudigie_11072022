@@ -280,9 +280,22 @@ exports.createPost = (req, res, next) => {
 
 
 exports.getAllPosts = (req, res, next) => {
+
+
+//On récupère le userId qui fait la requête depuis les headers du token 
+const token = req.headers.authorization;
+  
+jwt.verify(
+  token,
+  process.env.ACCESS_TOKEN_SECRET,
+  (err, decoded) => {
+      if (err) return res.sendStatus(403); //invalid token
+  
+let userId = decoded.UserInfo.userId;
+
 //la requête SQL
 mysqlconnection.query(
-    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, post.likes, post.date, post.text, post.Count, post.userId, indexlikes.hasLiked FROM post INNER JOIN user ON post.userId = user.userId LEFT JOIN indexlikes ON indexlikes.postIdLiked = post.postId', (error, results, fields)=>{
+    `SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, post.likes, post.date, post.text, post.Count, user.userId, indexlikes.hasLiked FROM post INNER JOIN user ON post.userId = user.userId LEFT JOIN indexlikes ON indexlikes.userIdThatLiked = '${userId}' AND indexlikes.postIdLiked = post.postId`, (error, results, fields)=>{
         if (error){
             console.log(error);
             res.json({error});
@@ -290,7 +303,8 @@ mysqlconnection.query(
             res.json(results);
         }
     })
-};
+  }
+)};
 
 
 exports.changeLiking = (req, res, next) => {
