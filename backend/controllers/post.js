@@ -282,7 +282,7 @@ exports.createPost = (req, res, next) => {
 exports.getAllPosts = (req, res, next) => {
 //la requête SQL
 mysqlconnection.query(
-    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, post.likes, post.date, post.text, post.Count, user.userId, indexlikes.hasLiked FROM post INNER JOIN user ON post.userId = user.userId LEFT JOIN indexlikes ON indexlikes.postIdLiked = post.postId', (error, results, fields)=>{
+    'SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, post.likes, post.date, post.text, post.Count, post.userId, indexlikes.hasLiked FROM post INNER JOIN user ON post.userId = user.userId LEFT JOIN indexlikes ON indexlikes.postIdLiked = post.postId', (error, results, fields)=>{
         if (error){
             console.log(error);
             res.json({error});
@@ -296,7 +296,9 @@ mysqlconnection.query(
 exports.changeLiking = (req, res, next) => {
   let { postId, liking, likes } = req.body.info;
   console.log(postId);
-
+  console.log(liking);
+  if (liking === 1) console.log("je like")
+  if (liking === 0) console.log("je retire le like")
 
   //On récupère le userId qui fait la requête depuis les headers du token 
   const token = req.headers.authorization;
@@ -307,18 +309,22 @@ exports.changeLiking = (req, res, next) => {
         if (err) return res.sendStatus(403); //invalid token
   let userId = decoded.UserInfo.userId;
 
-  // Retrouve tous les utilisateurs qui ont liké le post pour savoir si l'utilisateur à l'origine de la requête a déjà liké
+
+  // Retrouve l'index like/utilisateur correspondant à l'utilisateur pouvant liker ce post
   mysqlconnection.query(
-    `SELECT userIdThatLiked FROM indexlikes WHERE postIdLiked = ${postId}`, (error, results, fields)=>{
-      console.log(results)
-      if (results.indexOf(userId) === -1){
+    `SELECT * FROM indexlikes WHERE postIdLiked = ${postId} AND userIdThatLiked = ${userId}`, (error, results, fields)=>{
+      console.log(results[0]?.hasLiked);
+      let hasLiked = results[0]?.hasLiked;
+
+      // Vérifie qu'il n'ait pas déjà liké
+      if (hasLiked !== 1){
 
         const like = {
           postIdLiked: postId,
           userIdThatLiked: userId,
           hasLiked: true
         }
-        // Ajoute un index d'utilisateurs ayant liké le post
+        // Ajoute le like à l'index des likes d'utilisateurs 
         mysqlconnection.query(
           `INSERT INTO indexlikes SET ?`, like, (error, results, fields)=>{
               if (error){
@@ -330,7 +336,6 @@ exports.changeLiking = (req, res, next) => {
                   res.json({message:"like fait"});
               }
           })
-
           // Ajoute un like au compteur de likes du post
           mysqlconnection.query(
             `UPDATE post SET likes ='${likes+1}' WHERE postId='${postId}'`, (error, results, fields)=>{
