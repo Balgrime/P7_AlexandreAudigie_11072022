@@ -3,7 +3,6 @@ const sanitize = require("validator");
 const fs = require('fs');
 
 
-
 const mysql = require("mysql");
 const dbName = process.env.dbName;
 
@@ -179,7 +178,6 @@ exports.createPost = (req, res, next) => {
 
     // Prend en considération les droits administrateurs
     if(userId === 12199815){
-
       // Supprime l'image du post du dossier images (si elle était présente)
     mysqlconnection.query(
       `SELECT postImageUrl FROM post WHERE postId='${postId}'`, (error, results, fields)=>{
@@ -214,8 +212,7 @@ exports.createPost = (req, res, next) => {
             console.log(error);
             })
           })
-
-            res.json({message:"post supprimé"});
+          res.json({message:"post supprimé"});
 
           // Supprime les commentaires associés au post initial
           mysqlconnection.query(
@@ -223,11 +220,8 @@ exports.createPost = (req, res, next) => {
               if (error) console.log(error);
           })
         }
-          })
-
-
+      })
     } else {
-
     // Supprime l'image du post du dossier images (si elle était présente)
     mysqlconnection.query(
       `SELECT postImageUrl FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
@@ -278,10 +272,7 @@ exports.createPost = (req, res, next) => {
 
 
 
-
 exports.getAllPosts = (req, res, next) => {
-
-
 //On récupère le userId qui fait la requête depuis les headers du token 
 const token = req.headers.authorization;
   
@@ -330,7 +321,6 @@ exports.changeLiking = (req, res, next) => {
       console.log(results[0]?.hasLiked);
       let hasLiked = results[0]?.hasLiked;
 
-
       if (liking ===1){
         // Vérifie qu'il n'ait pas déjà liké
       if (hasLiked !== 1){
@@ -361,13 +351,6 @@ exports.changeLiking = (req, res, next) => {
       } else if (liking ===0){
       // Vérifie qu'il ait déjà liké avant de retirer son like
       if (hasLiked === 1){
-
-        /*const like = {
-          postIdLiked: postId,
-          userIdThatLiked: userId,
-          hasLiked: 0
-        }*/
-
         // Ajoute le like à l'index des likes d'utilisateurs 
         mysqlconnection.query(
           `DELETE FROM indexlikes WHERE postIdLiked = '${postId}' AND userIdThatLiked = '${userId}'`, (error, results, fields)=>{
@@ -387,35 +370,5 @@ exports.changeLiking = (req, res, next) => {
           })
         }
       }
-    })
-/*
-
-  //création du contenu du post à partir des infos récupérées
-  if (liking === 1){
-    addLiking();
-  } else if (liking === 0){
-    removeLiking();
-  };
-  let tata = 0;
-  let tato = 1;
-  //on insère le post dans la bdd
-  mysqlconnection.query(
-    `UPDATE indexlikes SET hasLiked='${tata}' WHERE indexlikes.userId ='${tato}'`, (error, results, fields)=>{
-        if (error){
-            console.log(error);
-            res.json({error});
-        } else {
-            res.json({message:"post enregistré"});
-        }
-      }
-    )*/}
+    })}
 )}
-
-
-function addLiking(liking){
-};
-
-
-function removeLiking(liking){
-  console.log(liking)
-};

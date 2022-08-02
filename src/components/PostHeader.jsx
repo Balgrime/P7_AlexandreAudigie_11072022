@@ -3,7 +3,6 @@ import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 
-
 function PostHeader(props) {
 
     let post = props.post;

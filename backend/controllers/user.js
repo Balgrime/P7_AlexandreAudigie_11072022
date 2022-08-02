@@ -19,10 +19,16 @@ const mysqlconnection = mysql.createConnection({
   
 
 exports.signup = (req, res, next) => {
-    console.log(req.body.formValues.password);
     let form = req.body.formValues;
 
-    var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
+    if (form?.firstName !=="" && form?.name !== ""){
+      let nameBefore = form.name;
+      let name = sanitize.blacklist(nameBefore, "<>/");
+      let firstNameBefore = form.firstName;
+      let firstName = sanitize.blacklist(firstNameBefore, "<>/");
+
+
+      var options = {year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'}
     let date = new Date().toLocaleDateString([], options);
 
     let userId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""))
@@ -32,8 +38,8 @@ exports.signup = (req, res, next) => {
     .then(hash => {
             const user = {
                 userId: userId,
-                firstName: form.firstName,
-                name: form.name,
+                firstName: firstName,
+                name: name,
                 date: date,
                 email: form.email,
                 password: hash,
@@ -53,6 +59,7 @@ exports.signup = (req, res, next) => {
                 }
             })
     });
+    }
 }
 
 
@@ -135,7 +142,6 @@ exports.logout = (req, res) => {
 
 
 exports.getAllUsers = (req, res, next) => {
-//la requête SQL
 mysqlconnection.query(
     'SELECT * FROM user', (error, results, fields)=>{
         if (error){
@@ -166,39 +172,64 @@ mysqlconnection.query(
 
 
 exports.deleteUser = (req, res, next) => {
-    console.log("requete reçue");
-    /*
-    Sauce.findOne({ _id: req.params.id }).then(
-      (sauce) => {
-        if (!sauce) {
-          res.status(404).json({
-            error: new Error('No such Thing!')
-          });
-        }
-        if (sauce.userId !== req.auth.userId) {
-          res.status(403).json({
-            error: new Error('Unauthorized user!')
-          });
-        } else {
-          Sauce.findOne({ _id: req.params.id })
-            .then(sauce => {
-              const filename = sauce.imageUrl.split('/images/')[1];
-              fs.unlink(`images/${filename}`, () => {
-                Sauce.deleteOne({ _id: req.params.id })
-                  .then(() => res.status(200).json({ message: 'Sauce supprimée !'}))
-                  .catch(error => res.status(400).json({ error }));
-              });
-            })
-            .catch(error => res.status(500).json({ error }));
-        }
+
+let bodyUserId = req.body.userId;
+
+  //On récupère le userId qui fait la requête depuis les headers du token 
+  const token = req.headers.authorization;
+
+  jwt.verify(
+    token,
+    process.env.ACCESS_TOKEN_SECRET,
+    (err, decoded) => {
+        if (err) return res.sendStatus(403); //invalid token
+    
+  let userId = decoded.UserInfo.userId;
+
+  // Ne supprime le compte que si le userId de la requête équivaut à celui contenu dans le token (ou à l'admin)
+  if(userId === bodyUserId || userId === 12199815){
+  // Supprime l'image du profil du dossier images (si elle était présente)
+  mysqlconnection.query(
+    `SELECT profilImageUrl FROM user WHERE userId='${bodyUserId}'`, (error, results, fields)=>{
+      if (error){
+        console.log(error);
+      } else if (results) {
+        console.log(results[0]?.profilImageUrl);
+        let urlToRemove = results[0]?.profilImageUrl;
+
+        if(urlToRemove !== null){
+          const filenameToRemove = urlToRemove?.split('/images/')[1];
+          fs.unlink(`images/${filenameToRemove}`, (res, err) => {
+          if(err) console.log('error', err);})  
+        } 
       }
-    )*/
-  };
+    })
+    
+    // On supprime l'utilisateur correspondant au userId de la requête
+    mysqlconnection.query(
+      `DELETE FROM user WHERE userId='${bodyUserId}'`, (error, results, fields)=>{
+        if (error){
+          console.log(error);
+          res.json({error});
+      } else if (results !== null) {
+        res.json({message:"utilisateur supprimé"});
+      }
+    })
+  }
+}
+)}
+
   
 
   exports.editUser = (req, res, next) => {
     let json = JSON.parse(req.body.info);
   
+    if (json?.firstName !=="" && json?.name !== ""){
+      let nameBefore = json.name;
+      let name = sanitize.blacklist(nameBefore, "<>/");
+      let firstNameBefore = json.firstName;
+      let firstName = sanitize.blacklist(firstNameBefore, "<>/");
+
     //On récupère le userId qui fait la requête depuis les headers du token 
     const token = req.headers.authorization;
   
@@ -209,8 +240,6 @@ exports.deleteUser = (req, res, next) => {
           if (err) return res.sendStatus(403); //invalid token
       
     let userId = decoded.UserInfo.userId;
-  
-  
   
     // S'assure que l'image du profil est nulle si aucune url n'a été fournie
     let profilImg = null;
@@ -237,20 +266,18 @@ exports.deleteUser = (req, res, next) => {
     let profil = {};
     if (req.file){
         profil = {
-        firstName: json.firstName,
-        name: json.name,
+        firstName: firstName,
+        name: name,
         isPrivate: json.isPrivate,
         profilImageUrl: profilImg
         }
       } else {
         profil = {
-            firstName: json.firstName,
-            name: json.name,
-            email: json.email,
+            firstName: firstName,
+            name: name,
             isPrivate: json.isPrivate
         }
       }
-  
     //on insère le post dans la bdd
     mysqlconnection.query(
         `UPDATE user SET ? WHERE userId='${userId}'`, profil, (error, user, fields)=>{
@@ -262,4 +289,5 @@ exports.deleteUser = (req, res, next) => {
           }
         })
       })
-    };
+    }
+  };

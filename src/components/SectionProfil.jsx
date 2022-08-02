@@ -3,7 +3,7 @@ import { faCircleUser, faUserSecret, faUserTie } from "@fortawesome/free-solid-s
 import HistoriqueMessages from "./HistoriqueMessages";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/AuthContext";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 
 
 function SectionProfil(props) {
@@ -12,6 +12,8 @@ function SectionProfil(props) {
     const { id } = useParams();
 
     let context = useContext(AuthContext);
+    let role = context.userContext.role;
+    let setUser = context.setUser;
 
     /* On récupère le token CSRF depuis le localStorage */
     let accessToken = localStorage.getItem('accessToken');
@@ -34,10 +36,11 @@ function SectionProfil(props) {
 
     useEffect(()=> {
             console.log("ça boucle");
-        fetch(`http://localhost:3002/api/User/${id}`, options).then(res => res.json()).then((json)=>{props.setData(json);
+        fetch(`http://localhost:3002/api/User/${id}`, options)
+        .then(res => res.json())
+        .then((json)=>{props.setData(json);
     })
     }, [id]);
-
 
 
     console.log(id);
@@ -48,13 +51,8 @@ function SectionProfil(props) {
                     <FontAwesomeIcon className="profilIcon" icon={ faCircleUser }></FontAwesomeIcon>
                 </div>
 
-
-
     let userId = context.userContext.userId;
 
-
-
-    const [clic, editClic] = useState(false);
 
     const handleDelete = () => {
         
@@ -72,20 +70,15 @@ function SectionProfil(props) {
         credentials: 'include',
         body: JSON.stringify( info )
         };
-
         fetch("http://localhost:3002/api/User/Delete", options)
-            .then( res => res.json() )
+        .then( res => res.json() )
             .then( res => {
+                if(role !== "8759")
                 console.log(res);
-                localStorage.removeItem("accessToken");
+                localStorage?.removeItem("accessToken");
+                setUser("");
         });
     }
-
-    if (clic){
-        handleDelete();
-    }
-
-
 
 
     // Les boutons modifier et supprimer qui apparaissent selon le contexte (role ou userId)
@@ -97,15 +90,14 @@ function SectionProfil(props) {
         <button className="greenButton" type="button" onClick={() => props.switchToEdit(true)}>
             <span>Modifier mon profil</span>
         </button>
-        <button className="greenButton greenButton--red" type="button" onClick={()=>editClic(true)}>
+        <button className="greenButton greenButton--red" type="button" onClick={()=>handleDelete()}>
             <span>Supprimer mon profil</span>
         </button>
         </>
         }
     };
-    let role = context.userContext.role;
     let adminBtn = "";
-    if(role === "8759" && id !== "12199815") adminBtn = <button className="greenButton greenButton--red" onClick={()=>editClic(true)}><span>Supprimer le profil</span></button>
+    if(role === "8759" && id !== "12199815") adminBtn = <button className="greenButton greenButton--red" onClick={()=>handleDelete()}><span>Supprimer le profil</span></button>
 
 
     return (
