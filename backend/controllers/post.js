@@ -175,12 +175,14 @@ exports.createPost = (req, res, next) => {
           if (err) return res.sendStatus(403); //invalid token
       
     let userId = decoded.UserInfo.userId;
-    let adminId = 12199815;
-  
 
-    // Supprime l'image du post du dossier images (si elle était présente)
+
+    // Prend en considération les droits administrateurs
+    if(userId === 12199815){
+
+      // Supprime l'image du post du dossier images (si elle était présente)
     mysqlconnection.query(
-      `SELECT postImageUrl FROM post WHERE postId='${postId}' AND userId='${userId}' OR userId='${adminId}'`, (error, results, fields)=>{
+      `SELECT postImageUrl FROM post WHERE postId='${postId}'`, (error, results, fields)=>{
         if (error){
           console.log(error);
         } else if (results) {
@@ -196,11 +198,11 @@ exports.createPost = (req, res, next) => {
       })
       // On supprime le post correspondant au postId, seulement si le userId décodé correspond au userId qui a créé le post
       mysqlconnection.query(
-        `DELETE FROM post WHERE postId='${postId}' AND userId='${userId}' OR userId='${adminId}'`, (error, results, fields)=>{
+        `DELETE FROM post WHERE postId='${postId}'`, (error, results, fields)=>{
           if (error){
             console.log(error);
             res.json({error});
-        } else if (results) {
+        } else if (results !== null) {
           // Si le post deleted était un commentaire, on lance des requêtes pour mettre à jour le nombre de commentaires du post référent dans la bdd
           mysqlconnection.query(
             `SELECT * FROM post WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
@@ -222,6 +224,55 @@ exports.createPost = (req, res, next) => {
           })
         }
           })
+
+
+    } else {
+
+    // Supprime l'image du post du dossier images (si elle était présente)
+    mysqlconnection.query(
+      `SELECT postImageUrl FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
+        if (error){
+          console.log(error);
+        } else if (results) {
+          console.log(results[0]?.postImageUrl);
+          let urlToRemove = results[0]?.postImageUrl;
+
+          if(urlToRemove !== null){
+            const filenameToRemove = urlToRemove?.split('/images/')[1];
+            fs.unlink(`images/${filenameToRemove}`, (res, err) => {
+            if(err) console.log('error', err);})  
+          } 
+        }
+      })
+      // On supprime le post correspondant au postId, seulement si le userId décodé correspond au userId qui a créé le post
+      mysqlconnection.query(
+        `DELETE FROM post WHERE postId='${postId}' AND userId='${userId}'`, (error, results, fields)=>{
+          if (error){
+            console.log(error);
+            res.json({error});
+        } else if (results !== null) {
+          // Si le post deleted était un commentaire, on lance des requêtes pour mettre à jour le nombre de commentaires du post référent dans la bdd
+          mysqlconnection.query(
+            `SELECT * FROM post WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
+              let commentsCount = results[0]?.comments;
+              commentsCount -= 1;
+
+          mysqlconnection.query(
+            `UPDATE post SET comments='${commentsCount}' WHERE postId='${postFollowedId}'`, (error, results, fields)=>{
+            console.log(error);
+            })
+          })
+
+            res.json({message:"post supprimé"});
+
+          // Supprime les commentaires associés au post initial
+          mysqlconnection.query(
+            `DELETE FROM post WHERE postFollowedId='${postId}'`, (error, results, fields)=>{
+              if (error) console.log(error);
+          })
+        }
+          })
+        }
         }
       )}
 

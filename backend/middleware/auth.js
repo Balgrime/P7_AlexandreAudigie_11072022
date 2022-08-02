@@ -12,7 +12,7 @@ const mysqlconnection = mysql.createConnection({
     database: dbName
   })
 
-
+  
 
 module.exports = (req, res, next) => {
   try {
