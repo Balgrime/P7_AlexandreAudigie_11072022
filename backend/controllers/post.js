@@ -5,14 +5,14 @@ const fs = require('fs');
 
 const mysql = require("mysql");
 const dbName = process.env.dbName;
-const port = process.env.port;
 
 const mysqlconnection = mysql.createConnection({
   host: "localhost",
-  port: port,
+  port: "3307",
   user:'root',
   database: dbName
 });
+
 
 
 exports.createPost = (req, res, next) => {

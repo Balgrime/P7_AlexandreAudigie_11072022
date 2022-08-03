@@ -12,7 +12,6 @@ const allowedOrigins = require('./config/allowedOrigins');
 
 
 const dbName = process.env.dbName;
-const port = process.env.port;
 
 
 
@@ -113,7 +112,7 @@ app.all('*', (req, res) => {
 //Pour se connecter à la base de données mysql
 const mysqlconnection = mysql.createConnection({
   host: "localhost",
-  port: port,
+  port: "3307",
   user:'root',
   database: dbName
 })

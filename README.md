@@ -3,12 +3,12 @@ puis : cd backend et ensuite: npm install.
 
 Créez un fichier .env dans le backend et remplissez le selon les consignes laissées dans le fichier .env_sample.
 
-(Le serveur de l'api est paramétré sur le port 3002)
+(Le serveur de l'api est paramétré sur le port 3002, et le serveur local sur 3307)
 
 Lancez votre serveur local contenant la base de données mysql fournie, puis placez vous à la racine du projet et lancez : npm start, 
 puis au niveau du dossier backend : nodemon server. 
 
-Le site devrait se lancer sur le navigateur à l'url : localhost 3000.
+Le site devrait se lancer sur le navigateur sur : localhost 3000.
 
 
 
