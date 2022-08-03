@@ -15,7 +15,7 @@ const mysqlconnection = mysql.createConnection({
   })
 
 
-  
+
 
 exports.signup = (req, res, next) => {
     let form = req.body.formValues;

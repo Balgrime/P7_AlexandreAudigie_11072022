@@ -286,7 +286,7 @@ let userId = decoded.UserInfo.userId;
 
 //la requête SQL
 mysqlconnection.query(
-    `SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, post.likes, post.date, post.text, post.Count, user.userId, indexlikes.hasLiked FROM post INNER JOIN user ON post.userId = user.userId LEFT JOIN indexlikes ON indexlikes.userIdThatLiked = '${userId}' AND indexlikes.postIdLiked = post.postId`, (error, results, fields)=>{
+    `SELECT name, firstName, profilImageUrl, postId, postFollowedId, comments, modifDate, postImageUrl, post.likes, post.date, post.text, post.Count, user.userId, indexlikes.hasLiked FROM post LEFT JOIN user ON post.userId = user.userId LEFT JOIN indexlikes ON indexlikes.userIdThatLiked = '${userId}' AND indexlikes.postIdLiked = post.postId`, (error, results, fields)=>{
         if (error){
             console.log(error);
             res.json({error});

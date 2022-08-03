@@ -113,7 +113,7 @@ function SectionProfil(props) {
             <section className="sectionProfil">
                 <div className="sectionProfil__haut">
                     {img}
-                    <div><p>{data?.firstName + " " + data?.name}</p><p>{data?.email}</p></div>
+                    <div><p>{data?.firstName ? (data?.firstName + " " + data?.name) : "Ancien utilisateur"}</p><p>{data?.email}</p></div>
         
                 </div>
                 {data?.isPrivate ? <div className="sectionProfil__bas">

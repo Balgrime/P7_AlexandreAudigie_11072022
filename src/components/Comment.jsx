@@ -67,7 +67,7 @@ function Comment(props) {
             </div>}
 
             <Link to={`/pages/Profil/${props.comment.userId}`}>
-                <p className="infoUser__user">{comment.firstName + " " + comment.name}</p>
+                <p className="infoUser__user">{comment.firstName ? (comment.firstName + " " + comment.name) : "Ancien utilisateur"}</p>
                 <p className="infoUser__date">{comment.date}</p>
             </Link>
             {supprBtn}

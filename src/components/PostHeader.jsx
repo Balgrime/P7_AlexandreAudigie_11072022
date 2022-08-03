@@ -16,7 +16,7 @@ function PostHeader(props) {
                         <FontAwesomeIcon className="imageProfil imageProfil--icon" icon={ faCircleUser }></FontAwesomeIcon>
                     </div>}
             <div>
-                <p className="infoUser__user">{post.firstName + " " + post.name}</p>
+                <p className="infoUser__user">{post.firstName ? (post.firstName + " " + post.name) : "Ancien utilisateur"}</p>
                 <p className="infoUser__date">{post.modifDate ? "modifié le : "+post.modifDate : post.date}</p>
             </div>
         </Link>
