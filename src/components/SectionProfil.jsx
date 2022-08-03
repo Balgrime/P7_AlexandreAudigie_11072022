@@ -82,18 +82,19 @@ function SectionProfil(props) {
     // Les boutons modifier et supprimer qui apparaissent selon le contexte (role ou userId)
     let btnModif = "";
     let idNb = parseInt(id);
-    if(!idNb || idNb === userId){
-        if (id !== "12199815"){
-            btnModif = <>
-        <button className="greenButton" type="button" onClick={() => props.switchToEdit(true)}>
-            <span>Modifier mon profil</span>
-        </button>
-        <button className="greenButton greenButton--red" type="button" onClick={()=>handleDelete()}>
-            <span>Supprimer mon profil</span>
-        </button>
-        </>
-        }
-    };
+    if(data?.firstName){
+        if(!idNb || idNb === userId){
+            if (id !== "12199815"){
+                btnModif = <>
+            <button className="greenButton" type="button" onClick={() => props.switchToEdit(true)}>
+                <span>Modifier mon profil</span>
+            </button>
+            <button className="greenButton greenButton--red" type="button" onClick={()=>handleDelete()}>
+                <span>Supprimer mon profil</span>
+            </button>
+            </>
+            }
+    }};
     let adminBtn = "";
     if(role === "8759" && id !== "12199815") adminBtn = <button className="greenButton greenButton--red" onClick={()=>handleDelete()}><span>Supprimer le profil</span></button>
 
