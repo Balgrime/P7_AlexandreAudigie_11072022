@@ -2,14 +2,11 @@
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleUser } from "@fortawesome/free-solid-svg-icons";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../context/AuthContext";
+import { useEffect, useState } from "react";
 
 
 
 function ListUsers() {
-
-
 
     const [data, setData] = useState([]);
 
@@ -31,15 +28,9 @@ function ListUsers() {
     credentials: 'include'
     };
 
-
-    let context = useContext(AuthContext);
-
-
     useEffect(()=> {
-        console.log("boucle")
         fetch("http://localhost:3002/api/User", options).then(res => res.json()).then((json)=>{setData(json);
     })}, []);
-
 
 
 

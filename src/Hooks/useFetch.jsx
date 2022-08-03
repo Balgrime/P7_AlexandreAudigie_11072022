@@ -25,7 +25,6 @@ function useFetch(url) {
     credentials: 'include'
     };
 
-    console.log(options);
     
 const getData = (url, options)=>{
     setLoading(true);

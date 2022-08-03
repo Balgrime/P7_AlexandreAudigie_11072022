@@ -35,15 +35,12 @@ function SectionProfil(props) {
 
 
     useEffect(()=> {
-            console.log("ça boucle");
         fetch(`http://localhost:3002/api/User/${id}`, options)
         .then(res => res.json())
         .then((json)=>{props.setData(json);
     })
     }, [id]);
 
-
-    console.log(id);
     let img = data?.profilImageUrl ? 
         <div>
             <img className="imageProfil imageProfil--big" src={data.profilImageUrl} alt="profil" />
@@ -54,7 +51,7 @@ function SectionProfil(props) {
     let userId = context.userContext.userId;
 
 
-    
+
     const handleDelete = () => {
         
         let info = {

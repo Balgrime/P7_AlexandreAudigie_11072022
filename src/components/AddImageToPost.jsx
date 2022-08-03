@@ -8,7 +8,6 @@ function AddImageToPost(props) {
         props.setFile(e.target.files[0]);
     }
     
-
     // Enclenche la prévisualisation de l'image lorsqu'un fichier est présent
     const [preview, showPreview] = useState("");
 

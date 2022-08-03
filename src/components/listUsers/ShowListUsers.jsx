@@ -5,11 +5,9 @@ import { faCaretDown, faCaretUp } from "@fortawesome/free-solid-svg-icons";
 
 function ShowListUsers() {
 
-
     const [show, editShow] = useState("");
 
 
-    
     return (
         <div className="listUser">
             {!show ? <button className="greenButton listButton" type="button" onClick={()=>{editShow(<ListUsers />)}}>

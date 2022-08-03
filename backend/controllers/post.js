@@ -118,7 +118,6 @@ exports.createPost = (req, res, next) => {
     if (req.file){
       mysqlconnection.query(
         `SELECT postImageUrl FROM post WHERE postId='${json.postId}' AND userId='${userId}'`, (error, results, fields)=>{
-            console.log("LAAAAAAAA"+results[0].postImageUrl);
             let urlToRemove = results[0].postImageUrl;
 
 
@@ -185,7 +184,6 @@ exports.createPost = (req, res, next) => {
         if (error){
           console.log(error);
         } else if (results) {
-          console.log(results[0]?.postImageUrl);
           let urlToRemove = results[0]?.postImageUrl;
 
           if(urlToRemove !== null){
@@ -269,7 +267,7 @@ exports.createPost = (req, res, next) => {
           })
         }
         }
-      )}
+      )};
 
 
 
@@ -301,10 +299,6 @@ mysqlconnection.query(
 
 exports.changeLiking = (req, res, next) => {
   let { postId, liking, likes } = req.body.info;
-  console.log(postId);
-  console.log(liking);
-  if (liking === 1) console.log("je like")
-  if (liking === 0) console.log("je retire le like")
 
   //On récupère le userId qui fait la requête depuis les headers du token 
   const token = req.headers.authorization;
@@ -319,7 +313,6 @@ exports.changeLiking = (req, res, next) => {
   // Retrouve l'index like/utilisateur correspondant à l'utilisateur pouvant liker ce post
   mysqlconnection.query(
     `SELECT * FROM indexlikes WHERE postIdLiked = '${postId}' AND userIdThatLiked = '${userId}'`, (error, results, fields)=>{
-      console.log(results[0]?.hasLiked);
       let hasLiked = results[0]?.hasLiked;
 
       if (liking ===1){

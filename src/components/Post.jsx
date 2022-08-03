@@ -163,8 +163,6 @@ function Post(props) {
 
 
 
-
-
     const currentPostImg = post.postImageUrl ?
     <Link to="#" className='article__corps__image'>
         <img className="imagePost" src={post.postImageUrl} alt="illustrant le post" />

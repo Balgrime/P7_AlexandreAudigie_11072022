@@ -27,7 +27,6 @@ function Home() {
     let role = accessToken?.role;
     let userId = accessToken?.userId;
     setUser({ role, userId });
-    console.log("le contexte actuel est" + role);
   }, [])
 
 

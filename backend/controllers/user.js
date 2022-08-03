@@ -15,7 +15,6 @@ const mysqlconnection = mysql.createConnection({
   })
 
 
-
   
 
 exports.signup = (req, res, next) => {
@@ -32,7 +31,6 @@ exports.signup = (req, res, next) => {
     let date = new Date().toLocaleDateString([], options);
 
     let userId = parseInt(Math.ceil(Math.random() * Date.now()).toPrecision(8).toString().replace(".", ""))
-    console.log(userId);
 
     bcrypt.hash(form.password, 10)
     .then(hash => {
@@ -45,7 +43,6 @@ exports.signup = (req, res, next) => {
                 password: hash,
                 role: 2834
             };
-        console.log(user);
         // on enregistre l'utilisateur dans la bdd
         mysqlconnection.query(
             'INSERT INTO user SET ?', user, (error, results, fields)=>{
@@ -109,10 +106,10 @@ exports.login = (req, res, next) => {
                                     console.log(user);
                                 }
                             })
-                    // Creates Secure Cookie with refresh token : je désactive pour le developpement
+                    // Creates Secure Cookie with refresh token 
                     //res.cookie('jwt', refreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
 
-                    // Send authorization roles and access token to user
+                    // Send authorization role, userId and access token to user
                     res.json({ role, userId, accessToken });
                 }
             }).catch(error => res.status(500).json({ error }));
@@ -204,7 +201,7 @@ let bodyUserId = req.body.userId;
         } 
       }
     })
-    
+
     // On supprime l'utilisateur correspondant au userId de la requête
     mysqlconnection.query(
       `DELETE FROM user WHERE userId='${bodyUserId}'`, (error, results, fields)=>{

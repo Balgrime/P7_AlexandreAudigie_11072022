@@ -1,4 +1,4 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import React, { useContext, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserTie, faCaretDown } from "@fortawesome/free-solid-svg-icons";
@@ -50,12 +50,10 @@ function SectionConnexion() {
    
 
 
-
-
   useEffect(() => {
     console.log(formErrors);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
-      console.log(formValues);
+      console.log("form submitted");
     }
   }, [formErrors]);
   const validate = (values) => {

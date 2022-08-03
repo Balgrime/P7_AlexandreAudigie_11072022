@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown, faUserFriends } from "@fortawesome/free-solid-svg-icons";
-import useFetch from "../Hooks/useFetch";
 import Post from "./Post";
 import CreatePost from "./CreatePost";
 import { AuthContext } from "../context/AuthContext";
@@ -12,11 +11,6 @@ function Posts() {
 
 
     const [clicPost, editClicPost] = useState("");
-
-
-    /*let { data, error } = useFetch("http://localhost:3002/api/Post");
-    if (error) console.log(error);*/
-    
 
 
     const [data, setData] = useState([]);
@@ -45,7 +39,6 @@ function Posts() {
 
 
     useEffect(()=> {
-            console.log("ça boucle");
         fetch("http://localhost:3002/api/Post", options).then(res => res.json()).then((json)=>{setData(json);
     })
     }, [postChange]);

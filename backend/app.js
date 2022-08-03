@@ -11,7 +11,6 @@ const allowedOrigins = require('./config/allowedOrigins');
 
 
 
-const frontLink = process.env.linkFront;
 const dbName = process.env.dbName;
 
 
@@ -123,7 +122,7 @@ mysqlconnection.connect((err)=>{
   if(err){
     console.log(`error connecting:${err.stack}`)
   } else {
-    console.log("connecté à la bonne base de donnée!")
+    console.log("connecté à la base de donnée!")
     console.log(`connected as id ${mysqlconnection.threadId}`)
   }
 })
