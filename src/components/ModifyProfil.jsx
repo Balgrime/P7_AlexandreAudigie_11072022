@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleUser, faUserGear, faCaretDown, faCheck, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCircleUser, faUserGear, faCaretDown, faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 
 

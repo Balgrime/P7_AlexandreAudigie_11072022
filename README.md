@@ -1,3 +1,17 @@
+Après avoir cloné le dépot, placez vous à la racine du projet, puis lancez la commande : npm install,
+puis : cd backend et ensuite: npm install.
+
+Créez un fichier .env dans le backend et remplissez le selon les consignes laissées dans le fichier .env_sample.
+
+(Le serveur de l'api est paramétré sur le port 3002)
+
+Lancez votre serveur local contenant la base de données mysql fournie, puis placez vous à la racine du projet et lancez : npm start, 
+puis au niveau du dossier backend : nodemon server. 
+
+Le site devrait se lancer sur le navigateur à l'url : localhost 3000.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
